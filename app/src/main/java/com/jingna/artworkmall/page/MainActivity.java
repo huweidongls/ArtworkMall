@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.jingna.artworkmall.R;
 import com.jingna.artworkmall.app.MyApplication;
+import com.jingna.artworkmall.base.BaseActivity;
 import com.jingna.artworkmall.fragment.Fragment1;
 import com.jingna.artworkmall.fragment.Fragment2;
 import com.jingna.artworkmall.fragment.Fragment3;
@@ -29,7 +30,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     private Context context = MainActivity.this;
 
