@@ -146,6 +146,7 @@
                                 android:layout_height="wrap_content">
 
                                 <ImageView
+                                    android:src="@mipmap/quanbudingdan"
                                     android:layout_gravity="center_horizontal"
                                     android:layout_width="25dp"
                                     android:layout_height="25dp" />
@@ -176,6 +177,7 @@
                                 android:layout_height="wrap_content">
 
                                 <ImageView
+                                    android:src="@mipmap/yuyuezhong"
                                     android:layout_gravity="center_horizontal"
                                     android:layout_width="25dp"
                                     android:layout_height="25dp" />
@@ -206,6 +208,7 @@
                                 android:layout_height="wrap_content">
 
                                 <ImageView
+                                    android:src="@mipmap/yuyuechenggong"
                                     android:layout_gravity="center_horizontal"
                                     android:layout_width="25dp"
                                     android:layout_height="25dp" />
@@ -236,6 +239,7 @@
                                 android:layout_height="wrap_content">
 
                                 <ImageView
+                                    android:src="@mipmap/yuyueshibai"
                                     android:layout_gravity="center_horizontal"
                                     android:layout_width="25dp"
                                     android:layout_height="25dp" />

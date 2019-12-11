@@ -151,7 +151,7 @@
                 android:id="@+id/menu_5"
                 android:layout_width="16dp"
                 android:layout_height="16dp"
-                android:background="@drawable/select4"
+                android:background="@drawable/select5"
                 android:scaleType="centerCrop" />
 
             <TextView

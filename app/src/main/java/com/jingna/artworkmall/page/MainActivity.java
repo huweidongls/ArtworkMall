@@ -79,7 +79,6 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        StatusBarUtil.setTranslucentStatus(MainActivity.this);
         StatusBarUtil.setStatusBarColor(MainActivity.this, getResources().getColor(R.color.theme));
         PermissionManager.instance().request(this, new OnPermissionCallback() {
                     @Override
