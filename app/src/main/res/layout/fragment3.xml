@@ -5,11 +5,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
-    <com.jingna.artworkmall.widget.StatusBarHeightView
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:use_type="use_padding_top">
+    <!--<com.jingna.artworkmall.widget.StatusBarHeightView-->
+        <!--android:orientation="vertical"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--app:use_type="use_padding_top">-->
 
         <RelativeLayout
             style="@style/rl_top_bar">
@@ -25,6 +25,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
-    </com.jingna.artworkmall.widget.StatusBarHeightView>
+    <!--</com.jingna.artworkmall.widget.StatusBarHeightView>-->
 
 </LinearLayout>

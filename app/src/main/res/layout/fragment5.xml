@@ -6,11 +6,11 @@
     android:background="@color/line"
     android:orientation="vertical">
 
-    <com.jingna.artworkmall.widget.StatusBarHeightView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        app:use_type="use_padding_top">
+    <!--<com.jingna.artworkmall.widget.StatusBarHeightView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:orientation="vertical"-->
+        <!--app:use_type="use_padding_top">-->
 
         <ScrollView
             android:layout_width="match_parent"
@@ -303,6 +303,7 @@
                         android:layout_height="1dp"/>
 
                     <RelativeLayout
+                        android:id="@+id/rl_address"
                         android:background="?android:selectableItemBackground"
                         android:layout_width="match_parent"
                         android:layout_height="45dp">
@@ -487,6 +488,6 @@
 
         </ScrollView>
 
-    </com.jingna.artworkmall.widget.StatusBarHeightView>
+    <!--</com.jingna.artworkmall.widget.StatusBarHeightView>-->
 
 </LinearLayout>

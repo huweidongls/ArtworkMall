@@ -25,7 +25,6 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        StatusBarUtil.setTranslucentStatus(this);
     }
     /**
      * 检测当的网络（WLAN、3G/2G）状态

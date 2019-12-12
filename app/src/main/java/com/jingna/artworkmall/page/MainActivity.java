@@ -170,7 +170,7 @@ public class MainActivity extends BaseActivity {
                     selectButton(ib2);
                     selectText(tv2);
                     switchFragment(1);
-                    StatusBarUtil.setTranslucentStatus(MainActivity.this);
+                    StatusBarUtil.setStatusBarColor(MainActivity.this, getResources().getColor(R.color.white_ffffff));
                     //一般的手机的状态栏文字和图标都是白色的, 可如果你的应用也是纯白色的, 或导致状态栏文字看不清
                     //所以如果你是这种情况,请使用以下代码, 设置状态使用深色文字图标风格, 否则你可以选择性注释掉这个if内容
                     if (!StatusBarUtil.setStatusBarDarkTheme(MainActivity.this, true)) {
@@ -196,7 +196,7 @@ public class MainActivity extends BaseActivity {
                     selectButton(ib4);
                     selectText(tv4);
                     switchFragment(3);
-                    StatusBarUtil.setTranslucentStatus(MainActivity.this);
+                    StatusBarUtil.setStatusBarColor(MainActivity.this, getResources().getColor(R.color.white_ffffff));
                     //一般的手机的状态栏文字和图标都是白色的, 可如果你的应用也是纯白色的, 或导致状态栏文字看不清
                     //所以如果你是这种情况,请使用以下代码, 设置状态使用深色文字图标风格, 否则你可以选择性注释掉这个if内容
                     if (!StatusBarUtil.setStatusBarDarkTheme(MainActivity.this, true)) {
@@ -235,7 +235,7 @@ public class MainActivity extends BaseActivity {
                     selectButton(ib2);
                     selectText(tv2);
                     switchFragment(1);
-                    StatusBarUtil.setTranslucentStatus(MainActivity.this);
+                    StatusBarUtil.setStatusBarColor(MainActivity.this, getResources().getColor(R.color.white_ffffff));
                     //一般的手机的状态栏文字和图标都是白色的, 可如果你的应用也是纯白色的, 或导致状态栏文字看不清
                     //所以如果你是这种情况,请使用以下代码, 设置状态使用深色文字图标风格, 否则你可以选择性注释掉这个if内容
                     if (!StatusBarUtil.setStatusBarDarkTheme(MainActivity.this, true)) {
@@ -261,7 +261,7 @@ public class MainActivity extends BaseActivity {
                     selectButton(ib4);
                     selectText(tv4);
                     switchFragment(3);
-                    StatusBarUtil.setTranslucentStatus(MainActivity.this);
+                    StatusBarUtil.setStatusBarColor(MainActivity.this, getResources().getColor(R.color.white_ffffff));
                     //一般的手机的状态栏文字和图标都是白色的, 可如果你的应用也是纯白色的, 或导致状态栏文字看不清
                     //所以如果你是这种情况,请使用以下代码, 设置状态使用深色文字图标风格, 否则你可以选择性注释掉这个if内容
                     if (!StatusBarUtil.setStatusBarDarkTheme(MainActivity.this, true)) {
