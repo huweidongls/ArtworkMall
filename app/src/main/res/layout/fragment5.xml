@@ -49,6 +49,7 @@
                         android:layout_height="wrap_content">
 
                         <LinearLayout
+                            android:id="@+id/ll_pt_jifen"
                             android:layout_marginLeft="50dp"
                             android:orientation="vertical"
                             android:layout_weight="1"
