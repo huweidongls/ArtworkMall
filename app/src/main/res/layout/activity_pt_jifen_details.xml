@@ -4,12 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.jingna.artworkmall.page.PtJifenDetailsActivity">
 
     <RelativeLayout
         style="@style/rl_top_bar_gray">
 
         <RelativeLayout
+            android:id="@+id/rl_back"
             android:layout_width="50dp"
             android:layout_height="match_parent">
 
@@ -23,5 +25,10 @@
             style="@style/tv_top_title_gray" />
 
     </RelativeLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
 </LinearLayout>
