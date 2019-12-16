@@ -53,7 +53,9 @@
         <activity android:name=".page.AddressActivity" />
         <activity android:name=".page.InsertAddressActivity" />
         <activity android:name=".page.PtJifenActivity" />
-        <activity android:name=".page.PtJifenDetailsActivity"></activity>
+        <activity android:name=".page.PtJifenDetailsActivity" />
+        <activity android:name=".page.JifenOrderActivity" />
+        <activity android:name=".page.JifenOrderDetailsActivity"></activity>
     </application>
 
 </manifest>

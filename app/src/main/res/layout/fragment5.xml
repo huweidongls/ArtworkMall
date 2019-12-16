@@ -273,6 +273,7 @@
                     android:layout_height="wrap_content">
 
                     <RelativeLayout
+                        android:id="@+id/rl_jifen_order"
                         android:background="?android:selectableItemBackground"
                         android:layout_width="match_parent"
                         android:layout_height="45dp">

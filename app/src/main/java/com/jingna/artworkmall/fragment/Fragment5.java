@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import com.jingna.artworkmall.R;
 import com.jingna.artworkmall.base.BaseFragment;
 import com.jingna.artworkmall.page.AddressActivity;
+import com.jingna.artworkmall.page.JifenOrderActivity;
 import com.jingna.artworkmall.page.PtJifenActivity;
 
 import butterknife.ButterKnife;
@@ -31,7 +32,7 @@ public class Fragment5 extends BaseFragment {
         return view;
     }
 
-    @OnClick({R.id.rl_address, R.id.ll_pt_jifen})
+    @OnClick({R.id.rl_address, R.id.ll_pt_jifen, R.id.rl_jifen_order})
     public void onClick(View view){
         Intent intent = new Intent();
         switch (view.getId()){
@@ -41,6 +42,10 @@ public class Fragment5 extends BaseFragment {
                 break;
             case R.id.ll_pt_jifen:
                 intent.setClass(getContext(), PtJifenActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.rl_jifen_order:
+                intent.setClass(getContext(), JifenOrderActivity.class);
                 startActivity(intent);
                 break;
         }
