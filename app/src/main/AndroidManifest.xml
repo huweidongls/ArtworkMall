@@ -55,7 +55,10 @@
         <activity android:name=".page.PtJifenActivity" />
         <activity android:name=".page.PtJifenDetailsActivity" />
         <activity android:name=".page.JifenOrderActivity" />
-        <activity android:name=".page.JifenOrderDetailsActivity"></activity>
+        <activity android:name=".page.JifenOrderDetailsActivity" />
+        <activity android:name=".page.MyBankCardActivity" />
+        <activity android:name=".page.InsertBankCardActivity" />
+        <activity android:name=".page.InsertBankCardSuccessActivity"></activity>
     </application>
 
 </manifest>
