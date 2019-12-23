@@ -11,7 +11,9 @@ import com.jingna.artworkmall.R;
 import com.jingna.artworkmall.base.BaseFragment;
 import com.jingna.artworkmall.page.AddressActivity;
 import com.jingna.artworkmall.page.JifenOrderActivity;
+import com.jingna.artworkmall.page.LoginActivity;
 import com.jingna.artworkmall.page.PtJifenActivity;
+import com.jingna.artworkmall.util.SpUtils;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -37,16 +39,31 @@ public class Fragment5 extends BaseFragment {
         Intent intent = new Intent();
         switch (view.getId()){
             case R.id.rl_address:
-                intent.setClass(getContext(), AddressActivity.class);
-                startActivity(intent);
+                if(SpUtils.getUserId(getContext()).equals("0")){
+                    intent.setClass(getContext(), LoginActivity.class);
+                    startActivity(intent);
+                }else {
+                    intent.setClass(getContext(), AddressActivity.class);
+                    startActivity(intent);
+                }
                 break;
             case R.id.ll_pt_jifen:
-                intent.setClass(getContext(), PtJifenActivity.class);
-                startActivity(intent);
+                if(SpUtils.getUserId(getContext()).equals("0")){
+                    intent.setClass(getContext(), LoginActivity.class);
+                    startActivity(intent);
+                }else {
+                    intent.setClass(getContext(), PtJifenActivity.class);
+                    startActivity(intent);
+                }
                 break;
             case R.id.rl_jifen_order:
-                intent.setClass(getContext(), JifenOrderActivity.class);
-                startActivity(intent);
+                if(SpUtils.getUserId(getContext()).equals("0")){
+                    intent.setClass(getContext(), LoginActivity.class);
+                    startActivity(intent);
+                }else {
+                    intent.setClass(getContext(), JifenOrderActivity.class);
+                    startActivity(intent);
+                }
                 break;
         }
     }

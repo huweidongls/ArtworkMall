@@ -22,6 +22,7 @@
                 android:layout_height="wrap_content">
 
                 <LinearLayout
+                    android:id="@+id/ll_head"
                     android:background="@color/theme"
                     android:orientation="vertical"
                     android:layout_width="match_parent"
