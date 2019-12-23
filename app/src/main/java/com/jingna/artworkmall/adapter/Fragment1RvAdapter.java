@@ -11,7 +11,7 @@ import com.jingna.artworkmall.R;
 import java.util.List;
 
 /**
- * Created by Administrator on 2019/12/11.
+ * Created by Administrator on 2019/12/19.
  */
 
 public class Fragment1RvAdapter extends RecyclerView.Adapter<Fragment1RvAdapter.ViewHolder> {

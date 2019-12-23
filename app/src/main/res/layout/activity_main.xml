@@ -56,6 +56,7 @@
         </RelativeLayout>
 
         <RelativeLayout
+            android:visibility="gone"
             android:id="@+id/menu2"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -84,34 +85,6 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/menu3"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
-
-            <ImageButton
-                android:layout_marginTop="10dp"
-                android:layout_centerHorizontal="true"
-                android:id="@+id/menu_3"
-                android:layout_width="16dp"
-                android:layout_height="16dp"
-                android:background="@drawable/select3"
-                android:scaleType="centerCrop" />
-
-            <TextView
-                android:id="@+id/tv3"
-                android:textColor="@drawable/select_text_color"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="5dp"
-                android:textSize="11sp"
-                android:layout_below="@+id/menu_3"
-                android:text="发现"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-        </RelativeLayout>
-
-        <RelativeLayout
             android:id="@+id/menu4"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -134,6 +107,34 @@
                 android:textSize="11sp"
                 android:layout_below="@+id/menu_4"
                 android:text="积分商城"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/menu3"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <ImageButton
+                android:layout_marginTop="10dp"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/menu_3"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:background="@drawable/select3"
+                android:scaleType="centerCrop" />
+
+            <TextView
+                android:id="@+id/tv3"
+                android:textColor="@drawable/select_text_color"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dp"
+                android:textSize="11sp"
+                android:layout_below="@+id/menu_3"
+                android:text="发现"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 

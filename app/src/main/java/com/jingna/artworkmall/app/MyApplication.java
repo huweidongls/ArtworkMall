@@ -5,6 +5,8 @@ import android.app.Application;
 
 import com.jingna.artworkmall.net.NetUrl;
 import com.jingna.artworkmall.util.BankCodeTimeCount;
+import com.jingna.artworkmall.util.LoginTimeCount;
+import com.jingna.artworkmall.util.RegisterTimeCount;
 import com.jingna.artworkmall.util.SpUtils;
 import com.vise.xsnow.http.ViseHttp;
 
@@ -23,6 +25,8 @@ public class MyApplication extends Application {
     private List<Activity> mList = new LinkedList<Activity>();
     // 修改密码获取验证码倒计时
     public static BankCodeTimeCount bankCodeTimeCount;
+    public static LoginTimeCount loginTimeCount;
+    public static RegisterTimeCount registerTimeCount;
 
     public MyApplication() {
     }
@@ -36,6 +40,8 @@ public class MyApplication extends Application {
         ViseHttp.CONFIG().baseUrl(NetUrl.BASE_URL);
 //                .globalHeaders(map);
         bankCodeTimeCount = new BankCodeTimeCount(60000, 1000);
+        loginTimeCount = new LoginTimeCount(60000, 1000);
+        registerTimeCount = new RegisterTimeCount(60000, 1000);
 //        RichText.initCacheDir(this);
     }
 
