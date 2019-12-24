@@ -26,6 +26,7 @@
             </RelativeLayout>
 
             <TextView
+                android:id="@+id/tv_title"
                 android:text="新建收货人"
                 style="@style/tv_top_title_white" />
 

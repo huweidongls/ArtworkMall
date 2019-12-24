@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -40,7 +41,7 @@ import butterknife.OnClick;
 public class AddressActivity extends BaseActivity {
 
     private Context context = AddressActivity.this;
-
+    private boolean isFirst = true;
     @BindView(R.id.rv)
     SwipeMenuRecyclerView recyclerView;
 
@@ -64,7 +65,14 @@ public class AddressActivity extends BaseActivity {
         initData();
 
     }
-
+    public void onStart() {
+        super.onStart();
+       /* if(isFirst){
+            isFirst = false;
+        }else {
+            //initData();
+        }*/
+    }
     private void initData() {
         Map<String,String> map = new LinkedHashMap<>();
         map.put("memberId", SpUtils.getUserId(context));
@@ -93,6 +101,8 @@ public class AddressActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.btn_insert:
+                intent.putExtra("id", "0");
+                intent.putExtra("type", 0+"");
                 intent.setClass(context, InsertAddressActivity.class);
                 startActivity(intent);
                 break;
@@ -144,7 +154,8 @@ public class AddressActivity extends BaseActivity {
                     case 0:
                         //设为默认
                         Map<String,String> map = new LinkedHashMap<>();
-                        map.put("id",mList.get(menuPosition).getId()+"");
+                        //Log.e("78789789789",mList.get(adapterPosition).getId()+"");
+                        map.put("id",mList.get(adapterPosition).getId()+"");
                         map.put("memberId",SpUtils.getUserId(context));
                         ViseUtil.Post(context, NetUrl.MemAdresssetDefault, map, new ViseUtil.ViseListener() {
                             @Override
@@ -153,7 +164,14 @@ public class AddressActivity extends BaseActivity {
                                     JSONObject jsonObject = new JSONObject(s);
                                     if(jsonObject.optString("status").equals("200")){
                                         ToastUtil.showShort(context, "设置成功!");
-                                        initData();
+                                        for (int i=0; i<mList.size();i++){
+                                            if(i == adapterPosition){
+                                                mList.get(i).setAcquiescentAdress("1");
+                                            }else{
+                                                mList.get(i).setAcquiescentAdress("0");
+                                            }
+                                        }
+                                        adapter.notifyDataSetChanged();
                                     }
                                 } catch (JSONException e) {
                                     e.printStackTrace();
@@ -164,7 +182,7 @@ public class AddressActivity extends BaseActivity {
                     case 1:
                         //删除 MemAdresstoDelete
                         Map<String,String> map1 = new LinkedHashMap<>();
-                        map1.put("id",mList.get(menuPosition).getId()+"");
+                        map1.put("id",mList.get(adapterPosition).getId()+"");
                         ViseUtil.Post(context, NetUrl.MemAdresstoDelete, map1, new ViseUtil.ViseListener() {
                             @Override
                             public void onReturn(String s) {
@@ -172,7 +190,9 @@ public class AddressActivity extends BaseActivity {
                                     JSONObject jsonObject = new JSONObject(s);
                                     if(jsonObject.optString("status").equals("200")){
                                         ToastUtil.showShort(context, "删除成功!");
-                                        initData();
+                                        //mList.get(adapterPosition).
+                                        mList.remove(adapterPosition);
+                                        adapter.notifyDataSetChanged();
                                     }
                                 } catch (JSONException e) {
                                     e.printStackTrace();

@@ -1,6 +1,7 @@
 package com.jingna.artworkmall.page;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -15,6 +16,8 @@ import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.jingna.artworkmall.R;
 import com.jingna.artworkmall.base.BaseActivity;
+import com.jingna.artworkmall.bean.AddressInfoBean;
+import com.jingna.artworkmall.bean.AddressListBean;
 import com.jingna.artworkmall.bean.JsonBean;
 import com.jingna.artworkmall.net.NetUrl;
 import com.jingna.artworkmall.util.GetJsonDataUtil;
@@ -53,6 +56,8 @@ public class InsertAddressActivity extends BaseActivity {
     EditText etAddress;
     @BindView(R.id.iv_set)
     ImageView ivSet;
+    @BindView(R.id.tv_title)
+    TextView tv_title;
 
     private ArrayList<JsonBean> options1Items = new ArrayList<>();
     private ArrayList<ArrayList<String>> options2Items = new ArrayList<>();
@@ -79,10 +84,14 @@ public class InsertAddressActivity extends BaseActivity {
 
     }
 
+
+
     private void initData() {
-        if(type.isEmpty() && aid.isEmpty()){
+        if(type.equals("0") && aid.equals("0")){
             initJsonData();
+            tv_title.setText("新建收货地址");
         }else{
+            tv_title.setText("编辑收货地址");
             initJsonData();
             Map<String,String> map = new LinkedHashMap<>();
             map.put("id",aid);
@@ -90,6 +99,18 @@ public class InsertAddressActivity extends BaseActivity {
                 @Override
                 public void onReturn(String s) {
                     Gson gson = new Gson();
+                    AddressInfoBean bean = gson.fromJson(s, AddressInfoBean.class);
+                    etName.setText(bean.getData().getConsignee());
+                    etPhoneNum.setText(bean.getData().getConsigneeTel());
+                    tvCity.setText(bean.getData().getLocation());
+                    etAddress.setText(bean.getData().getAdress());
+                    if(bean.getData().getAcquiescentAdress().equals("0")){
+                        Glide.with(context).load(R.mipmap.address_off).into(ivSet);
+                        acquiescentAdress = "0";
+                    }else {
+                        Glide.with(context).load(R.mipmap.address_on).into(ivSet);
+                        acquiescentAdress = "1";
+                    }
                 }
             });
         }
@@ -133,6 +154,9 @@ public class InsertAddressActivity extends BaseActivity {
                 }else{
                     Map<String,String> map = new LinkedHashMap<>();
                     map.put("memberId", SpUtils.getUserId(context));//会员ID
+                    if(!aid.equals("0")){
+                        map.put("id",aid);
+                    }
                     map.put("consignee", UserName);//收货人
                     map.put("adress", UseretAddress);//收货地址
                     map.put("acquiescentAdress", acquiescentAdress);//默认地址(0为正常/1为默认)
@@ -145,7 +169,10 @@ public class InsertAddressActivity extends BaseActivity {
                             try {
                                 JSONObject jsonObject = new JSONObject(s);
                                 if(jsonObject.optString("status").equals("200")){
-                                    ToastUtil.showShort(context,"发布成功!");
+                                    ToastUtil.showShort(context,"操作成功!");
+                                    Intent intent = new Intent();
+                                    intent.setClass(context, AddressActivity.class);
+                                    startActivity(intent);
                                     finish();
                                 }
                             } catch (JSONException e) {
