@@ -11,4 +11,8 @@ public class NetUrl {
     public static final String MemUserloginAPP = "/MemUser/loginAPP";//短信登录
     public static final String MemUserloginAppPassword = "/MemUser/loginAppPassword";//账号密码登录
     public static final String MemUseraddMember = "/MemUser/addMember";//注册
+    public static final String MemAdresstoUpdate = "/MemAdress/toUpdate";//发布收货地址
+    public static final String MemAdressqueryList = "/MemAdress/queryList";//地址列表
+    public static final String MemAdresssetDefault="/MemAdress/setDefault";//设置会员默认地址
+    public static final String MemAdresstoDelete = "/MemAdress/toDelete";//删除地址
 }

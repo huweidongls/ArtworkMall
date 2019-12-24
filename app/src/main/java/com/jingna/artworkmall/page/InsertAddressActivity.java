@@ -16,12 +16,20 @@ import com.google.gson.Gson;
 import com.jingna.artworkmall.R;
 import com.jingna.artworkmall.base.BaseActivity;
 import com.jingna.artworkmall.bean.JsonBean;
+import com.jingna.artworkmall.net.NetUrl;
 import com.jingna.artworkmall.util.GetJsonDataUtil;
+import com.jingna.artworkmall.util.SpUtils;
 import com.jingna.artworkmall.util.StatusBarUtil;
+import com.jingna.artworkmall.util.ToastUtil;
+import com.jingna.artworkmall.util.ViseUtil;
 
 import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -41,8 +49,6 @@ public class InsertAddressActivity extends BaseActivity {
     EditText etAddress;
     @BindView(R.id.iv_set)
     ImageView ivSet;
-//    @BindView(R.id.et_zip_code)
-//    EditText etZipCode;
 
     private ArrayList<JsonBean> options1Items = new ArrayList<>();
     private ArrayList<ArrayList<String>> options2Items = new ArrayList<>();
@@ -103,7 +109,36 @@ public class InsertAddressActivity extends BaseActivity {
                 pvOptions.show();
                 break;
             case R.id.btn_save:
-
+                String UserName = etName.getText().toString();
+                String phone = etPhoneNum.getText().toString();
+                String city = tvCity.getText().toString();
+                String UseretAddress = etAddress.getText().toString();
+                if(UserName.isEmpty() || phone.isEmpty() || city.isEmpty() || UseretAddress.isEmpty()){
+                    ToastUtil.showShort(context,"请将信息填写完整!");
+                }else{
+                    Map<String,String> map = new LinkedHashMap<>();
+                    map.put("memberId", SpUtils.getUserId(context));//会员ID
+                    map.put("consignee", UserName);//收货人
+                    map.put("adress", UseretAddress);//收货地址
+                    map.put("acquiescentAdress", acquiescentAdress);//默认地址(0为正常/1为默认)
+                    map.put("location", city);//所在地区
+                    map.put("consigneeTel", phone);//收货人电话
+                    map.put("zipCode", "000000");
+                    ViseUtil.Post(context, NetUrl.MemAdresstoUpdate, map, new ViseUtil.ViseListener() {
+                        @Override
+                        public void onReturn(String s) {
+                            try {
+                                JSONObject jsonObject = new JSONObject(s);
+                                if(jsonObject.optString("status").equals("200")){
+                                    ToastUtil.showShort(context,"发布成功!");
+                                    finish();
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    });
+                }
                 break;
             case R.id.iv_set:
                 if(acquiescentAdress.equals("0")){

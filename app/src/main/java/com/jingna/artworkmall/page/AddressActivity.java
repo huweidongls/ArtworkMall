@@ -8,11 +8,16 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.gson.Gson;
 import com.jingna.artworkmall.R;
 import com.jingna.artworkmall.adapter.AddressAdapter;
 import com.jingna.artworkmall.base.BaseActivity;
+import com.jingna.artworkmall.bean.AddressListBean;
+import com.jingna.artworkmall.net.NetUrl;
+import com.jingna.artworkmall.util.SpUtils;
 import com.jingna.artworkmall.util.StatusBarUtil;
 import com.jingna.artworkmall.util.ToastUtil;
+import com.jingna.artworkmall.util.ViseUtil;
 import com.yanzhenjie.recyclerview.swipe.SwipeMenu;
 import com.yanzhenjie.recyclerview.swipe.SwipeMenuBridge;
 import com.yanzhenjie.recyclerview.swipe.SwipeMenuCreator;
@@ -20,8 +25,13 @@ import com.yanzhenjie.recyclerview.swipe.SwipeMenuItem;
 import com.yanzhenjie.recyclerview.swipe.SwipeMenuItemClickListener;
 import com.yanzhenjie.recyclerview.swipe.SwipeMenuRecyclerView;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -35,7 +45,7 @@ public class AddressActivity extends BaseActivity {
     SwipeMenuRecyclerView recyclerView;
 
     private AddressAdapter adapter;
-    private List<String> mList;
+    private List<AddressListBean.DataBean> mList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,19 +66,23 @@ public class AddressActivity extends BaseActivity {
     }
 
     private void initData() {
-
-        mList = new ArrayList<>();
-        mList.add("");
-        mList.add("");
-        mList.add("");
-        adapter = new AddressAdapter(mList);
-        LinearLayoutManager manager = new LinearLayoutManager(context);
-        manager.setOrientation(LinearLayoutManager.VERTICAL);
-        recyclerView.setLayoutManager(manager);
-        recyclerView.setSwipeMenuCreator(mSwipeMenuCreator);
-        recyclerView.setSwipeMenuItemClickListener(mMenuItemClickListener);
-        recyclerView.setAdapter(adapter);
-
+        Map<String,String> map = new LinkedHashMap<>();
+        map.put("memberId", SpUtils.getUserId(context));
+        ViseUtil.Get(context, NetUrl.MemAdressqueryList, map, new ViseUtil.ViseListener() {
+            @Override
+            public void onReturn(String s) {
+                Gson gson = new Gson();
+                AddressListBean bean = gson.fromJson(s, AddressListBean.class);
+                mList = bean.getData();
+                adapter = new AddressAdapter(mList);
+                LinearLayoutManager manager = new LinearLayoutManager(context);
+                manager.setOrientation(LinearLayoutManager.VERTICAL);
+                recyclerView.setLayoutManager(manager);
+                recyclerView.setSwipeMenuCreator(mSwipeMenuCreator);
+                recyclerView.setSwipeMenuItemClickListener(mMenuItemClickListener);
+                recyclerView.setAdapter(adapter);
+            }
+        });
     }
 
     @OnClick({R.id.rl_back, R.id.btn_insert})
@@ -129,11 +143,43 @@ public class AddressActivity extends BaseActivity {
                 switch (menuPosition){
                     case 0:
                         //设为默认
-                        ToastUtil.showShort(context, "设为默认");
+                        Map<String,String> map = new LinkedHashMap<>();
+                        map.put("id",mList.get(menuPosition).getId()+"");
+                        map.put("memberId",SpUtils.getUserId(context));
+                        ViseUtil.Post(context, NetUrl.MemAdresssetDefault, map, new ViseUtil.ViseListener() {
+                            @Override
+                            public void onReturn(String s) {
+                                try {
+                                    JSONObject jsonObject = new JSONObject(s);
+                                    if(jsonObject.optString("status").equals("200")){
+                                        ToastUtil.showShort(context, "设置成功!");
+                                        initData();
+                                    }
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        });
                         break;
                     case 1:
-                        //删除
-                        ToastUtil.showShort(context, "删除");
+                        //删除 MemAdresstoDelete
+                        Map<String,String> map1 = new LinkedHashMap<>();
+                        map1.put("id",mList.get(menuPosition).getId()+"");
+                        ViseUtil.Post(context, NetUrl.MemAdresstoDelete, map1, new ViseUtil.ViseListener() {
+                            @Override
+                            public void onReturn(String s) {
+                                try {
+                                    JSONObject jsonObject = new JSONObject(s);
+                                    if(jsonObject.optString("status").equals("200")){
+                                        ToastUtil.showShort(context, "删除成功!");
+                                        initData();
+                                    }
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        });
+
                         break;
                 }
             } else if (direction == SwipeMenuRecyclerView.LEFT_DIRECTION) {
