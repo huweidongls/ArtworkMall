@@ -39,6 +39,10 @@ public class InsertAddressActivity extends BaseActivity {
 
     private Context context = InsertAddressActivity.this;
 
+    private String aid="";//要修改的地址ID
+
+    private String type="";//修改的type
+
     @BindView(R.id.tv_city)
     TextView tvCity;
     @BindView(R.id.et_name)
@@ -60,7 +64,8 @@ public class InsertAddressActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_insert_address);
-
+        aid = getIntent().getStringExtra("id");
+        type = getIntent().getStringExtra("type");
         StatusBarUtil.setStatusBarColor(InsertAddressActivity.this, getResources().getColor(R.color.white_ffffff));
         //一般的手机的状态栏文字和图标都是白色的, 可如果你的应用也是纯白色的, 或导致状态栏文字看不清
         //所以如果你是这种情况,请使用以下代码, 设置状态使用深色文字图标风格, 否则你可以选择性注释掉这个if内容
@@ -75,9 +80,19 @@ public class InsertAddressActivity extends BaseActivity {
     }
 
     private void initData() {
-
-        initJsonData();
-
+        if(type.isEmpty() && aid.isEmpty()){
+            initJsonData();
+        }else{
+            initJsonData();
+            Map<String,String> map = new LinkedHashMap<>();
+            map.put("id",aid);
+            ViseUtil.Get(context, NetUrl.MemAdressgetOne, map, new ViseUtil.ViseListener() {
+                @Override
+                public void onReturn(String s) {
+                    Gson gson = new Gson();
+                }
+            });
+        }
     }
 
     @OnClick({R.id.rl_back, R.id.ll_city, R.id.btn_save, R.id.iv_set})

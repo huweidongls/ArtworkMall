@@ -64,6 +64,7 @@
             android:layout_height="wrap_content" />
         
         <ImageView
+            android:id="@+id/iv_edit"
             android:src="@mipmap/bianji_address"
             android:layout_marginTop="43dp"
             android:layout_marginRight="10dp"

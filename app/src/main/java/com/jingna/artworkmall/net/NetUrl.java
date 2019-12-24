@@ -15,4 +15,5 @@ public class NetUrl {
     public static final String MemAdressqueryList = "/MemAdress/queryList";//地址列表
     public static final String MemAdresssetDefault="/MemAdress/setDefault";//设置会员默认地址
     public static final String MemAdresstoDelete = "/MemAdress/toDelete";//删除地址
+    public static final String MemAdressgetOne = "/MemAdress/getOne";//获取单个会员收货地址信息
 }
