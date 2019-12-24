@@ -34,11 +34,11 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-//        Map<String, String> map = new LinkedHashMap<>();
-//        map.put("jnkjToken", SpUtils.getToken(getApplicationContext()));
+        Map<String, String> map = new LinkedHashMap<>();
+        map.put("fxToken", SpUtils.getToken(getApplicationContext()));
         ViseHttp.init(this);
-        ViseHttp.CONFIG().baseUrl(NetUrl.BASE_URL);
-//                .globalHeaders(map);
+        ViseHttp.CONFIG().baseUrl(NetUrl.BASE_URL)
+                .globalHeaders(map);
         bankCodeTimeCount = new BankCodeTimeCount(60000, 1000);
         loginTimeCount = new LoginTimeCount(60000, 1000);
         registerTimeCount = new RegisterTimeCount(60000, 1000);
