@@ -16,6 +16,7 @@ import com.jingna.artworkmall.util.SpUtils;
 import com.jingna.artworkmall.util.StatusBarUtil;
 import com.jingna.artworkmall.util.ToastUtil;
 import com.jingna.artworkmall.util.ViseUtil;
+import com.vise.xsnow.http.ViseHttp;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -86,6 +87,10 @@ public class PhoneLoginActivity extends AppCompatActivity {
                     LoginBean bean = gson.fromJson(s,LoginBean.class);
                     SpUtils.setToken(context, bean.getData().getToken());
                     SpUtils.setUserId(context, bean.getData().getUserId()+"");
+                    Map<String, String> map = new LinkedHashMap<>();
+                    map.put("fxToken", bean.getData().getToken());
+                    ViseHttp.CONFIG().baseUrl(NetUrl.BASE_URL)
+                            .globalHeaders(map);
                     Intent intent = new Intent();
                     intent.setClass(context, MainActivity.class);
                     startActivity(intent);
