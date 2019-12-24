@@ -12,6 +12,7 @@ import com.jingna.artworkmall.base.BaseFragment;
 import com.jingna.artworkmall.page.AddressActivity;
 import com.jingna.artworkmall.page.JifenOrderActivity;
 import com.jingna.artworkmall.page.LoginActivity;
+import com.jingna.artworkmall.page.PersonInformationActivity;
 import com.jingna.artworkmall.page.PtJifenActivity;
 import com.jingna.artworkmall.util.SpUtils;
 
@@ -34,7 +35,7 @@ public class Fragment5 extends BaseFragment {
         return view;
     }
 
-    @OnClick({R.id.rl_address, R.id.ll_pt_jifen, R.id.rl_jifen_order})
+    @OnClick({R.id.rl_address, R.id.ll_pt_jifen, R.id.rl_jifen_order, R.id.ll_head})
     public void onClick(View view){
         Intent intent = new Intent();
         switch (view.getId()){
@@ -64,6 +65,10 @@ public class Fragment5 extends BaseFragment {
                     intent.setClass(getContext(), JifenOrderActivity.class);
                     startActivity(intent);
                 }
+                break;
+            case R.id.ll_head:
+                intent.setClass(getContext(), PersonInformationActivity.class);
+                startActivity(intent);
                 break;
         }
     }
