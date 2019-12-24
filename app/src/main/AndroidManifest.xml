@@ -62,9 +62,10 @@
         <activity android:name=".page.InsertBankCardSuccessActivity" />
         <activity android:name=".page.CommissionActivity" />
         <activity android:name=".page.LoginActivity" />
-        <activity android:name=".page.WelcomeActivity"></activity>
+        <activity android:name=".page.WelcomeActivity" />
         <activity android:name=".page.RegisterActivity" />
-        <activity android:name=".page.PhoneLoginActivity"></activity>
+        <activity android:name=".page.PhoneLoginActivity" />
+        <activity android:name=".page.PersonInformationActivity"></activity>
     </application>
 
 </manifest>
