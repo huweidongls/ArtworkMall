@@ -87,7 +87,7 @@ public class PersonInformationActivity extends BaseActivity {
     private void initData() {
 
         Map<String, String> map = new LinkedHashMap<>();
-        map.put("", "");
+        map.put("id", SpUtils.getUserId(context));
         ViseUtil.Get(context, NetUrl.MemUsergetOne, map, new ViseUtil.ViseListener() {
             @Override
             public void onReturn(String s) {
@@ -123,7 +123,7 @@ public class PersonInformationActivity extends BaseActivity {
                         .setCrop(true)  // 设置是否使用图片剪切功能。
                         .setSingle(true)  //设置是否单选
                         .setViewImage(true) //是否点击放大图片查看,，默认为true
-                        .start(this, REQUEST_CODE); // 打开相册
+                        .start(PersonInformationActivity.this, REQUEST_CODE); // 打开相册
                 break;
             case R.id.rl_birthday:
                 new DatePickerDialog(context, onDateSetListener, mYear, mMonth, mDay).show();
