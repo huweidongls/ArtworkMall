@@ -1,5 +1,6 @@
 package com.jingna.artworkmall.page;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -14,8 +15,10 @@ import com.jingna.artworkmall.bean.LoginBean;
 import com.jingna.artworkmall.net.NetUrl;
 import com.jingna.artworkmall.util.SpUtils;
 import com.jingna.artworkmall.util.StatusBarUtil;
+import com.jingna.artworkmall.util.StringUtils;
 import com.jingna.artworkmall.util.ToastUtil;
 import com.jingna.artworkmall.util.ViseUtil;
+import com.jingna.artworkmall.util.WeiboDialogUtils;
 import com.vise.xsnow.http.ViseHttp;
 
 import java.util.LinkedHashMap;
@@ -31,6 +34,9 @@ public class PhoneLoginActivity extends AppCompatActivity {
     EditText et_phone;
     @BindView(R.id.edget_password)
     EditText edget_password;
+
+    private Dialog dialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,13 +80,14 @@ public class PhoneLoginActivity extends AppCompatActivity {
     public void LoginApp(){
         String phone = et_phone.getText().toString();
         String pwd = edget_password.getText().toString();
-        if(phone.isEmpty() || pwd.isEmpty()){
+        if(StringUtils.isEmpty(phone) || StringUtils.isEmpty(pwd)){
             ToastUtil.showShort(context, "请输入账号和密码!");
         } else {
+            dialog = WeiboDialogUtils.createLoadingDialog(context, "请等待...");
             Map<String,String> map = new LinkedHashMap<>();
             map.put("username",phone);
             map.put("password",pwd);
-            ViseUtil.Get(context, NetUrl.MemUserloginAppPassword, map, new ViseUtil.ViseListener() {
+            ViseUtil.Get(context, NetUrl.MemUserloginAppPassword, map, dialog, new ViseUtil.ViseListener() {
                 @Override
                 public void onReturn(String s) {
                     Gson gson = new Gson();

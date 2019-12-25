@@ -23,6 +23,7 @@ import com.jingna.artworkmall.net.NetUrl;
 import com.jingna.artworkmall.util.GlideUtils;
 import com.jingna.artworkmall.util.SpUtils;
 import com.jingna.artworkmall.util.StatusBarUtil;
+import com.jingna.artworkmall.util.StringUtils;
 import com.jingna.artworkmall.util.ToastUtil;
 import com.jingna.artworkmall.util.ViseUtil;
 import com.vise.xsnow.http.ViseHttp;
@@ -92,7 +93,9 @@ public class PersonInformationActivity extends BaseActivity {
             public void onReturn(String s) {
                 Gson gson = new Gson();
                 MemUsergetOneBean bean = gson.fromJson(s, MemUsergetOneBean.class);
-                GlideUtils.into(context, NetUrl.BASE_URL+bean.getData().getMemberUserInfo().getHeadPhoto(), ivAvatar);
+                if(!StringUtils.isEmpty(bean.getData().getMemberUserInfo().getHeadPhoto())){
+                    GlideUtils.into(context, NetUrl.BASE_URL+bean.getData().getMemberUserInfo().getHeadPhoto(), ivAvatar);
+                }
                 tvNickname.setText(bean.getData().getMemberUserInfo().getMemName());
                 if(bean.getData().getMemberUserInfo().getGender().equals("0")){
                     tvSex.setText("未填写");

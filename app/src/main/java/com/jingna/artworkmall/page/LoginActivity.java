@@ -1,5 +1,6 @@
 package com.jingna.artworkmall.page;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,8 +17,10 @@ import com.jingna.artworkmall.bean.LoginBean;
 import com.jingna.artworkmall.net.NetUrl;
 import com.jingna.artworkmall.util.SpUtils;
 import com.jingna.artworkmall.util.StatusBarUtil;
+import com.jingna.artworkmall.util.StringUtils;
 import com.jingna.artworkmall.util.ToastUtil;
 import com.jingna.artworkmall.util.ViseUtil;
+import com.jingna.artworkmall.util.WeiboDialogUtils;
 import com.vise.xsnow.http.ViseHttp;
 
 import org.json.JSONException;
@@ -46,6 +49,8 @@ public class LoginActivity extends BaseActivity {
     public TextView getCode_btn() {
         return tvGetCode;
     }
+
+    private Dialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,7 +97,7 @@ public class LoginActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.btn_login:
-               LoginApp();
+                LoginApp();
                 break;
         }
     }
@@ -128,16 +133,17 @@ public class LoginActivity extends BaseActivity {
     public void LoginApp(){
         String phone = et_phone.getText().toString();
         String code = edget_code.getText().toString();
-        if(phone.isEmpty() || code.isEmpty()){
+        if(StringUtils.isEmpty(phone) || StringUtils.isEmpty(code)){
             ToastUtil.showShort(context,"请填写完整信息在提交!");
         }else{
             if(!codes.equals(code)){
                 ToastUtil.showShort(context,"短信验证码不正确!");
             }else{
+                dialog = WeiboDialogUtils.createLoadingDialog(context, "请等待...");
                 Map<String,String> map = new LinkedHashMap<>();
                 map.put("phone",phone);
                 map.put("code",code);
-                ViseUtil.Get(context, NetUrl.MemUserloginAPP, map, new ViseUtil.ViseListener() {
+                ViseUtil.Get(context, NetUrl.MemUserloginAPP, map, dialog, new ViseUtil.ViseListener() {
                     @Override
                     public void onReturn(String s) {
                         Gson gson = new Gson();

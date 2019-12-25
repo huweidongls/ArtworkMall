@@ -1,5 +1,6 @@
 package com.jingna.artworkmall.page;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,8 +18,10 @@ import com.jingna.artworkmall.bean.LoginBean;
 import com.jingna.artworkmall.net.NetUrl;
 import com.jingna.artworkmall.util.SpUtils;
 import com.jingna.artworkmall.util.StatusBarUtil;
+import com.jingna.artworkmall.util.StringUtils;
 import com.jingna.artworkmall.util.ToastUtil;
 import com.jingna.artworkmall.util.ViseUtil;
+import com.jingna.artworkmall.util.WeiboDialogUtils;
 import com.vise.xsnow.http.ViseHttp;
 
 import org.json.JSONException;
@@ -38,21 +41,19 @@ public class RegisterActivity extends BaseActivity {
     private String code ="";
     @BindView(R.id.tv_get_code)
     TextView tvGetCode;
-
     @BindView(R.id.et_phone)
     EditText et_phone;
-
     @BindView(R.id.et_code)
     EditText et_code;
-
     @BindView(R.id.et_yqm)
     EditText et_yqm;
-
     @BindView(R.id.et_pwd)
     EditText et_pwd;
     public TextView getCode_btn() {
         return tvGetCode;
     }
+
+    private Dialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,15 +83,14 @@ public class RegisterActivity extends BaseActivity {
             case R.id.tv_get_code:
                 MyApplication.registerTimeCount.start();
                 String phones = et_phone.getText().toString();
-                if(phones.isEmpty()){
-                    ToastUtil.showShort(context, "请输入电话号码!");
+                if(!StringUtils.isPhoneNumberValid(phones)){
+                    ToastUtil.showShort(context, "请输入正确格式的电话号码!");
                 }else{
                     Map<String, String> map = new LinkedHashMap<>();
                     map.put("phone",phones);
                     ViseUtil.Get(context, NetUrl.MemUsersendMessage, map, new ViseUtil.ViseListener() {
                         @Override
                         public void onReturn(String s) {
-                            //Log.e("7787887",s);
                             try {
                                 JSONObject jsonObject = new JSONObject(s);
                                 if(jsonObject.optString("status").equals("200")){
@@ -110,19 +110,19 @@ public class RegisterActivity extends BaseActivity {
                 String code_msg = et_code.getText().toString();
                 String yq = et_yqm.getText().toString();
                 String pwd = et_pwd.getText().toString();
-                if(tel.isEmpty() || code.isEmpty() || yq.isEmpty() || pwd.isEmpty()){
+                if(StringUtils.isEmpty(tel) || StringUtils.isEmpty(code_msg) || StringUtils.isEmpty(yq) || StringUtils.isEmpty(pwd)){
                     ToastUtil.showShort(context,"请填写完整信息!");
                 }else{
-                    Log.e("7878787878",code);
                     if(!code.equals(code_msg)){
                         ToastUtil.showShort(context,"短信验证码不正确!");
                     }else{
+                        dialog = WeiboDialogUtils.createLoadingDialog(context, "请等待...");
                         Map<String,String> map = new LinkedHashMap<>();
                         map.put("phone",tel);
                         map.put("invitationCode",yq);
                         map.put("password",pwd);
                         map.put("code",code_msg);
-                        ViseUtil.Get(context, NetUrl.MemUseraddMember, map, new ViseUtil.ViseListener() {
+                        ViseUtil.Get(context, NetUrl.MemUseraddMember, map, dialog, new ViseUtil.ViseListener() {
                             @Override
                             public void onReturn(String s) {
                                 Gson gson = new Gson();
