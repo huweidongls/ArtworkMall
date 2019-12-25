@@ -338,6 +338,7 @@
                         android:layout_height="1dp"/>
 
                     <RelativeLayout
+                        android:id="@+id/rl_bank"
                         android:background="?android:selectableItemBackground"
                         android:layout_width="match_parent"
                         android:layout_height="45dp">
@@ -347,7 +348,7 @@
                             android:layout_marginLeft="11dp"
                             android:textColor="#2E2E2E"
                             android:textSize="15sp"
-                            android:text="我的寄售"
+                            android:text="我的银行卡"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
 

@@ -23,6 +23,7 @@ import com.jingna.artworkmall.net.NetUrl;
 import com.jingna.artworkmall.util.GetJsonDataUtil;
 import com.jingna.artworkmall.util.SpUtils;
 import com.jingna.artworkmall.util.StatusBarUtil;
+import com.jingna.artworkmall.util.StringUtils;
 import com.jingna.artworkmall.util.ToastUtil;
 import com.jingna.artworkmall.util.ViseUtil;
 
@@ -149,9 +150,11 @@ public class InsertAddressActivity extends BaseActivity {
                 String phone = etPhoneNum.getText().toString();
                 String city = tvCity.getText().toString();
                 String UseretAddress = etAddress.getText().toString();
-                if(UserName.isEmpty() || phone.isEmpty() || city.isEmpty() || UseretAddress.isEmpty()){
+                if(StringUtils.isEmpty(UserName) || StringUtils.isEmpty(phone) || StringUtils.isEmpty(city) || StringUtils.isEmpty(UseretAddress)){
                     ToastUtil.showShort(context,"请将信息填写完整!");
-                }else{
+                }else if(!StringUtils.isPhoneNumberValid(phone)){
+                    ToastUtil.showShort(context,"请输入正确格式的手机号码!");
+                }else {
                     Map<String,String> map = new LinkedHashMap<>();
                     map.put("memberId", SpUtils.getUserId(context));//会员ID
                     if(!aid.equals("0")){
@@ -169,7 +172,7 @@ public class InsertAddressActivity extends BaseActivity {
                             try {
                                 JSONObject jsonObject = new JSONObject(s);
                                 if(jsonObject.optString("status").equals("200")){
-                                    ToastUtil.showShort(context,"操作成功!");
+                                    ToastUtil.showShort(context,"添加成功!");
                                     Intent intent = new Intent();
                                     intent.setClass(context, AddressActivity.class);
                                     startActivity(intent);

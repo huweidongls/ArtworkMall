@@ -48,11 +48,11 @@ public class MyBankCardAdapter extends RecyclerView.Adapter<MyBankCardAdapter.Vi
         }else {
             holder.rlBank.setVisibility(View.VISIBLE);
             holder.tvAdd.setVisibility(View.GONE);
-            holder.tvBankName.setText(data.get(position).getCardType());
-            phone = data.get(position).getPhone();
+            holder.tvBankName.setText(data.get(position).getCardName());
+            phone = data.get(position).getCardPhone();
             phone = phone.substring(phone.length()-4, phone.length());
             holder.tvPhoneNum.setText("手机尾号"+phone);
-            card = data.get(position).getBankCardNum();
+            card = data.get(position).getCardNumber();
             card = card.substring(card.length()-4, card.length());
             holder.tvBankCard.setText(card);
         }
@@ -60,7 +60,7 @@ public class MyBankCardAdapter extends RecyclerView.Adapter<MyBankCardAdapter.Vi
         holder.rlBank.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listener.onItemClick(position, data.get(position).getCardType(), finalCard);
+                listener.onItemClick(position, data.get(position).getCardName(), finalCard);
             }
         });
         holder.tvAdd.setOnClickListener(new View.OnClickListener() {

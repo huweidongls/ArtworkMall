@@ -11,18 +11,10 @@ public class BankCardListBean implements Serializable {
 
     /**
      * status : 200
-     * errorMsg :
-     * data : [{"id":1,"userId":46,"bankCardNum":"12580","phone":"123456789","cardType":"中国银行","isDelete":0,"createTime":"2019-07-23T03:04:54.000+0000","updateTime":""}]
-     * totalPage :
-     * totalCount :
-     * userNameFromToken :
+     * data : [{"id":3,"cardNumber":"5412541521452","cardName":"建设银行","cardPhone":"13796068265"},{"id":2,"cardNumber":"11","cardName":"啊啊啊","cardPhone":"11"}]
      */
 
     private String status;
-    private String errorMsg;
-    private String totalPage;
-    private String totalCount;
-    private String userNameFromToken;
     private List<DataBean> data;
 
     public String getStatus() {
@@ -31,38 +23,6 @@ public class BankCardListBean implements Serializable {
 
     public void setStatus(String status) {
         this.status = status;
-    }
-
-    public String getErrorMsg() {
-        return errorMsg;
-    }
-
-    public void setErrorMsg(String errorMsg) {
-        this.errorMsg = errorMsg;
-    }
-
-    public String getTotalPage() {
-        return totalPage;
-    }
-
-    public void setTotalPage(String totalPage) {
-        this.totalPage = totalPage;
-    }
-
-    public String getTotalCount() {
-        return totalCount;
-    }
-
-    public void setTotalCount(String totalCount) {
-        this.totalCount = totalCount;
-    }
-
-    public String getUserNameFromToken() {
-        return userNameFromToken;
-    }
-
-    public void setUserNameFromToken(String userNameFromToken) {
-        this.userNameFromToken = userNameFromToken;
     }
 
     public List<DataBean> getData() {
@@ -75,24 +35,16 @@ public class BankCardListBean implements Serializable {
 
     public static class DataBean implements Serializable {
         /**
-         * id : 1
-         * userId : 46
-         * bankCardNum : 12580
-         * phone : 123456789
-         * cardType : 中国银行
-         * isDelete : 0
-         * createTime : 2019-07-23T03:04:54.000+0000
-         * updateTime :
+         * id : 3
+         * cardNumber : 5412541521452
+         * cardName : 建设银行
+         * cardPhone : 13796068265
          */
 
         private int id;
-        private int userId;
-        private String bankCardNum;
-        private String phone;
-        private String cardType;
-        private int isDelete;
-        private String createTime;
-        private String updateTime;
+        private String cardNumber;
+        private String cardName;
+        private String cardPhone;
 
         public int getId() {
             return id;
@@ -102,60 +54,28 @@ public class BankCardListBean implements Serializable {
             this.id = id;
         }
 
-        public int getUserId() {
-            return userId;
+        public String getCardNumber() {
+            return cardNumber;
         }
 
-        public void setUserId(int userId) {
-            this.userId = userId;
+        public void setCardNumber(String cardNumber) {
+            this.cardNumber = cardNumber;
         }
 
-        public String getBankCardNum() {
-            return bankCardNum;
+        public String getCardName() {
+            return cardName;
         }
 
-        public void setBankCardNum(String bankCardNum) {
-            this.bankCardNum = bankCardNum;
+        public void setCardName(String cardName) {
+            this.cardName = cardName;
         }
 
-        public String getPhone() {
-            return phone;
+        public String getCardPhone() {
+            return cardPhone;
         }
 
-        public void setPhone(String phone) {
-            this.phone = phone;
-        }
-
-        public String getCardType() {
-            return cardType;
-        }
-
-        public void setCardType(String cardType) {
-            this.cardType = cardType;
-        }
-
-        public int getIsDelete() {
-            return isDelete;
-        }
-
-        public void setIsDelete(int isDelete) {
-            this.isDelete = isDelete;
-        }
-
-        public String getCreateTime() {
-            return createTime;
-        }
-
-        public void setCreateTime(String createTime) {
-            this.createTime = createTime;
-        }
-
-        public String getUpdateTime() {
-            return updateTime;
-        }
-
-        public void setUpdateTime(String updateTime) {
-            this.updateTime = updateTime;
+        public void setCardPhone(String cardPhone) {
+            this.cardPhone = cardPhone;
         }
     }
 }

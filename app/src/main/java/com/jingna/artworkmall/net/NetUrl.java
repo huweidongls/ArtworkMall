@@ -18,4 +18,7 @@ public class NetUrl {
     public static final String MemAdressgetOne = "/MemAdress/getOne";//获取单个会员收货地址信息
     public static final String MemUsergetOne = "/MemUser/getOne";//通过ID查询会员
     public static final String MemUsertoUpdate = "/MemUser/toUpdate";//新增个人信息详情
+    public static final String AppBankCardqueryList = "/AppBankCard/queryList";//全部银行卡
+    public static final String AppBankCardtoDelete = "/AppBankCard/toDelete";//删除银行卡
+    public static final String AppBankCardtoUpdate = "/AppBankCard/toUpdate";//添加银行卡
 }

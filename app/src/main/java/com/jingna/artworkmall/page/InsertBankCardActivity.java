@@ -12,15 +12,20 @@ import com.bumptech.glide.Glide;
 import com.jingna.artworkmall.R;
 import com.jingna.artworkmall.base.BaseActivity;
 import com.jingna.artworkmall.dialog.BankCodeDialog;
+import com.jingna.artworkmall.net.NetUrl;
 import com.jingna.artworkmall.util.SpUtils;
 import com.jingna.artworkmall.util.StatusBarUtil;
 import com.jingna.artworkmall.util.StringUtils;
 import com.jingna.artworkmall.util.ToastUtil;
+import com.jingna.artworkmall.util.ViseUtil;
 import com.vise.xsnow.http.ViseHttp;
 import com.vise.xsnow.http.callback.ACallback;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -93,34 +98,20 @@ public class InsertBankCardActivity extends BaseActivity {
                         BankCodeDialog dialog = new BankCodeDialog(context, phoneNum, new BankCodeDialog.ClickListener() {
                             @Override
                             public void onSure() {
-                                ViseHttp.POST("")
-                                        .addParam("userId", SpUtils.getUserId(context))
-                                        .addParam("bankCardNum", bankCard)
-                                        .addParam("cardType", bankName)
-                                        .addParam("phone", phoneNum)
-                                        .request(new ACallback<String>() {
-                                            @Override
-                                            public void onSuccess(String data) {
-                                                try {
-                                                    JSONObject jsonObject = new JSONObject(data);
-                                                    if(jsonObject.optString("status").equals("200")){
-                                                        Intent intent = new Intent();
-                                                        intent.setClass(context, InsertBankCardSuccessActivity.class);
-                                                        startActivity(intent);
-                                                        finish();
-                                                    }else {
-                                                        ToastUtil.showShort(context, jsonObject.optString("errorMsg"));
-                                                    }
-                                                } catch (JSONException e) {
-                                                    e.printStackTrace();
-                                                }
-                                            }
-
-                                            @Override
-                                            public void onFail(int errCode, String errMsg) {
-
-                                            }
-                                        });
+                                Map<String, String> map = new LinkedHashMap<>();
+                                map.put("cardMemberId", SpUtils.getUserId(context));
+                                map.put("cardNumber", bankCard);
+                                map.put("cardPhone", phoneNum);
+                                map.put("cardName", bankName);
+                                ViseUtil.Post(context, NetUrl.AppBankCardtoUpdate, map, new ViseUtil.ViseListener() {
+                                    @Override
+                                    public void onReturn(String s) {
+                                        Intent intent = new Intent();
+                                        intent.setClass(context, InsertBankCardSuccessActivity.class);
+                                        startActivity(intent);
+                                        finish();
+                                    }
+                                });
                             }
                         });
                         dialog.show();

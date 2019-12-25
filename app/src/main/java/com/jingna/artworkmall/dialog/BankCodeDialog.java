@@ -12,12 +12,18 @@ import android.widget.TextView;
 
 import com.jingna.artworkmall.R;
 import com.jingna.artworkmall.app.MyApplication;
+import com.jingna.artworkmall.net.NetUrl;
+import com.jingna.artworkmall.util.StringUtils;
 import com.jingna.artworkmall.util.ToastUtil;
+import com.jingna.artworkmall.util.ViseUtil;
 import com.vise.xsnow.http.ViseHttp;
 import com.vise.xsnow.http.callback.ACallback;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 /**
  * Created by Administrator on 2019/6/19.
@@ -34,6 +40,7 @@ public class BankCodeDialog extends Dialog {
     private String phone;
     private TextView tv;
     private EditText etCode;
+    private String codeNet;
 
     public BankCodeDialog(@NonNull Context context, String phone, ClickListener listener) {
         super(context, R.style.RoundCornerDialog);
@@ -71,30 +78,14 @@ public class BankCodeDialog extends Dialog {
             @Override
             public void onClick(View v) {
                 String code = etCode.getText().toString();
-                ViseHttp.GET("")
-                        .addParam("phone", phone)
-                        .addParam("code", code)
-                        .request(new ACallback<String>() {
-                            @Override
-                            public void onSuccess(String data) {
-                                try {
-                                    JSONObject jsonObject = new JSONObject(data);
-                                    if(jsonObject.optString("status").equals("200")){
-                                        dismiss();
-                                        listener.onSure();
-                                    }else {
-                                        ToastUtil.showShort(context, "验证码不正确");
-                                    }
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
-                            }
-
-                            @Override
-                            public void onFail(int errCode, String errMsg) {
-
-                            }
-                        });
+                if(StringUtils.isEmpty(code)){
+                    ToastUtil.showShort(context, "验证码不能为空");
+                }else if(!codeNet.equals(code)){
+                    ToastUtil.showShort(context, "验证码不正确");
+                }else {
+                    dismiss();
+                    listener.onSure();
+                }
             }
         });
 
@@ -109,26 +100,22 @@ public class BankCodeDialog extends Dialog {
             @Override
             public void onClick(View v) {
                 MyApplication.bankCodeTimeCount.start();
-                ViseHttp.GET("")
-                        .addParam("phone", phone)
-                        .request(new ACallback<String>() {
-                            @Override
-                            public void onSuccess(String data) {
-                                try {
-                                    JSONObject jsonObject = new JSONObject(data);
-                                    if(jsonObject.optString("status").equals("200")){
-                                        ToastUtil.showShort(context, "验证码发送成功");
-                                    }
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
+                Map<String, String> map = new LinkedHashMap<>();
+                map.put("phone", phone);
+                ViseUtil.Get(context, NetUrl.MemUsersendMessage, map, new ViseUtil.ViseListener() {
+                    @Override
+                    public void onReturn(String s) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(s);
+                            if(jsonObject.optString("status").equals("200")){
+                                codeNet = jsonObject.optString("data");
+                                ToastUtil.showShort(context,"验证码发送成功，请注意查收!");
                             }
-
-                            @Override
-                            public void onFail(int errCode, String errMsg) {
-
-                            }
-                        });
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
             }
         });
 

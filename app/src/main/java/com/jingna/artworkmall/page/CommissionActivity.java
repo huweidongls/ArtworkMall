@@ -92,7 +92,7 @@ public class CommissionActivity extends BaseActivity {
                             JSONObject jsonObject = new JSONObject(data);
                             if (jsonObject.optString("status").equals("200")) {
                                 allMoney = jsonObject.optDouble("data");
-                                tvMoney.setText("佣金余额¥" + allMoney + "，");
+                                tvMoney.setText("余额¥" + allMoney + "，");
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -129,18 +129,6 @@ public class CommissionActivity extends BaseActivity {
             }
         });
     }
-
-//    private void init_back() {
-//        mList = new ArrayList<>();
-//        mList.add("");
-//        mList.add("");
-//        mList.add("");
-//        adapter = new BackCardListAdapter(mList);
-//        LinearLayoutManager manager = new LinearLayoutManager(CommissionActivity.this);
-//        manager.setOrientation(LinearLayoutManager.VERTICAL);
-//        recyclerView.setLayoutManager(manager);
-//        recyclerView.setAdapter(adapter);
-//    }
 
     @OnClick({R.id.rl_back, R.id.btn_mone, R.id.all, R.id.ll_bank})
     public void onClick(View view) {
@@ -199,40 +187,9 @@ public class CommissionActivity extends BaseActivity {
         if (requestCode == 1003 && data != null) {
             BankCardListBean.DataBean bean = (BankCardListBean.DataBean) data.getSerializableExtra("bean");
             bankId = bean.getId() + "";
-            tvBankName.setText(bean.getCardType() + "(" + bean.getBankCardNum().substring(bean.getBankCardNum().length() - 4, bean.getBankCardNum().length()) + ")");
+            tvBankName.setText(bean.getCardName() + "(" + bean.getCardNumber().substring(bean.getCardNumber().length() - 4, bean.getCardNumber().length()) + ")");
             tvSelect.setVisibility(View.GONE);
         }
     }
-
-//    private void showBankPop() {
-//        View view = LayoutInflater.from(CommissionActivity.this).inflate(R.layout.popupwindow_bankcardlist, null);
-//
-//        recyclerView = view.findViewById(R.id.rv_bankcard);
-//        init_back();
-//        popupWindow = new PopupWindow(view, WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT, true);
-//        popupWindow.setTouchable(true);
-//        popupWindow.setFocusable(true);
-//        // 设置点击窗口外边窗口消失
-//        popupWindow.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-//        popupWindow.setOutsideTouchable(true);
-//        popupWindow.showAtLocation(getWindow().getDecorView(), Gravity.BOTTOM, 0, 0);
-////        popupWindow.showAsDropDown(rlPro);
-//        // 设置popWindow的显示和消失动画
-//        popupWindow.setAnimationStyle(R.style.mypopwindow_anim_style_bottom);
-//        WindowManager.LayoutParams params = getWindow().getAttributes();
-//        params.alpha = 0.5f;
-//        getWindow().setAttributes(params);
-//        popupWindow.update();
-//
-//        popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
-//
-//            // 在dismiss中恢复透明度
-//            public void onDismiss() {
-//                WindowManager.LayoutParams params = getWindow().getAttributes();
-//                params.alpha = 1f;
-//                getWindow().setAttributes(params);
-//            }
-//        });
-//    }
 
 }
