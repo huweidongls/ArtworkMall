@@ -5,6 +5,7 @@ import android.app.Application;
 
 import com.jingna.artworkmall.net.NetUrl;
 import com.jingna.artworkmall.util.BankCodeTimeCount;
+import com.jingna.artworkmall.util.ForgotTimeCount;
 import com.jingna.artworkmall.util.LoginTimeCount;
 import com.jingna.artworkmall.util.RegisterTimeCount;
 import com.jingna.artworkmall.util.SpUtils;
@@ -27,6 +28,7 @@ public class MyApplication extends Application {
     public static BankCodeTimeCount bankCodeTimeCount;
     public static LoginTimeCount loginTimeCount;
     public static RegisterTimeCount registerTimeCount;
+    public static ForgotTimeCount forgotTimeCount;
 
     public MyApplication() {
     }
@@ -42,6 +44,7 @@ public class MyApplication extends Application {
         bankCodeTimeCount = new BankCodeTimeCount(60000, 1000);
         loginTimeCount = new LoginTimeCount(60000, 1000);
         registerTimeCount = new RegisterTimeCount(60000, 1000);
+        forgotTimeCount = new ForgotTimeCount(60000, 1000);
 //        RichText.initCacheDir(this);
     }
 

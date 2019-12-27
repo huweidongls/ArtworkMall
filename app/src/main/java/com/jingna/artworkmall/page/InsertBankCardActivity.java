@@ -116,6 +116,8 @@ public class InsertBankCardActivity extends BaseActivity {
                         });
                         dialog.show();
                     }
+                }else {
+                    ToastUtil.showShort(context, "需同意支付协议才能绑定！");
                 }
                 break;
         }

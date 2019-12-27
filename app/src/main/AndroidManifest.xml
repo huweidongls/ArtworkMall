@@ -37,8 +37,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".page.MainActivity"
-            android:configChanges="orientation|screenSize">
-        </activity>
+            android:configChanges="orientation|screenSize" />
 
         <receiver android:name=".broadcastreceiver.NetBroadcastReceiver">
             <intent-filter>
@@ -57,7 +56,7 @@
         <activity android:name=".page.InsertBankCardSuccessActivity" />
         <activity android:name=".page.CommissionActivity" />
         <activity android:name=".page.LoginActivity" />
-        <activity android:name=".page.WelcomeActivity" >
+        <activity android:name=".page.WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -66,7 +65,7 @@
         </activity>
         <activity android:name=".page.RegisterActivity" />
         <activity android:name=".page.PhoneLoginActivity" />
-        <activity android:name=".page.PersonInformationActivity"/>
+        <activity android:name=".page.PersonInformationActivity" />
         <activity
             android:name="com.donkingliang.imageselector.ImageSelectorActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
@@ -89,6 +88,23 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
+
+        <activity android:name=".page.ForgotPwdActivity" />
+        <activity android:name=".page.ForgotPwd2Activity" />
+        <activity
+            android:name="com.alipay.sdk.app.H5PayActivity"
+            android:configChanges="orientation|keyboardHidden|navigation|screenSize"
+            android:exported="false"
+            android:screenOrientation="behind"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
+        <activity
+            android:name="com.alipay.sdk.app.H5AuthActivity"
+            android:configChanges="orientation|keyboardHidden|navigation"
+            android:exported="false"
+            android:screenOrientation="behind"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
+        <activity android:name=".page.MyDianpuActivity" />
+        <activity android:name=".page.CouponsActivity"></activity>
     </application>
 
 </manifest>

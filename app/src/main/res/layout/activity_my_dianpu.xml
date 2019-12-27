@@ -5,10 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.jingna.artworkmall.page.PtJifenDetailsActivity">
+    android:background="@color/white_ffffff"
+    tools:context="com.jingna.artworkmall.page.MyDianpuActivity">
 
     <RelativeLayout
-        style="@style/rl_top_bar_gray">
+        style="@style/rl_top_bar_white">
 
         <RelativeLayout
             android:id="@+id/rl_back"
@@ -16,26 +17,19 @@
             android:layout_height="match_parent">
 
             <ImageView
-                style="@style/iv_top_back_gray" />
+                style="@style/iv_top_back_white" />
 
         </RelativeLayout>
 
         <TextView
-            android:text="平台币明细"
-            style="@style/tv_top_title_gray" />
+            android:text="我的店铺"
+            style="@style/tv_top_title_white" />
 
     </RelativeLayout>
 
-    <com.scwang.smartrefresh.layout.SmartRefreshLayout
-        android:id="@+id/refresh"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+        android:layout_height="wrap_content"/>
 
 </LinearLayout>

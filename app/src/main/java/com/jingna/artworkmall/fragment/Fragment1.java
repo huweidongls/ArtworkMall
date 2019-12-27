@@ -9,15 +9,22 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.gson.Gson;
 import com.jingna.artworkmall.R;
 import com.jingna.artworkmall.adapter.Fragment1RvAdapter;
 import com.jingna.artworkmall.base.BaseFragment;
+import com.jingna.artworkmall.bean.IndexPageApifindBannerCategoryBean;
 import com.jingna.artworkmall.card.CardFragmentPagerAdapter;
 import com.jingna.artworkmall.card.CardFxPagerAdapter;
+import com.jingna.artworkmall.net.NetUrl;
 import com.jingna.artworkmall.util.DensityTool;
+import com.jingna.artworkmall.util.ViseUtil;
+import com.youth.banner.Banner;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -32,6 +39,9 @@ public class Fragment1 extends BaseFragment {
     RecyclerView recyclerView;
     @BindView(R.id.vp)
     ViewPager viewPager;
+    @BindView(R.id.banner)
+    Banner banner;
+
     private CardFxPagerAdapter mCardAdapter;
     private CardFragmentPagerAdapter mFragmentCardAdapter;
 
@@ -66,6 +76,21 @@ public class Fragment1 extends BaseFragment {
     }
 
     private void initData() {
+
+        Map<String, String> map = new LinkedHashMap<>();
+        map.put("type", "0");
+        ViseUtil.Get(getContext(), NetUrl.IndexPageApifindBannerCategory, map, new ViseUtil.ViseListener() {
+            @Override
+            public void onReturn(String s) {
+                Gson gson = new Gson();
+                IndexPageApifindBannerCategoryBean bean = gson.fromJson(s, IndexPageApifindBannerCategoryBean.class);
+                List<String> list = new ArrayList<>();
+                for (IndexPageApifindBannerCategoryBean.DataBean b : bean.getData()){
+                    list.add(NetUrl.BASE_URL+b.getAppPic());
+                }
+                init(banner, list);
+            }
+        });
 
         data = new ArrayList<>();
         data.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1576124684803&di=b2955f5c7f53d25a2a66942ae32d992d&imgtype=0&src=http%3A%2F%2Fww2.sinaimg.cn%2Flarge%2F00667u01jw1erufiv0fd1j30k00b9q48.jpg");

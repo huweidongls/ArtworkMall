@@ -6,7 +6,7 @@ package com.jingna.artworkmall.net;
 
 public class NetUrl {
 
-    public static final String BASE_URL = "http://192.168.1.102:8866/";//http://192.168.2.211:8080/
+    public static final String BASE_URL = "http://192.168.1.102:80/";//http://192.168.2.211:8080/
     public static final String MemUsersendMessage = "/MemUser/sendMessage";//发送验证码
     public static final String MemUserloginAPP = "/MemUser/loginAPP";//短信登录
     public static final String MemUserloginAppPassword = "/MemUser/loginAppPassword";//账号密码登录
@@ -21,4 +21,8 @@ public class NetUrl {
     public static final String AppBankCardqueryList = "/AppBankCard/queryList";//全部银行卡
     public static final String AppBankCardtoDelete = "/AppBankCard/toDelete";//删除银行卡
     public static final String AppBankCardtoUpdate = "/AppBankCard/toUpdate";//添加银行卡
+    public static final String MemUserretrievePassword = "/MemUser/retrievePassword";//通过手机验证码设置新密码
+    public static final String AppPlatformBalanceMybalance = "/AppPlatformBalance/Mybalance";//查询平台币余额
+    public static final String AppPlatformBalancequeryList = "/AppPlatformBalance/queryList";//查询该用户平台币余额明细
+    public static final String IndexPageApifindBannerCategory = "/IndexPageApi/findBannerCategory";//显示所有轮播图
 }

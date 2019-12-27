@@ -176,7 +176,7 @@
             android:id="@+id/tv_add"
             android:gravity="center"
             android:textSize="16sp"
-            android:textColor="#ffffff"
+            android:textColor="#727272"
             android:text="+ 添加银行卡"
             android:background="@drawable/bg_e4e4e4_bord"
             android:layout_marginRight="10dp"

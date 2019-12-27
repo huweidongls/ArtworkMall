@@ -11,6 +11,7 @@ import android.widget.EditText;
 import com.google.gson.Gson;
 import com.jingna.artworkmall.R;
 import com.jingna.artworkmall.app.MyApplication;
+import com.jingna.artworkmall.base.BaseActivity;
 import com.jingna.artworkmall.bean.LoginBean;
 import com.jingna.artworkmall.net.NetUrl;
 import com.jingna.artworkmall.util.SpUtils;
@@ -28,7 +29,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class PhoneLoginActivity extends AppCompatActivity {
+public class PhoneLoginActivity extends BaseActivity {
     private Context context = PhoneLoginActivity.this;
     @BindView(R.id.et_phone)
     EditText et_phone;
@@ -51,7 +52,7 @@ public class PhoneLoginActivity extends AppCompatActivity {
         }
         ButterKnife.bind(PhoneLoginActivity.this);
     }
-    @OnClick({R.id.rl_back, R.id.btn_login,R.id.tv_phone_pwd,R.id.tv_register})
+    @OnClick({R.id.rl_back, R.id.btn_login,R.id.tv_phone_pwd,R.id.tv_register, R.id.tv_forgot})
     public void onClick(View view){
         Intent intent = new Intent();
         switch (view.getId()){
@@ -70,6 +71,11 @@ public class PhoneLoginActivity extends AppCompatActivity {
                 break;
             case R.id.btn_login:
                 LoginApp();
+                break;
+            case R.id.tv_forgot:
+                intent.setClass(context, ForgotPwdActivity.class);
+                startActivity(intent);
+                finish();
                 break;
         }
     }

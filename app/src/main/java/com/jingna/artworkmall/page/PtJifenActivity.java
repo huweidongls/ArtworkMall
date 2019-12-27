@@ -4,17 +4,31 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 import com.jingna.artworkmall.R;
 import com.jingna.artworkmall.base.BaseActivity;
+import com.jingna.artworkmall.net.NetUrl;
+import com.jingna.artworkmall.util.SpUtils;
 import com.jingna.artworkmall.util.StatusBarUtil;
+import com.jingna.artworkmall.util.ViseUtil;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.LinkedHashMap;
+import java.util.Map;
+
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class PtJifenActivity extends BaseActivity {
 
     private Context context = PtJifenActivity.this;
+
+    @BindView(R.id.tv_ptb)
+    TextView tvPtb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +44,26 @@ public class PtJifenActivity extends BaseActivity {
             StatusBarUtil.setStatusBarColor(PtJifenActivity.this,0x55000000);
         }
         ButterKnife.bind(PtJifenActivity.this);
+        initData();
+
+    }
+
+    private void initData() {
+
+        Map<String, String> map = new LinkedHashMap<>();
+        map.put("id", SpUtils.getUserId(context));
+        ViseUtil.Get(context, NetUrl.AppPlatformBalanceMybalance, map, new ViseUtil.ViseListener() {
+            @Override
+            public void onReturn(String s) {
+                try {
+                    JSONObject jsonObject = new JSONObject(s);
+                    String ptb = jsonObject.optInt("data")+"";
+                    tvPtb.setText(ptb);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
 
     }
 

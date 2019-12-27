@@ -73,7 +73,7 @@ public class RegisterActivity extends BaseActivity {
 
     }
 
-    @OnClick({R.id.rl_back, R.id.tv_get_code, R.id.login_btn})
+    @OnClick({R.id.rl_back, R.id.tv_get_code, R.id.login_btn, R.id.tv_msg, R.id.tv_phone})
     public void onClick(View view){
         Intent intent = new Intent();
         switch (view.getId()){
@@ -142,6 +142,14 @@ public class RegisterActivity extends BaseActivity {
                     }
 
                 }
+                break;
+            case R.id.tv_msg:
+                intent.setClass(context, LoginActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.tv_phone:
+                intent.setClass(context, PhoneLoginActivity.class);
+                startActivity(intent);
                 break;
         }
     }

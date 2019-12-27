@@ -5,8 +5,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.jingna.artworkmall.R;
+import com.jingna.artworkmall.bean.AppPlatformBalancequeryListBean;
 
 import java.util.List;
 
@@ -17,9 +19,9 @@ import java.util.List;
 public class PtJifenDetailsAdapter extends RecyclerView.Adapter<PtJifenDetailsAdapter.ViewHolder> {
 
     private Context context;
-    private List<String> data;
+    private List<AppPlatformBalancequeryListBean.DataBean> data;
 
-    public PtJifenDetailsAdapter(List<String> data) {
+    public PtJifenDetailsAdapter(List<AppPlatformBalancequeryListBean.DataBean> data) {
         this.data = data;
     }
 
@@ -33,7 +35,10 @@ public class PtJifenDetailsAdapter extends RecyclerView.Adapter<PtJifenDetailsAd
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-
+        holder.tvTitle.setText(data.get(position).getOperatingDescribe());
+        holder.tvRecord.setText(data.get(position).getOperatingRecord()+"");
+        holder.tvTime.setText(data.get(position).getCreateTime());
+        holder.tvYue.setText("余额"+data.get(position).getBalance());
     }
 
     @Override
@@ -43,8 +48,17 @@ public class PtJifenDetailsAdapter extends RecyclerView.Adapter<PtJifenDetailsAd
 
     class ViewHolder extends RecyclerView.ViewHolder{
 
+        private TextView tvTitle;
+        private TextView tvRecord;
+        private TextView tvTime;
+        private TextView tvYue;
+
         public ViewHolder(View itemView) {
             super(itemView);
+            tvTitle = itemView.findViewById(R.id.tv_title);
+            tvRecord = itemView.findViewById(R.id.tv_record);
+            tvTime = itemView.findViewById(R.id.tv_time);
+            tvYue = itemView.findViewById(R.id.tv_yue);
         }
     }
 
