@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/white_ffffff">
+
+    <ImageView
+        android:id="@+id/iv"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_gravity="end"
+        android:src="@mipmap/guanbi"
+        android:layout_width="18dp"
+        android:layout_height="18dp" />
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_marginTop="8dp"
+        android:id="@+id/rv"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>

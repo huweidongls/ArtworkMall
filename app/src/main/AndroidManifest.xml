@@ -104,7 +104,9 @@
             android:screenOrientation="behind"
             android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity android:name=".page.MyDianpuActivity" />
-        <activity android:name=".page.CouponsActivity"></activity>
+        <activity android:name=".page.CouponsActivity" />
+        <activity android:name=".page.TijianDetailsActivity" />
+        <activity android:name=".page.TijianSureActivity"></activity>
     </application>
 
 </manifest>

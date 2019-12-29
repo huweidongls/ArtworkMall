@@ -1,5 +1,6 @@
 package com.jingna.artworkmall.page;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -26,6 +27,7 @@ import com.jingna.artworkmall.util.StatusBarUtil;
 import com.jingna.artworkmall.util.StringUtils;
 import com.jingna.artworkmall.util.ToastUtil;
 import com.jingna.artworkmall.util.ViseUtil;
+import com.jingna.artworkmall.util.WeiboDialogUtils;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -65,6 +67,8 @@ public class InsertAddressActivity extends BaseActivity {
     private ArrayList<ArrayList<ArrayList<String>>> options3Items = new ArrayList<>();
 
     private String acquiescentAdress = "0";
+
+    private Dialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -155,6 +159,7 @@ public class InsertAddressActivity extends BaseActivity {
                 }else if(!StringUtils.isPhoneNumberValid(phone)){
                     ToastUtil.showShort(context,"请输入正确格式的手机号码!");
                 }else {
+                    dialog = WeiboDialogUtils.createLoadingDialog(context, "请等待...");
                     Map<String,String> map = new LinkedHashMap<>();
                     map.put("memberId", SpUtils.getUserId(context));//会员ID
                     if(!aid.equals("0")){
@@ -166,7 +171,7 @@ public class InsertAddressActivity extends BaseActivity {
                     map.put("location", city);//所在地区
                     map.put("consigneeTel", phone);//收货人电话
                     map.put("zipCode", "000000");
-                    ViseUtil.Post(context, NetUrl.MemAdresstoUpdate, map, new ViseUtil.ViseListener() {
+                    ViseUtil.Post(context, NetUrl.MemAdresstoUpdate, map, dialog, new ViseUtil.ViseListener() {
                         @Override
                         public void onReturn(String s) {
                             try {

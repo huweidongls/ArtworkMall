@@ -14,6 +14,7 @@ import com.jingna.artworkmall.R;
 import com.jingna.artworkmall.adapter.Fragment1RvAdapter;
 import com.jingna.artworkmall.base.BaseFragment;
 import com.jingna.artworkmall.bean.IndexPageApifindBannerCategoryBean;
+import com.jingna.artworkmall.bean.IndexPageApiqueryCardBean;
 import com.jingna.artworkmall.card.CardFragmentPagerAdapter;
 import com.jingna.artworkmall.card.CardFxPagerAdapter;
 import com.jingna.artworkmall.net.NetUrl;
@@ -48,7 +49,7 @@ public class Fragment1 extends BaseFragment {
     private List<String> data;
 
     private Fragment1RvAdapter adapter;
-    private List<String> mList;
+    private List<IndexPageApiqueryCardBean.DataBean> mList;
 
     @Nullable
     @Override
@@ -100,20 +101,27 @@ public class Fragment1 extends BaseFragment {
         data.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1576124684800&di=c16a4a9ff8ced70464fe924aca6ef57c&imgtype=0&src=http%3A%2F%2Fstatic.chayuqing.com%2F65cbb7e0729bb0ea9be3f26a0b6ec5c6.jpg");
         setCardView(data);
 
-        mList = new ArrayList<>();
-        mList.add("");
-        mList.add("");
-        mList.add("");
-        adapter = new Fragment1RvAdapter(mList);
-        LinearLayoutManager manager = new LinearLayoutManager(getContext()){
+        Map<String, String> map1 = new LinkedHashMap<>();
+        map1.put("pageNum", "0");
+        map1.put("pageSize", "0");
+        ViseUtil.Get(getContext(), NetUrl.IndexPageApiqueryCard, map1, new ViseUtil.ViseListener() {
             @Override
-            public boolean canScrollVertically() {
-                return false;
+            public void onReturn(String s) {
+                Gson gson = new Gson();
+                IndexPageApiqueryCardBean bean = gson.fromJson(s, IndexPageApiqueryCardBean.class);
+                mList = bean.getData();
+                adapter = new Fragment1RvAdapter(mList);
+                LinearLayoutManager manager = new LinearLayoutManager(getContext()){
+                    @Override
+                    public boolean canScrollVertically() {
+                        return false;
+                    }
+                };
+                manager.setOrientation(LinearLayoutManager.VERTICAL);
+                recyclerView.setLayoutManager(manager);
+                recyclerView.setAdapter(adapter);
             }
-        };
-        manager.setOrientation(LinearLayoutManager.VERTICAL);
-        recyclerView.setLayoutManager(manager);
-        recyclerView.setAdapter(adapter);
+        });
 
     }
 

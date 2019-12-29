@@ -1,12 +1,13 @@
 package com.jingna.artworkmall.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by Administrator on 2019/12/24.
  */
 
-public class AddressListBean {
+public class AddressListBean implements Serializable {
 
     /**
      * status : 200
@@ -52,7 +53,7 @@ public class AddressListBean {
         this.data = data;
     }
 
-    public static class DataBean {
+    public static class DataBean implements Serializable {
         /**
          * id : 14
          * memberId : 47

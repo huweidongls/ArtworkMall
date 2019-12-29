@@ -25,4 +25,8 @@ public class NetUrl {
     public static final String AppPlatformBalanceMybalance = "/AppPlatformBalance/Mybalance";//查询平台币余额
     public static final String AppPlatformBalancequeryList = "/AppPlatformBalance/queryList";//查询该用户平台币余额明细
     public static final String IndexPageApifindBannerCategory = "/IndexPageApi/findBannerCategory";//显示所有轮播图
+    public static final String IndexPageApiqueryCard = "/IndexPageApi/queryCard";//首页体检卡
+    public static final String AppGoodsShopqueryList = "/AppGoodsShop/queryList";//商品列表
+    public static final String AppMemberSigntoUpdate = "/AppMemberSign/toUpdate";//用户签到
+    public static final String AppMemberSignqueryList = "/AppMemberSign/queryList";//用户签到信息
 }

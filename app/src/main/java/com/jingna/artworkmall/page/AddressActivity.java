@@ -48,11 +48,14 @@ public class AddressActivity extends BaseActivity {
     private AddressAdapter adapter;
     private List<AddressListBean.DataBean> mList;
 
+    private String order = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_address);
 
+        order = getIntent().getStringExtra("order");
         StatusBarUtil.setStatusBarColor(AddressActivity.this, getResources().getColor(R.color.white_ffffff));
         //一般的手机的状态栏文字和图标都是白色的, 可如果你的应用也是纯白色的, 或导致状态栏文字看不清
         //所以如果你是这种情况,请使用以下代码, 设置状态使用深色文字图标风格, 否则你可以选择性注释掉这个if内容
@@ -62,16 +65,11 @@ public class AddressActivity extends BaseActivity {
             StatusBarUtil.setStatusBarColor(AddressActivity.this,0x55000000);
         }
         ButterKnife.bind(AddressActivity.this);
-        initData();
 
     }
     public void onStart() {
         super.onStart();
-       /* if(isFirst){
-            isFirst = false;
-        }else {
-            //initData();
-        }*/
+        initData();
     }
     private void initData() {
         Map<String,String> map = new LinkedHashMap<>();
@@ -82,7 +80,17 @@ public class AddressActivity extends BaseActivity {
                 Gson gson = new Gson();
                 AddressListBean bean = gson.fromJson(s, AddressListBean.class);
                 mList = bean.getData();
-                adapter = new AddressAdapter(mList);
+                adapter = new AddressAdapter(mList, new AddressAdapter.ClickListener() {
+                    @Override
+                    public void onClick(int pos) {
+                        if(order.equals("1")){
+                            Intent intent = new Intent();
+                            intent.putExtra("bean", mList.get(pos));
+                            setResult(1002, intent);
+                            finish();
+                        }
+                    }
+                });
                 LinearLayoutManager manager = new LinearLayoutManager(context);
                 manager.setOrientation(LinearLayoutManager.VERTICAL);
                 recyclerView.setLayoutManager(manager);
@@ -102,7 +110,7 @@ public class AddressActivity extends BaseActivity {
                 break;
             case R.id.btn_insert:
                 intent.putExtra("id", "0");
-                intent.putExtra("type", 0+"");
+                intent.putExtra("type", "0");
                 intent.setClass(context, InsertAddressActivity.class);
                 startActivity(intent);
                 break;

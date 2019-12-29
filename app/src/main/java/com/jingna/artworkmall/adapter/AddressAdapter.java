@@ -24,9 +24,11 @@ public class AddressAdapter extends RecyclerView.Adapter<AddressAdapter.ViewHold
 
     private Context context;
     private List<AddressListBean.DataBean> data;
+    private ClickListener listener;
 
-    public AddressAdapter(List<AddressListBean.DataBean> data) {
+    public AddressAdapter(List<AddressListBean.DataBean> data, ClickListener listener) {
         this.data = data;
+        this.listener = listener;
     }
 
     @Override
@@ -46,15 +48,21 @@ public class AddressAdapter extends RecyclerView.Adapter<AddressAdapter.ViewHold
         }else{
             holder.tv_moren.setVisibility(View.VISIBLE);
         }
-        holder.tv_address.setText(data.get(position).getAdress());
+        holder.tv_address.setText(data.get(position).getLocation()+"-"+data.get(position).getAdress());
         holder.iv_edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
                 intent.setClass(context, InsertAddressActivity.class);
                 intent.putExtra("id", data.get(position).getId()+"");
-                intent.putExtra("type", 1+"");
+                intent.putExtra("type", "1");
                 context.startActivity(intent);
+            }
+        });
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.onClick(position);
             }
         });
     }
@@ -78,6 +86,10 @@ public class AddressAdapter extends RecyclerView.Adapter<AddressAdapter.ViewHold
             tv_address = itemView.findViewById(R.id.tv_address);
             iv_edit = itemView.findViewById(R.id.iv_edit);
         }
+    }
+
+    public interface ClickListener{
+        void onClick(int pos);
     }
 
 }
