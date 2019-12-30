@@ -106,7 +106,7 @@
                 android:layout_marginTop="5dp"
                 android:textSize="11sp"
                 android:layout_below="@+id/menu_4"
-                android:text="积分商城"
+                android:text="优选"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
