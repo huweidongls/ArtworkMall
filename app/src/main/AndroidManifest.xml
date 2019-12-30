@@ -106,7 +106,8 @@
         <activity android:name=".page.MyDianpuActivity" />
         <activity android:name=".page.CouponsActivity" />
         <activity android:name=".page.TijianDetailsActivity" />
-        <activity android:name=".page.TijianSureActivity"></activity>
+        <activity android:name=".page.TijianSureActivity" />
+        <activity android:name=".page.TijianOrderActivity"></activity>
     </application>
 
 </manifest>

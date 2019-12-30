@@ -10,6 +10,7 @@
         android:layout_height="46dp">
 
         <TextView
+            android:id="@+id/tv_time"
             android:background="@drawable/bg_dfdfdf_12dp"
             android:gravity="center"
             android:paddingLeft="11dp"
@@ -32,6 +33,7 @@
         android:layout_height="wrap_content">
 
         <com.jingna.artworkmall.widget.RoundImageView
+            android:id="@+id/iv"
             app:left_top_radius="8dp"
             app:right_top_radius="8dp"
             android:scaleType="centerCrop"
@@ -40,6 +42,7 @@
             android:layout_height="183dp" />
 
         <TextView
+            android:id="@+id/tv_title"
             android:textColor="#707070"
             android:textSize="17sp"
             android:text="当代中国画名家学术邀请展"

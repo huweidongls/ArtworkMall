@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bigkoo.pickerview.builder.OptionsPickerBuilder;
@@ -61,6 +62,10 @@ public class InsertAddressActivity extends BaseActivity {
     ImageView ivSet;
     @BindView(R.id.tv_title)
     TextView tv_title;
+    @BindView(R.id.et_id_num)
+    EditText etIdNum;
+    @BindView(R.id.rl_moren)
+    RelativeLayout rlMoren;
 
     private ArrayList<JsonBean> options1Items = new ArrayList<>();
     private ArrayList<ArrayList<String>> options2Items = new ArrayList<>();
@@ -109,12 +114,14 @@ public class InsertAddressActivity extends BaseActivity {
                     etPhoneNum.setText(bean.getData().getConsigneeTel());
                     tvCity.setText(bean.getData().getLocation());
                     etAddress.setText(bean.getData().getAdress());
+                    etIdNum.setText(bean.getData().getIdNumber());
                     if(bean.getData().getAcquiescentAdress().equals("0")){
                         Glide.with(context).load(R.mipmap.address_off).into(ivSet);
                         acquiescentAdress = "0";
                     }else {
                         Glide.with(context).load(R.mipmap.address_on).into(ivSet);
                         acquiescentAdress = "1";
+                        rlMoren.setVisibility(View.GONE);
                     }
                 }
             });
@@ -154,7 +161,9 @@ public class InsertAddressActivity extends BaseActivity {
                 String phone = etPhoneNum.getText().toString();
                 String city = tvCity.getText().toString();
                 String UseretAddress = etAddress.getText().toString();
-                if(StringUtils.isEmpty(UserName) || StringUtils.isEmpty(phone) || StringUtils.isEmpty(city) || StringUtils.isEmpty(UseretAddress)){
+                String idNum = etIdNum.getText().toString();
+                if(StringUtils.isEmpty(UserName) || StringUtils.isEmpty(phone) || StringUtils.isEmpty(city) ||
+                        StringUtils.isEmpty(UseretAddress) || StringUtils.isEmpty(idNum)){
                     ToastUtil.showShort(context,"请将信息填写完整!");
                 }else if(!StringUtils.isPhoneNumberValid(phone)){
                     ToastUtil.showShort(context,"请输入正确格式的手机号码!");
@@ -170,6 +179,7 @@ public class InsertAddressActivity extends BaseActivity {
                     map.put("acquiescentAdress", acquiescentAdress);//默认地址(0为正常/1为默认)
                     map.put("location", city);//所在地区
                     map.put("consigneeTel", phone);//收货人电话
+                    map.put("idNumber", idNum);
                     map.put("zipCode", "000000");
                     ViseUtil.Post(context, NetUrl.MemAdresstoUpdate, map, dialog, new ViseUtil.ViseListener() {
                         @Override
@@ -178,9 +188,6 @@ public class InsertAddressActivity extends BaseActivity {
                                 JSONObject jsonObject = new JSONObject(s);
                                 if(jsonObject.optString("status").equals("200")){
                                     ToastUtil.showShort(context,"添加成功!");
-                                    Intent intent = new Intent();
-                                    intent.setClass(context, AddressActivity.class);
-                                    startActivity(intent);
                                     finish();
                                 }
                             } catch (JSONException e) {

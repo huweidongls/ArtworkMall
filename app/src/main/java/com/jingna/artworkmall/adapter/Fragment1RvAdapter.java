@@ -39,7 +39,7 @@ public class Fragment1RvAdapter extends RecyclerView.Adapter<Fragment1RvAdapter.
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, final int position) {
         GlideUtils.into(context, NetUrl.BASE_URL+data.get(position).getAppPic(), holder.iv);
         holder.tvPrice.setText("¥"+data.get(position).getPrice());
         holder.tvName.setText(data.get(position).getGoodsName());
@@ -48,6 +48,7 @@ public class Fragment1RvAdapter extends RecyclerView.Adapter<Fragment1RvAdapter.
             public void onClick(View v) {
                 Intent intent = new Intent();
                 intent.setClass(context, TijianDetailsActivity.class);
+                intent.putExtra("id", data.get(position).getId()+"");
                 context.startActivity(intent);
             }
         });

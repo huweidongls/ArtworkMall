@@ -30,6 +30,7 @@ import com.jingna.artworkmall.page.MyBankCardActivity;
 import com.jingna.artworkmall.page.MyDianpuActivity;
 import com.jingna.artworkmall.page.PersonInformationActivity;
 import com.jingna.artworkmall.page.PtJifenActivity;
+import com.jingna.artworkmall.page.TijianOrderActivity;
 import com.jingna.artworkmall.util.GlideUtils;
 import com.jingna.artworkmall.util.SpUtils;
 import com.jingna.artworkmall.util.StringUtils;
@@ -102,7 +103,7 @@ public class Fragment5 extends BaseFragment {
     }
 
     @OnClick({R.id.rl_address, R.id.ll_pt_jifen, R.id.rl_jifen_order, R.id.ll_head, R.id.rl_bank, R.id.rl_dianpu,
-    R.id.ll_coupons, R.id.ll_qiandao})
+    R.id.ll_coupons, R.id.ll_qiandao, R.id.rl_all_order})
     public void onClick(View view){
         Intent intent = new Intent();
         switch (view.getId()){
@@ -164,6 +165,10 @@ public class Fragment5 extends BaseFragment {
             case R.id.ll_qiandao:
                 //签到
                 qiandao();
+                break;
+            case R.id.rl_all_order:
+                intent.setClass(getContext(), TijianOrderActivity.class);
+                startActivity(intent);
                 break;
         }
     }

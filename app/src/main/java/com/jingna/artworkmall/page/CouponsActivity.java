@@ -6,13 +6,20 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.google.gson.Gson;
 import com.jingna.artworkmall.R;
 import com.jingna.artworkmall.adapter.CouponsAdapter;
 import com.jingna.artworkmall.base.BaseActivity;
+import com.jingna.artworkmall.bean.MarketingCouponUserfindByCouponsBean;
+import com.jingna.artworkmall.net.NetUrl;
+import com.jingna.artworkmall.util.SpUtils;
 import com.jingna.artworkmall.util.StatusBarUtil;
+import com.jingna.artworkmall.util.ViseUtil;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -26,7 +33,7 @@ public class CouponsActivity extends BaseActivity {
     RecyclerView recyclerView;
 
     private CouponsAdapter adapter;
-    private List<String> mList;
+    private List<MarketingCouponUserfindByCouponsBean.DataBean> mList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,15 +55,22 @@ public class CouponsActivity extends BaseActivity {
 
     private void initData() {
 
-        mList = new ArrayList<>();
-        mList.add("");
-        mList.add("");
-        mList.add("");
-        adapter = new CouponsAdapter(mList);
-        LinearLayoutManager manager = new LinearLayoutManager(context);
-        manager.setOrientation(LinearLayoutManager.VERTICAL);
-        recyclerView.setLayoutManager(manager);
-        recyclerView.setAdapter(adapter);
+        Map<String, String> map = new LinkedHashMap<>();
+        map.put("userId", SpUtils.getUserId(context));
+        map.put("type", "0");
+        ViseUtil.Post(context, NetUrl.MarketingCouponUserfindByCoupons, map, new ViseUtil.ViseListener() {
+            @Override
+            public void onReturn(String s) {
+                Gson gson = new Gson();
+                MarketingCouponUserfindByCouponsBean bean = gson.fromJson(s, MarketingCouponUserfindByCouponsBean.class);
+                mList = bean.getData();
+                adapter = new CouponsAdapter(mList);
+                LinearLayoutManager manager = new LinearLayoutManager(context);
+                manager.setOrientation(LinearLayoutManager.VERTICAL);
+                recyclerView.setLayoutManager(manager);
+                recyclerView.setAdapter(adapter);
+            }
+        });
 
     }
 

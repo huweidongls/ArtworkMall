@@ -1,6 +1,7 @@
 package com.jingna.artworkmall.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 import com.jingna.artworkmall.R;
 import com.jingna.artworkmall.bean.AppGoodsShopqueryListBean;
 import com.jingna.artworkmall.net.NetUrl;
+import com.jingna.artworkmall.page.TijianDetailsActivity;
 import com.jingna.artworkmall.util.GlideUtils;
 import com.jingna.artworkmall.util.StringUtils;
 
@@ -39,7 +41,7 @@ public class YouxuanAdapter extends RecyclerView.Adapter<YouxuanAdapter.ViewHold
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, final int position) {
         GlideUtils.into(context, NetUrl.BASE_URL+data.get(position).getAppPic(), holder.iv);
         holder.tvName.setText(data.get(position).getGoodsName());
         holder.tvPrice.setText("¥"+data.get(position).getPrice());
@@ -52,6 +54,15 @@ public class YouxuanAdapter extends RecyclerView.Adapter<YouxuanAdapter.ViewHold
             holder.rv.setLayoutManager(manager);
             holder.rv.setAdapter(itemAdapter);
         }
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(context, TijianDetailsActivity.class);
+                intent.putExtra("id", data.get(position).getId()+"");
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override

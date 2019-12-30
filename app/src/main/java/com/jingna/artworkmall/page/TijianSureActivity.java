@@ -16,6 +16,8 @@ import com.jingna.artworkmall.bean.AddressListBean;
 import com.jingna.artworkmall.net.NetUrl;
 import com.jingna.artworkmall.util.SpUtils;
 import com.jingna.artworkmall.util.StatusBarUtil;
+import com.jingna.artworkmall.util.StringUtils;
+import com.jingna.artworkmall.util.ToastUtil;
 import com.jingna.artworkmall.util.ViseUtil;
 
 import java.util.LinkedHashMap;
@@ -42,12 +44,20 @@ public class TijianSureActivity extends BaseActivity {
     RelativeLayout rlAddress;
     @BindView(R.id.tv_shouhuo)
     TextView tvShouhuo;
+    @BindView(R.id.tv_num)
+    TextView tvNum;
+
+    private String id = "";
+    private String addressId = "";
+    private String couponsId = "";
+    private int goodsNum = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tijian_sure);
 
+        id = getIntent().getStringExtra("id");
         StatusBarUtil.setStatusBarColor(TijianSureActivity.this, getResources().getColor(R.color.line));
         //一般的手机的状态栏文字和图标都是白色的, 可如果你的应用也是纯白色的, 或导致状态栏文字看不清
         //所以如果你是这种情况,请使用以下代码, 设置状态使用深色文字图标风格, 否则你可以选择性注释掉这个if内容
@@ -73,6 +83,7 @@ public class TijianSureActivity extends BaseActivity {
                 List<AddressListBean.DataBean> list = bean.getData();
                 for (int i = 0; i < list.size(); i++){
                     if(list.get(i).getAcquiescentAdress().equals("1")){
+                        addressId = list.get(i).getId()+"";
                         tvName.setText(list.get(i).getConsignee());
                         tvPhoneNum.setText(list.get(i).getConsigneeTel());
                         tvAddress.setText(list.get(i).getLocation()+"-"+list.get(i).getAdress());
@@ -88,7 +99,7 @@ public class TijianSureActivity extends BaseActivity {
 
     }
 
-    @OnClick({R.id.rl_back, R.id.rl_coupons, R.id.rl_address, R.id.tv_shouhuo})
+    @OnClick({R.id.rl_back, R.id.rl_coupons, R.id.rl_address, R.id.tv_shouhuo, R.id.tv_jian, R.id.tv_jia, R.id.tv_zhifu})
     public void onClick(View view){
         Intent intent = new Intent();
         switch (view.getId()){
@@ -109,7 +120,40 @@ public class TijianSureActivity extends BaseActivity {
                 intent.putExtra("order", "1");
                 startActivityForResult(intent, 1001);
                 break;
+            case R.id.tv_jian:
+                if(goodsNum>1){
+                    goodsNum = goodsNum - 1;
+                    tvNum.setText(goodsNum+"");
+                }
+                break;
+            case R.id.tv_jia:
+                goodsNum = goodsNum + 1;
+                tvNum.setText(goodsNum+"");
+                break;
+            case R.id.tv_zhifu:
+                tijiao();
+                break;
         }
+    }
+
+    private void tijiao() {
+
+        if(StringUtils.isEmpty(addressId)){
+            ToastUtil.showShort(context, "请选择收货地址");
+        }else {
+            Map<String, String> map = new LinkedHashMap<>();
+            map.put("member", SpUtils.getUserId(context));
+            map.put("addressId", addressId);
+            map.put("goodsId", id);
+            map.put("num", goodsNum+"");
+            ViseUtil.Get(context, NetUrl.AppOrderordersSubmitted, map, new ViseUtil.ViseListener() {
+                @Override
+                public void onReturn(String s) {
+                    ToastUtil.showShort(context, "提交成功");
+                }
+            });
+        }
+
     }
 
     @Override
@@ -117,6 +161,7 @@ public class TijianSureActivity extends BaseActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == 1001&&resultCode == 1002&&data != null){
             AddressListBean.DataBean dataBean = (AddressListBean.DataBean) data.getSerializableExtra("bean");
+            addressId = dataBean.getId()+"";
             tvName.setText(dataBean.getConsignee());
             tvPhoneNum.setText(dataBean.getConsigneeTel());
             tvAddress.setText(dataBean.getLocation()+"-"+dataBean.getAdress());

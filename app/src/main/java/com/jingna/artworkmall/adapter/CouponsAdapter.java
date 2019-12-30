@@ -5,8 +5,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.jingna.artworkmall.R;
+import com.jingna.artworkmall.bean.MarketingCouponUserfindByCouponsBean;
 
 import java.util.List;
 
@@ -17,9 +21,9 @@ import java.util.List;
 public class CouponsAdapter extends RecyclerView.Adapter<CouponsAdapter.ViewHolder> {
 
     private Context context;
-    private List<String> data;
+    private List<MarketingCouponUserfindByCouponsBean.DataBean> data;
 
-    public CouponsAdapter(List<String> data) {
+    public CouponsAdapter(List<MarketingCouponUserfindByCouponsBean.DataBean> data) {
         this.data = data;
     }
 
@@ -33,7 +37,22 @@ public class CouponsAdapter extends RecyclerView.Adapter<CouponsAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-
+        int type = data.get(position).getType();
+        if(type == 0){
+            holder.llManjian.setVisibility(View.VISIBLE);
+            holder.llZhekou.setVisibility(View.GONE);
+            holder.tvManjian.setText(((int)data.get(position).getParameter())+"");
+            holder.tvBottom.setText("满"+data.get(position).getMaxMoney()+"元立减");
+            holder.rl.setBackgroundResource(R.mipmap.cheng);
+        }else if(type == 1){
+            holder.llManjian.setVisibility(View.GONE);
+            holder.llZhekou.setVisibility(View.VISIBLE);
+            holder.tvZhekou.setText((data.get(position).getParameter()*10)+"");
+            holder.tvBottom.setText("满"+data.get(position).getMaxMoney()+"元可用");
+            holder.rl.setBackgroundResource(R.mipmap.lan);
+        }
+        holder.tvTitle.setText(data.get(position).getName());
+        holder.tvTime.setText(data.get(position).getCreateTime()+"-"+data.get(position).getPastTime());
     }
 
     @Override
@@ -43,8 +62,25 @@ public class CouponsAdapter extends RecyclerView.Adapter<CouponsAdapter.ViewHold
 
     class ViewHolder extends RecyclerView.ViewHolder{
 
+        private LinearLayout llManjian;
+        private LinearLayout llZhekou;
+        private TextView tvManjian;
+        private TextView tvZhekou;
+        private TextView tvBottom;
+        private TextView tvTitle;
+        private TextView tvTime;
+        private RelativeLayout rl;
+
         public ViewHolder(View itemView) {
             super(itemView);
+            llManjian = itemView.findViewById(R.id.ll_manjian);
+            llZhekou = itemView.findViewById(R.id.ll_zhekou);
+            tvManjian = itemView.findViewById(R.id.tv_manjian);
+            tvZhekou = itemView.findViewById(R.id.tv_zhekou);
+            tvBottom = itemView.findViewById(R.id.tv_bottom);
+            tvTitle = itemView.findViewById(R.id.tv_title);
+            tvTime = itemView.findViewById(R.id.tv_time);
+            rl = itemView.findViewById(R.id.rl);
         }
     }
 

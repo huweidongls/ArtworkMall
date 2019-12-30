@@ -17,6 +17,7 @@ import com.jingna.artworkmall.bean.AddressListBean;
 import com.jingna.artworkmall.net.NetUrl;
 import com.jingna.artworkmall.util.SpUtils;
 import com.jingna.artworkmall.util.StatusBarUtil;
+import com.jingna.artworkmall.util.StringUtils;
 import com.jingna.artworkmall.util.ToastUtil;
 import com.jingna.artworkmall.util.ViseUtil;
 import com.yanzhenjie.recyclerview.swipe.SwipeMenu;
@@ -65,11 +66,25 @@ public class AddressActivity extends BaseActivity {
             StatusBarUtil.setStatusBarColor(AddressActivity.this,0x55000000);
         }
         ButterKnife.bind(AddressActivity.this);
+        initData();
 
     }
     public void onStart() {
         super.onStart();
-        initData();
+        if(mList != null){
+            Map<String,String> map = new LinkedHashMap<>();
+            map.put("memberId", SpUtils.getUserId(context));
+            ViseUtil.Get(context, NetUrl.MemAdressqueryList, map, new ViseUtil.ViseListener() {
+                @Override
+                public void onReturn(String s) {
+                    Gson gson = new Gson();
+                    AddressListBean bean = gson.fromJson(s, AddressListBean.class);
+                    mList.clear();
+                    mList.addAll(bean.getData());
+                    adapter.notifyDataSetChanged();
+                }
+            });
+        }
     }
     private void initData() {
         Map<String,String> map = new LinkedHashMap<>();
@@ -83,7 +98,7 @@ public class AddressActivity extends BaseActivity {
                 adapter = new AddressAdapter(mList, new AddressAdapter.ClickListener() {
                     @Override
                     public void onClick(int pos) {
-                        if(order.equals("1")){
+                        if(!StringUtils.isEmpty(order)&&order.equals("1")){
                             Intent intent = new Intent();
                             intent.putExtra("bean", mList.get(pos));
                             setResult(1002, intent);

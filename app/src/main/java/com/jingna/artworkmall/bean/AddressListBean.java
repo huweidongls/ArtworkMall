@@ -11,7 +11,7 @@ public class AddressListBean implements Serializable {
 
     /**
      * status : 200
-     * data : [{"id":14,"memberId":"47","consignee":"齐连超","adress":"机场路313号","acquiescentAdress":"1","location":"黑龙江省-哈尔滨市-道里区","consigneeTel":"15244615473","zipCode":"000000","status":"1","createDate":"2019-12-24 10:28:48"}]
+     * data : [{"id":20,"memberId":"3","consignee":"宁","adress":"顶楼哦","acquiescentAdress":"1","location":"北京市-北京市-东城区","consigneeTel":"18643356464","idNumber":"34656565353464644","zipCode":"000000","status":"1","createDate":"2019-12-30 10:30:41"}]
      * totalPage : 0
      * totalCount : 1
      */
@@ -55,16 +55,17 @@ public class AddressListBean implements Serializable {
 
     public static class DataBean implements Serializable {
         /**
-         * id : 14
-         * memberId : 47
-         * consignee : 齐连超
-         * adress : 机场路313号
+         * id : 20
+         * memberId : 3
+         * consignee : 宁
+         * adress : 顶楼哦
          * acquiescentAdress : 1
-         * location : 黑龙江省-哈尔滨市-道里区
-         * consigneeTel : 15244615473
+         * location : 北京市-北京市-东城区
+         * consigneeTel : 18643356464
+         * idNumber : 34656565353464644
          * zipCode : 000000
          * status : 1
-         * createDate : 2019-12-24 10:28:48
+         * createDate : 2019-12-30 10:30:41
          */
 
         private int id;
@@ -74,6 +75,7 @@ public class AddressListBean implements Serializable {
         private String acquiescentAdress;
         private String location;
         private String consigneeTel;
+        private String idNumber;
         private String zipCode;
         private String status;
         private String createDate;
@@ -132,6 +134,14 @@ public class AddressListBean implements Serializable {
 
         public void setConsigneeTel(String consigneeTel) {
             this.consigneeTel = consigneeTel;
+        }
+
+        public String getIdNumber() {
+            return idNumber;
+        }
+
+        public void setIdNumber(String idNumber) {
+            this.idNumber = idNumber;
         }
 
         public String getZipCode() {
