@@ -22,9 +22,11 @@ public class CouponsAdapter extends RecyclerView.Adapter<CouponsAdapter.ViewHold
 
     private Context context;
     private List<MarketingCouponUserfindByCouponsBean.DataBean> data;
+    private ClickListener listener;
 
-    public CouponsAdapter(List<MarketingCouponUserfindByCouponsBean.DataBean> data) {
+    public CouponsAdapter(List<MarketingCouponUserfindByCouponsBean.DataBean> data, ClickListener listener) {
         this.data = data;
+        this.listener = listener;
     }
 
     @Override
@@ -36,7 +38,7 @@ public class CouponsAdapter extends RecyclerView.Adapter<CouponsAdapter.ViewHold
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, final int position) {
         int type = data.get(position).getType();
         if(type == 0){
             holder.llManjian.setVisibility(View.VISIBLE);
@@ -53,6 +55,12 @@ public class CouponsAdapter extends RecyclerView.Adapter<CouponsAdapter.ViewHold
         }
         holder.tvTitle.setText(data.get(position).getName());
         holder.tvTime.setText(data.get(position).getCreateTime()+"-"+data.get(position).getPastTime());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.onItemClick(position);
+            }
+        });
     }
 
     @Override
@@ -82,6 +90,10 @@ public class CouponsAdapter extends RecyclerView.Adapter<CouponsAdapter.ViewHold
             tvTime = itemView.findViewById(R.id.tv_time);
             rl = itemView.findViewById(R.id.rl);
         }
+    }
+
+    public interface ClickListener{
+        void onItemClick(int pos);
     }
 
 }

@@ -1,12 +1,13 @@
 package com.jingna.artworkmall.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by Administrator on 2019/12/30.
  */
 
-public class MarketingCouponUserfindByCouponsBean {
+public class MarketingCouponUserfindByCouponsBean implements Serializable {
 
     /**
      * status : 200
@@ -32,7 +33,7 @@ public class MarketingCouponUserfindByCouponsBean {
         this.data = data;
     }
 
-    public static class DataBean {
+    public static class DataBean implements Serializable {
         /**
          * name : 满100-10优惠券
          * usageMode : 0
@@ -44,6 +45,7 @@ public class MarketingCouponUserfindByCouponsBean {
          * pastTime : 2019-12-23 20:02:44
          */
 
+        private int id;
         private String name;
         private int usageMode;
         private int type;
@@ -52,6 +54,14 @@ public class MarketingCouponUserfindByCouponsBean {
         private int sumDiscount;
         private String createTime;
         private String pastTime;
+
+        public int getId() {
+            return id;
+        }
+
+        public void setId(int id) {
+            this.id = id;
+        }
 
         public String getName() {
             return name;

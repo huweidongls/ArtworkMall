@@ -13,6 +13,7 @@ import com.jingna.artworkmall.R;
 import com.jingna.artworkmall.adapter.AddressAdapter;
 import com.jingna.artworkmall.base.BaseActivity;
 import com.jingna.artworkmall.bean.AddressListBean;
+import com.jingna.artworkmall.bean.MarketingCouponUserfindByCouponsBean;
 import com.jingna.artworkmall.net.NetUrl;
 import com.jingna.artworkmall.util.SpUtils;
 import com.jingna.artworkmall.util.StatusBarUtil;
@@ -46,6 +47,8 @@ public class TijianSureActivity extends BaseActivity {
     TextView tvShouhuo;
     @BindView(R.id.tv_num)
     TextView tvNum;
+    @BindView(R.id.tv_coupons)
+    TextView tvCoupons;
 
     private String id = "";
     private String addressId = "";
@@ -108,7 +111,7 @@ public class TijianSureActivity extends BaseActivity {
                 break;
             case R.id.rl_coupons:
                 intent.setClass(context, CouponsActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent, 1005);
                 break;
             case R.id.rl_address:
                 intent.setClass(context, AddressActivity.class);
@@ -146,10 +149,14 @@ public class TijianSureActivity extends BaseActivity {
             map.put("addressId", addressId);
             map.put("goodsId", id);
             map.put("num", goodsNum+"");
+            if(!StringUtils.isEmpty(couponsId)){
+                map.put("couponId", couponsId);
+            }
             ViseUtil.Get(context, NetUrl.AppOrderordersSubmitted, map, new ViseUtil.ViseListener() {
                 @Override
                 public void onReturn(String s) {
                     ToastUtil.showShort(context, "提交成功");
+                    finish();
                 }
             });
         }
@@ -172,6 +179,11 @@ public class TijianSureActivity extends BaseActivity {
             }
             rlAddress.setVisibility(View.VISIBLE);
             tvShouhuo.setVisibility(View.GONE);
+        }
+        if(requestCode == 1005&&resultCode == 1006&&data != null){
+            MarketingCouponUserfindByCouponsBean.DataBean dataBean = (MarketingCouponUserfindByCouponsBean.DataBean) data.getSerializableExtra("bean");
+            couponsId = dataBean.getId()+"";
+            tvCoupons.setText("已选择");
         }
     }
 }

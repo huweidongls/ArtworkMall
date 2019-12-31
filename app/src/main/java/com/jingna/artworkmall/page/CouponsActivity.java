@@ -1,6 +1,7 @@
 package com.jingna.artworkmall.page;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -64,7 +65,15 @@ public class CouponsActivity extends BaseActivity {
                 Gson gson = new Gson();
                 MarketingCouponUserfindByCouponsBean bean = gson.fromJson(s, MarketingCouponUserfindByCouponsBean.class);
                 mList = bean.getData();
-                adapter = new CouponsAdapter(mList);
+                adapter = new CouponsAdapter(mList, new CouponsAdapter.ClickListener() {
+                    @Override
+                    public void onItemClick(int pos) {
+                        Intent intent = new Intent();
+                        intent.putExtra("bean", mList.get(pos));
+                        setResult(1006, intent);
+                        finish();
+                    }
+                });
                 LinearLayoutManager manager = new LinearLayoutManager(context);
                 manager.setOrientation(LinearLayoutManager.VERTICAL);
                 recyclerView.setLayoutManager(manager);
