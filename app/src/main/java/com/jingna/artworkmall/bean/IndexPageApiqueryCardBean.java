@@ -63,7 +63,7 @@ public class IndexPageApiqueryCardBean {
         private int id;
         private String goodsName;
         private String appPic;
-        private int price;
+        private double price;
 
         public int getId() {
             return id;
@@ -89,11 +89,11 @@ public class IndexPageApiqueryCardBean {
             this.appPic = appPic;
         }
 
-        public int getPrice() {
+        public double getPrice() {
             return price;
         }
 
-        public void setPrice(int price) {
+        public void setPrice(double price) {
             this.price = price;
         }
     }

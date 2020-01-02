@@ -100,10 +100,14 @@
                             android:layout_gravity="center_vertical"
                             android:layout_marginLeft="3dp"
                             android:max="100"
-                            android:progress="70"
                             android:progressDrawable="@drawable/progressbar" />
 
                     </LinearLayout>
+
+                    <ImageView
+                        
+                        android:layout_width="29dp"
+                        android:layout_height="20dp" />
 
                 </LinearLayout>
 
@@ -164,9 +168,9 @@
                             android:textSize="12sp" />
 
                         <TextView
+                            android:id="@+id/tv_ptb"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="1000"
                             android:textColor="@color/white_ffffff"
                             android:textSize="24sp" />
 
@@ -195,9 +199,9 @@
                             android:textSize="12sp" />
 
                         <TextView
+                            android:id="@+id/tv_coupons_num"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="2"
                             android:textColor="@color/white_ffffff"
                             android:textSize="24sp" />
 

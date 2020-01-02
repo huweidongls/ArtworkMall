@@ -14,6 +14,7 @@ import com.jingna.artworkmall.bean.IndexPageApiqueryCardBean;
 import com.jingna.artworkmall.net.NetUrl;
 import com.jingna.artworkmall.page.TijianDetailsActivity;
 import com.jingna.artworkmall.util.GlideUtils;
+import com.jingna.artworkmall.util.StringUtils;
 
 import java.util.List;
 
@@ -41,7 +42,7 @@ public class Fragment1RvAdapter extends RecyclerView.Adapter<Fragment1RvAdapter.
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
         GlideUtils.into(context, NetUrl.BASE_URL+data.get(position).getAppPic(), holder.iv);
-        holder.tvPrice.setText("¥"+data.get(position).getPrice());
+        holder.tvPrice.setText("¥"+ StringUtils.roundByScale(data.get(position).getPrice(), 2));
         holder.tvName.setText(data.get(position).getGoodsName());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

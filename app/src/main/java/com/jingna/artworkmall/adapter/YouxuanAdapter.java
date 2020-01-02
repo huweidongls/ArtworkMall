@@ -44,7 +44,7 @@ public class YouxuanAdapter extends RecyclerView.Adapter<YouxuanAdapter.ViewHold
     public void onBindViewHolder(ViewHolder holder, final int position) {
         GlideUtils.into(context, NetUrl.BASE_URL+data.get(position).getAppPic(), holder.iv);
         holder.tvName.setText(data.get(position).getGoodsName());
-        holder.tvPrice.setText("¥"+data.get(position).getPrice());
+        holder.tvPrice.setText("¥"+StringUtils.roundByScale(data.get(position).getPrice(), 2));
         String label = data.get(position).getLabel();
         if(!StringUtils.isEmpty(label)){
             String[] s = label.split(",");

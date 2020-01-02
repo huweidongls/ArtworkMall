@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,9 +18,8 @@ import com.alipay.sdk.app.PayTask;
 import com.google.gson.Gson;
 import com.jingna.artworkmall.R;
 import com.jingna.artworkmall.base.BaseFragment;
-import com.jingna.artworkmall.bean.AliBean;
 import com.jingna.artworkmall.bean.AppMemberSignqueryListBean;
-import com.jingna.artworkmall.bean.MemUsergetOneBean;
+import com.jingna.artworkmall.bean.MemUsergetByInformationBean;
 import com.jingna.artworkmall.dialog.DialogCalendar;
 import com.jingna.artworkmall.net.NetUrl;
 import com.jingna.artworkmall.page.AddressActivity;
@@ -61,8 +61,15 @@ public class Fragment5 extends BaseFragment {
     TextView tvNickname;
     @BindView(R.id.iv_avatar)
     ImageView ivAvatar;
+    @BindView(R.id.tv_ptb)
+    TextView tvPtb;
+    @BindView(R.id.tv_coupons_num)
+    TextView tvCouponsNum;
+    @BindView(R.id.progress)
+    ProgressBar progressBar;
 
     private static final int SDK_PAY_FLAG = 1;
+    private int isSignIn = 0;
 
     private Calendar c;
 
@@ -90,15 +97,20 @@ public class Fragment5 extends BaseFragment {
         }else {
             Map<String, String> map = new LinkedHashMap<>();
             map.put("id", SpUtils.getUserId(getContext()));
-            ViseUtil.Get(getContext(), NetUrl.MemUsergetOne, map, new ViseUtil.ViseListener() {
+            ViseUtil.Get(getContext(), NetUrl.MemUsergetByInformation, map, new ViseUtil.ViseListener() {
                 @Override
                 public void onReturn(String s) {
                     Gson gson = new Gson();
-                    MemUsergetOneBean bean = gson.fromJson(s, MemUsergetOneBean.class);
-                    if(!StringUtils.isEmpty(bean.getData().getMemberUserInfo().getHeadPhoto())){
-                        GlideUtils.into(getContext(), NetUrl.BASE_URL+bean.getData().getMemberUserInfo().getHeadPhoto(), ivAvatar);
-                    }
-                    tvNickname.setText(bean.getData().getMemberUserInfo().getMemName());
+                    MemUsergetByInformationBean bean = gson.fromJson(s, MemUsergetByInformationBean.class);
+                    tvNickname.setText(bean.getData().getMemName());
+                    GlideUtils.into(getContext(), NetUrl.BASE_URL+bean.getData().getHeadPhoto(), ivAvatar);
+                    isSignIn = bean.getData().getIsSignIn();
+                    tvPtb.setText(StringUtils.roundByScale(bean.getData().getMemIntegral(), 2));
+                    tvCouponsNum.setText(bean.getData().getCouponNum()+"");
+                    int shangxian = bean.getData().getActivityLevelNum();
+                    int dangqian = bean.getData().getMemberUserLiveness();
+                    progressBar.setMax(shangxian);
+                    progressBar.setProgress(dangqian);
                 }
             });
         }
@@ -168,7 +180,11 @@ public class Fragment5 extends BaseFragment {
                 break;
             case R.id.ll_qiandao:
                 //签到
-                qiandao();
+                if(isSignIn == 0){
+                    qiandao();
+                }else if(isSignIn == 1){
+                    ToastUtil.showShort(getContext(), "已签到");
+                }
                 break;
             case R.id.rl_all_order:
                 intent.setClass(getContext(), TijianOrderActivity.class);
