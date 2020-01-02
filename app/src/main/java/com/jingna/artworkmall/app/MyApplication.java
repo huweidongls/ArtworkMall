@@ -9,6 +9,7 @@ import com.jingna.artworkmall.util.ForgotTimeCount;
 import com.jingna.artworkmall.util.LoginTimeCount;
 import com.jingna.artworkmall.util.RegisterTimeCount;
 import com.jingna.artworkmall.util.SpUtils;
+import com.uuzuche.lib_zxing.activity.ZXingLibrary;
 import com.vise.xsnow.http.ViseHttp;
 
 import java.util.LinkedHashMap;
@@ -41,6 +42,7 @@ public class MyApplication extends Application {
         ViseHttp.init(this);
         ViseHttp.CONFIG().baseUrl(NetUrl.BASE_URL)
                 .globalHeaders(map);
+        ZXingLibrary.initDisplayOpinion(this);
         bankCodeTimeCount = new BankCodeTimeCount(60000, 1000);
         loginTimeCount = new LoginTimeCount(60000, 1000);
         registerTimeCount = new RegisterTimeCount(60000, 1000);

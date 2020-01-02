@@ -49,14 +49,21 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarAdapter.ViewHo
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         for (AppMemberSignqueryListBean.DataBean bean : data){
-            if(bean.getSignDay().equals(position+"")){
+            if(bean.getSignDay().equals(formatTimeUnit(position+1))){
                 holder.iv.setVisibility(View.VISIBLE);
             }else {
                 holder.iv.setVisibility(View.GONE);
             }
         }
 
-        holder.tv.setText(position+"");
+        holder.tv.setText(formatTimeUnit(position+1));
+    }
+
+    /**
+     * 将“0-9”转换为“00-09”
+     */
+    private String formatTimeUnit(int unit) {
+        return unit < 10 ? "0" + String.valueOf(unit) : String.valueOf(unit);
     }
 
     @Override

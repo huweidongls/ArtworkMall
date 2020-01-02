@@ -11,6 +11,7 @@ import com.jingna.artworkmall.base.BaseActivity;
 import com.jingna.artworkmall.net.NetUrl;
 import com.jingna.artworkmall.util.SpUtils;
 import com.jingna.artworkmall.util.StatusBarUtil;
+import com.jingna.artworkmall.util.StringUtils;
 import com.jingna.artworkmall.util.ViseUtil;
 
 import org.json.JSONException;
@@ -57,8 +58,8 @@ public class PtJifenActivity extends BaseActivity {
             public void onReturn(String s) {
                 try {
                     JSONObject jsonObject = new JSONObject(s);
-                    String ptb = jsonObject.optInt("data")+"";
-                    tvPtb.setText(ptb);
+                    double ptb = jsonObject.optDouble("data");
+                    tvPtb.setText(StringUtils.roundByScale(ptb, 2));
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

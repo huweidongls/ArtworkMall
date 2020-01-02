@@ -22,6 +22,8 @@ import com.jingna.artworkmall.util.StringUtils;
 import com.jingna.artworkmall.util.ToastUtil;
 import com.jingna.artworkmall.util.ViseUtil;
 import com.jingna.artworkmall.util.WeiboDialogUtils;
+import com.uuzuche.lib_zxing.activity.CaptureActivity;
+import com.uuzuche.lib_zxing.activity.CodeUtils;
 import com.vise.xsnow.http.ViseHttp;
 
 import org.json.JSONException;
@@ -47,13 +49,12 @@ public class RegisterActivity extends BaseActivity {
     EditText et_code;
     @BindView(R.id.et_yqm)
     EditText et_yqm;
-    @BindView(R.id.et_pwd)
-    EditText et_pwd;
+
+    private int REQUEST_CODE = 1000;
+
     public TextView getCode_btn() {
         return tvGetCode;
     }
-
-    private Dialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,7 +74,7 @@ public class RegisterActivity extends BaseActivity {
 
     }
 
-    @OnClick({R.id.rl_back, R.id.tv_get_code, R.id.login_btn, R.id.tv_msg, R.id.tv_phone})
+    @OnClick({R.id.rl_back, R.id.tv_get_code, R.id.login_btn, R.id.tv_msg, R.id.tv_phone, R.id.iv_code})
     public void onClick(View view){
         Intent intent = new Intent();
         switch (view.getId()){
@@ -109,38 +110,18 @@ public class RegisterActivity extends BaseActivity {
                 String tel = et_phone.getText().toString();
                 String code_msg = et_code.getText().toString();
                 String yq = et_yqm.getText().toString();
-                String pwd = et_pwd.getText().toString();
-                if(StringUtils.isEmpty(tel) || StringUtils.isEmpty(code_msg) || StringUtils.isEmpty(yq) || StringUtils.isEmpty(pwd)){
+                if(StringUtils.isEmpty(tel) || StringUtils.isEmpty(code_msg) || StringUtils.isEmpty(yq)){
                     ToastUtil.showShort(context,"请填写完整信息!");
                 }else{
                     if(!code.equals(code_msg)){
                         ToastUtil.showShort(context,"短信验证码不正确!");
                     }else{
-                        dialog = WeiboDialogUtils.createLoadingDialog(context, "请等待...");
-                        Map<String,String> map = new LinkedHashMap<>();
-                        map.put("phone",tel);
-                        map.put("invitationCode",yq);
-                        map.put("password",pwd);
-                        map.put("code",code_msg);
-                        ViseUtil.Get(context, NetUrl.MemUseraddMember, map, dialog, new ViseUtil.ViseListener() {
-                            @Override
-                            public void onReturn(String s) {
-                                Gson gson = new Gson();
-                                LoginBean bean = gson.fromJson(s,LoginBean.class);
-                                SpUtils.setToken(context, bean.getData().getToken());
-                                SpUtils.setUserId(context, bean.getData().getUserId()+"");
-                                Map<String, String> map = new LinkedHashMap<>();
-                                map.put("fxToken", bean.getData().getToken());
-                                ViseHttp.CONFIG().baseUrl(NetUrl.BASE_URL)
-                                        .globalHeaders(map);
-                                Intent intent = new Intent();
-                                intent.setClass(context, MainActivity.class);
-                                startActivity(intent);
-                                finish();
-                            }
-                        });
+                        intent.setClass(context, Register2Activity.class);
+                        intent.putExtra("tel", tel);
+                        intent.putExtra("yqm", yq);
+                        startActivity(intent);
+                        finish();
                     }
-
                 }
                 break;
             case R.id.tv_msg:
@@ -151,7 +132,33 @@ public class RegisterActivity extends BaseActivity {
                 intent.setClass(context, PhoneLoginActivity.class);
                 startActivity(intent);
                 break;
+            case R.id.iv_code:
+                intent.setClass(context, CaptureActivity.class);
+                startActivityForResult(intent, REQUEST_CODE);
+                break;
         }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        /**
+         * 处理二维码扫描结果
+         */
+        if (requestCode == REQUEST_CODE) {
+            //处理扫描结果（在界面上显示）
+            if (null != data) {
+                Bundle bundle = data.getExtras();
+                if (bundle == null) {
+                    return;
+                }
+                if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_SUCCESS) {
+                    String result = bundle.getString(CodeUtils.RESULT_STRING);
+                    et_yqm.setText(result);
+                } else if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_FAILED) {
+                    ToastUtil.showShort(context, "解析二维码失败");
+                }
+            }
+        }
+    }
 }

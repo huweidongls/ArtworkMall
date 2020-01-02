@@ -46,11 +46,14 @@ public class TijianOrderActivity extends BaseActivity {
     private List<Fragment> fragmentList;
     private ArrayList<String> mTitleDataList;
 
+    private int position = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tijian_order);
 
+        position = getIntent().getIntExtra("position", 0);
         mFragmentManager = getSupportFragmentManager();
         StatusBarUtil.setStatusBarColor(TijianOrderActivity.this, getResources().getColor(R.color.white_ffffff));
         //一般的手机的状态栏文字和图标都是白色的, 可如果你的应用也是纯白色的, 或导致状态栏文字看不清
@@ -72,9 +75,9 @@ public class TijianOrderActivity extends BaseActivity {
         mTitleDataList.add("全部");
         mTitleDataList.add("待使用");
         mTitleDataList.add("已使用");
+        fragmentList.add(FragmentTijianOrder.newInstance("0"));
         fragmentList.add(FragmentTijianOrder.newInstance("1"));
-        fragmentList.add(FragmentTijianOrder.newInstance("1"));
-        fragmentList.add(FragmentTijianOrder.newInstance("1"));
+        fragmentList.add(FragmentTijianOrder.newInstance("4"));
         GoodsDetailsViewpagerAdapter mViewPagerFragmentAdapter = new GoodsDetailsViewpagerAdapter(mFragmentManager, fragmentList);
         mViewPager.setAdapter(mViewPagerFragmentAdapter);
         CommonNavigator commonNavigator = new CommonNavigator(context);
@@ -111,6 +114,7 @@ public class TijianOrderActivity extends BaseActivity {
         });
         magicIndicator.setNavigator(commonNavigator);
         ViewPagerHelper.bind(magicIndicator, mViewPager);
+        mViewPager.setCurrentItem(position);
 
     }
 

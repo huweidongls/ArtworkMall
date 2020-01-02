@@ -23,6 +23,7 @@ import com.jingna.artworkmall.bean.MemUsergetOneBean;
 import com.jingna.artworkmall.dialog.DialogCalendar;
 import com.jingna.artworkmall.net.NetUrl;
 import com.jingna.artworkmall.page.AddressActivity;
+import com.jingna.artworkmall.page.BanquanActivity;
 import com.jingna.artworkmall.page.CouponsActivity;
 import com.jingna.artworkmall.page.JifenOrderActivity;
 import com.jingna.artworkmall.page.LoginActivity;
@@ -31,7 +32,9 @@ import com.jingna.artworkmall.page.MyDianpuActivity;
 import com.jingna.artworkmall.page.PersonInformationActivity;
 import com.jingna.artworkmall.page.PtJifenActivity;
 import com.jingna.artworkmall.page.TijianOrderActivity;
+import com.jingna.artworkmall.page.YinsiActivity;
 import com.jingna.artworkmall.util.GlideUtils;
+import com.jingna.artworkmall.util.Logger;
 import com.jingna.artworkmall.util.SpUtils;
 import com.jingna.artworkmall.util.StringUtils;
 import com.jingna.artworkmall.util.ToastUtil;
@@ -103,7 +106,8 @@ public class Fragment5 extends BaseFragment {
     }
 
     @OnClick({R.id.rl_address, R.id.ll_pt_jifen, R.id.rl_jifen_order, R.id.ll_head, R.id.rl_bank, R.id.rl_dianpu,
-    R.id.ll_coupons, R.id.ll_qiandao, R.id.rl_all_order})
+    R.id.ll_coupons, R.id.ll_qiandao, R.id.rl_all_order, R.id.rl_daishiyong, R.id.rl_yishiyong, R.id.rl_about,
+    R.id.rl_banquan, R.id.rl_yinsi})
     public void onClick(View view){
         Intent intent = new Intent();
         switch (view.getId()){
@@ -168,6 +172,28 @@ public class Fragment5 extends BaseFragment {
                 break;
             case R.id.rl_all_order:
                 intent.setClass(getContext(), TijianOrderActivity.class);
+                intent.putExtra("position", 0);
+                startActivity(intent);
+                break;
+            case R.id.rl_daishiyong:
+                intent.setClass(getContext(), TijianOrderActivity.class);
+                intent.putExtra("position", 1);
+                startActivity(intent);
+                break;
+            case R.id.rl_yishiyong:
+                intent.setClass(getContext(), TijianOrderActivity.class);
+                intent.putExtra("position", 2);
+                startActivity(intent);
+                break;
+            case R.id.rl_about:
+
+                break;
+            case R.id.rl_banquan:
+                intent.setClass(getContext(), BanquanActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.rl_yinsi:
+                intent.setClass(getContext(), YinsiActivity.class);
                 startActivity(intent);
                 break;
         }
@@ -177,15 +203,16 @@ public class Fragment5 extends BaseFragment {
      * 签到
      */
     private void qiandao() {
-        final String yearMonth = c.get(Calendar.YEAR)+"-"+(c.get(Calendar.MONTH)+1);
+        final String yearMonth = c.get(Calendar.YEAR)+"-"+formatTimeUnit((c.get(Calendar.MONTH)+1));
         Map<String, String> map1 = new LinkedHashMap<>();
         map1.put("id", SpUtils.getUserId(getContext()));
-        map1.put("signYearMonth", yearMonth);
+        map1.put("yearMonth", yearMonth);
         map1.put("pageSize", "0");
         map1.put("pageNum", "0");
         ViseUtil.Get(getContext(), NetUrl.AppMemberSignqueryList, map1, new ViseUtil.ViseListener() {
             @Override
             public void onReturn(String s) {
+                Logger.e("123123", s);
                 Gson gson = new Gson();
                 AppMemberSignqueryListBean bean = gson.fromJson(s, AppMemberSignqueryListBean.class);
                 DialogCalendar dialogCalendar = new DialogCalendar(getContext(), yearMonth, bean.getData());
@@ -212,6 +239,13 @@ public class Fragment5 extends BaseFragment {
             }
         });
 
+    }
+
+    /**
+     * 将“0-9”转换为“00-09”
+     */
+    private String formatTimeUnit(int unit) {
+        return unit < 10 ? "0" + String.valueOf(unit) : String.valueOf(unit);
     }
 
     public void aliPay(String info) {

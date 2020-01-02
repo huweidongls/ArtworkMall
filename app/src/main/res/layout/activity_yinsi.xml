@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white_ffffff"
+    tools:context="com.jingna.artworkmall.page.YinsiActivity">
+
+    <RelativeLayout
+        style="@style/rl_top_bar_white">
+
+        <RelativeLayout
+            android:id="@+id/rl_back"
+            android:layout_width="50dp"
+            android:layout_height="match_parent">
+
+            <ImageView
+                style="@style/iv_top_back_white" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:text="隐私政策"
+            style="@style/tv_top_title_white" />
+
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_margin="15dp"
+                android:textColor="@color/black_333333"
+                android:textSize="13sp"
+                android:text="尊敬的用户：我们对《隐私政策》进行了更新。本《隐私 政策》的更新主要集中在用户注销流程的优化，删除您账户 注销一个月的“后悔期”，我们将在您提出申请的48小时内 完成对您的账户注销审核，审核通过后，我们将对您的个人 信息进行删除或匿名化处理。"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            
+            <View
+                android:background="@color/line"
+                android:layout_width="match_parent"
+                android:layout_height="10dp"/>
+
+            <TextView
+                android:layout_margin="15dp"
+                android:textColor="@color/black_333333"
+                android:textSize="13sp"
+                android:text="【特别提示】请仔细阅读《隐私政策》（尤其是加粗划线的 内容）并确定了解我们对您个人信息的处理规则。阅读过程 中，如您有任何疑问，可联系我们的客服咨询，如您不同意 协议中的任何条款，您应立即停止访问。 阅读协议的过程中， 如果您不同意相关协议或其中任何条款约定，您应立即停止 使用京东。"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_margin="15dp"
+                android:textColor="@color/black_333333"
+                android:textSize="13sp"
+                android:text="【特别提示】请仔细阅读《隐私政策》（尤其是加粗划线的 内容）并确定了解我们对您个人信息的处理规则。阅读过程 中，如您有任何疑问，可联系我们的客服咨询，如您不同意 协议中的任何条款，您应立即停止访问。 阅读协议的过程中， 如果您不同意相关协议或其中任何条款约定，您应立即停止 使用京东。"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_margin="15dp"
+                android:textColor="@color/black_333333"
+                android:textSize="13sp"
+                android:text="【特别提示】请仔细阅读《隐私政策》（尤其是加粗划线的 内容）并确定了解我们对您个人信息的处理规则。阅读过程 中，如您有任何疑问，可联系我们的客服咨询，如您不同意 协议中的任何条款，您应立即停止访问。 阅读协议的过程中， 如果您不同意相关协议或其中任何条款约定，您应立即停止 使用京东。"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_margin="15dp"
+                android:textColor="@color/black_333333"
+                android:textSize="13sp"
+                android:text="【特别提示】请仔细阅读《隐私政策》（尤其是加粗划线的 内容）并确定了解我们对您个人信息的处理规则。阅读过程 中，如您有任何疑问，可联系我们的客服咨询，如您不同意 协议中的任何条款，您应立即停止访问。 阅读协议的过程中， 如果您不同意相关协议或其中任何条款约定，您应立即停止 使用京东。"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

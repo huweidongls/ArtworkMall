@@ -2,9 +2,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="?android:selectableItemBackground"
     android:orientation="vertical">
 
     <RelativeLayout
+        android:id="@+id/rl_yishiyong"
         android:visibility="gone"
         android:layout_marginLeft="12dp"
         android:layout_marginRight="12dp"
@@ -19,6 +21,7 @@
             android:layout_height="wrap_content">
 
             <TextView
+                android:id="@+id/tv_yi_title"
                 android:textStyle="bold"
                 android:layout_marginRight="20dp"
                 android:layout_marginLeft="20dp"
@@ -30,6 +33,7 @@
                 android:layout_height="wrap_content" />
 
             <TextView
+                android:id="@+id/tv_yi_name"
                 android:layout_marginRight="20dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="10dp"
@@ -40,6 +44,7 @@
                 android:layout_height="wrap_content" />
 
             <TextView
+                android:id="@+id/tv_yi_phone"
                 android:layout_marginRight="20dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="6dp"
@@ -50,6 +55,7 @@
                 android:layout_height="wrap_content" />
 
             <TextView
+                android:id="@+id/tv_yi_idnum"
                 android:layout_marginRight="20dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="6dp"
@@ -67,6 +73,7 @@
                 android:layout_height="1dp"/>
 
             <TextView
+                android:id="@+id/tv_yi_price"
                 android:gravity="center_vertical|end"
                 android:paddingRight="20dp"
                 android:textColor="@color/black_333333"
@@ -80,6 +87,7 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:id="@+id/rl_daishiyong"
         android:layout_marginLeft="12dp"
         android:layout_marginRight="12dp"
         android:layout_marginTop="15dp"
@@ -93,6 +101,7 @@
             android:layout_height="wrap_content">
 
             <TextView
+                android:id="@+id/tv_title"
                 android:textStyle="bold"
                 android:layout_marginRight="20dp"
                 android:layout_marginLeft="20dp"
@@ -120,6 +129,7 @@
                 android:layout_height="wrap_content" />
 
             <ImageView
+                android:id="@+id/iv_code"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="15dp"
                 android:src="#979797"
@@ -127,6 +137,7 @@
                 android:layout_height="150dp" />
 
             <TextView
+                android:id="@+id/tv_electronic_code"
                 android:background="@drawable/bg_bcbcbc_3dp_bord"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="20dp"
@@ -147,6 +158,7 @@
                 android:layout_height="1dp"/>
 
             <TextView
+                android:id="@+id/tv_name"
                 android:layout_marginRight="20dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="15dp"
@@ -157,6 +169,7 @@
                 android:layout_height="wrap_content" />
 
             <TextView
+                android:id="@+id/tv_phone"
                 android:layout_marginRight="20dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="6dp"
@@ -167,6 +180,7 @@
                 android:layout_height="wrap_content" />
 
             <TextView
+                android:id="@+id/tv_idnum"
                 android:layout_marginRight="20dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="6dp"
@@ -184,6 +198,7 @@
                 android:layout_height="1dp"/>
 
             <TextView
+                android:id="@+id/tv_price"
                 android:gravity="center_vertical|end"
                 android:paddingRight="20dp"
                 android:textColor="@color/black_333333"

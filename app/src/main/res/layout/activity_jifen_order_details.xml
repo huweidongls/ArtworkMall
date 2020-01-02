@@ -52,32 +52,32 @@
                     android:layout_height="wrap_content">
 
                     <TextView
+                        android:id="@+id/tv_address_name"
                         android:textStyle="bold"
                         android:textColor="@color/black_333333"
                         android:textSize="16sp"
-                        android:text="赵先生"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
 
                     <TextView
+                        android:id="@+id/tv_address_phone"
                         android:layout_marginLeft="22dp"
                         android:textStyle="bold"
                         android:textColor="@color/black_333333"
                         android:textSize="16sp"
-                        android:text="177****1234"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
 
                 </LinearLayout>
 
                 <TextView
+                    android:id="@+id/tv_address"
                     android:textColor="#A5A5A5"
                     android:textSize="14sp"
                     android:layout_marginRight="15dp"
                     android:layout_marginBottom="15dp"
                     android:layout_marginLeft="15dp"
                     android:layout_marginTop="7dp"
-                    android:text="地址：黑龙江哈尔滨市南岗区汉广街123号"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
@@ -91,10 +91,10 @@
                 android:layout_height="100dp">
 
                 <ImageView
+                    android:id="@+id/iv"
                     android:layout_marginLeft="20dp"
                     android:layout_gravity="center_vertical"
                     android:scaleType="centerCrop"
-                    android:src="@mipmap/img0063x"
                     android:layout_width="70dp"
                     android:layout_height="70dp" />
 
@@ -107,8 +107,8 @@
                     android:layout_height="wrap_content">
 
                     <TextView
+                        android:id="@+id/tv_title"
                         android:textColor="@color/black_333333"
-                        android:text="富贵神仙"
                         android:textSize="14sp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
@@ -135,22 +135,22 @@
                 android:layout_height="wrap_content">
 
                 <TextView
+                    android:id="@+id/tv_order_id"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     android:layout_marginTop="15dp"
                     android:textColor="#686868"
                     android:textSize="14sp"
-                    android:text="订单编号：62280329717"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
                 <TextView
+                    android:id="@+id/tv_create_time"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     android:layout_marginTop="10dp"
                     android:textColor="#686868"
                     android:textSize="14sp"
-                    android:text="下单时间：2017-10-14 13 : 52 : 13"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
@@ -165,7 +165,7 @@
                     android:layout_marginRight="20dp"
                     android:textColor="#686868"
                     android:textSize="14sp"
-                    android:text="支付方式：平台积分支付"
+                    android:text="支付方式：平台币支付"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
@@ -219,10 +219,10 @@
                         android:layout_height="wrap_content" />
 
                     <TextView
+                        android:id="@+id/tv_all_price"
                         android:layout_alignParentRight="true"
                         android:textColor="#686868"
                         android:textSize="14sp"
-                        android:text="￥1500.00"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
 
@@ -275,6 +275,7 @@
                         android:layout_height="wrap_content" />
 
                     <TextView
+                        android:id="@+id/tv_price"
                         android:textColor="#E42600"
                         android:textSize="16sp"
                         android:text="￥1500.00"

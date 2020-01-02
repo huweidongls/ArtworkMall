@@ -107,7 +107,12 @@
         <activity android:name=".page.CouponsActivity" />
         <activity android:name=".page.TijianDetailsActivity" />
         <activity android:name=".page.TijianSureActivity" />
-        <activity android:name=".page.TijianOrderActivity"></activity>
+        <activity android:name=".page.TijianOrderActivity" />
+        <activity android:name=".page.TijianOrderDetailsActivity" />
+        <activity android:name=".page.AboutActivity" />
+        <activity android:name=".page.BanquanActivity" />
+        <activity android:name=".page.YinsiActivity" />
+        <activity android:name=".page.Register2Activity"></activity>
     </application>
 
 </manifest>

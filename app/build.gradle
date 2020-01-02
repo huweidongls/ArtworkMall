@@ -65,4 +65,5 @@ dependencies {
     compile 'com.yanzhenjie:recyclerview-swipe:1.1.4'
     compile 'com.contrarywind:Android-PickerView:4.1.5'
     implementation files('libs/alipaySdk-20180601.jar')
+    compile 'cn.yipianfengye.android:zxing-library:2.2'
 }

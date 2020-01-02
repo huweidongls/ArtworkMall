@@ -32,4 +32,8 @@ public class NetUrl {
     public static final String AppGoodsContentqueryList = "/AppGoodsContent/queryList";//内容列表接口
     public static final String AppOrderordersSubmitted = "/AppOrder/ordersSubmitted";//普通商品提交订单
     public static final String MarketingCouponUserfindByCoupons = "/MarketingCouponUser/findByCoupons";//查询该用户所有优惠券方法
+    public static final String AppOrderqueryListJfsc = "/AppOrder/queryListJfsc";//查询订单(积分商城)
+    public static final String AppOrderqueryListTjk = "/AppOrder/queryListTjk";//查询订单(体检卡)
+    public static final String AppOrdergetByCard = "/AppOrder/getByCard";//体检卡详情
+    public static final String AppOrdergetByGoods = "/AppOrder/getByGoods";//积分商城详情
 }

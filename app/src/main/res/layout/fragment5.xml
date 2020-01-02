@@ -271,6 +271,7 @@
                     </RelativeLayout>
 
                     <RelativeLayout
+                        android:id="@+id/rl_daishiyong"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
@@ -302,6 +303,7 @@
                     </RelativeLayout>
 
                     <RelativeLayout
+                        android:id="@+id/rl_yishiyong"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
@@ -475,6 +477,7 @@
                     android:background="@color/line" />
 
                 <RelativeLayout
+                    android:id="@+id/rl_about"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:background="?android:selectableItemBackground">
@@ -506,6 +509,7 @@
                     android:background="@color/line" />
 
                 <RelativeLayout
+                    android:id="@+id/rl_banquan"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:background="?android:selectableItemBackground">
@@ -537,6 +541,7 @@
                     android:background="@color/line" />
 
                 <RelativeLayout
+                    android:id="@+id/rl_yinsi"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:background="?android:selectableItemBackground">
@@ -546,7 +551,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="11dp"
-                        android:text="隐私权限"
+                        android:text="隐私政策"
                         android:textColor="#2E2E2E"
                         android:textSize="15sp" />
 

@@ -72,10 +72,10 @@ public class JifenOrderActivity extends BaseActivity {
         mTitleDataList.add("待发货");
         mTitleDataList.add("发货中");
         mTitleDataList.add("已完成");
+        fragmentList.add(FragmentJifenOrder.newInstance("0"));
         fragmentList.add(FragmentJifenOrder.newInstance("1"));
-        fragmentList.add(FragmentJifenOrder.newInstance("1"));
-        fragmentList.add(FragmentJifenOrder.newInstance("1"));
-        fragmentList.add(FragmentJifenOrder.newInstance("1"));
+        fragmentList.add(FragmentJifenOrder.newInstance("2"));
+        fragmentList.add(FragmentJifenOrder.newInstance("3"));
         GoodsDetailsViewpagerAdapter mViewPagerFragmentAdapter = new GoodsDetailsViewpagerAdapter(mFragmentManager, fragmentList);
         mViewPager.setAdapter(mViewPagerFragmentAdapter);
         CommonNavigator commonNavigator = new CommonNavigator(context);
