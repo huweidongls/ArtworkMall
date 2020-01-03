@@ -34,5 +34,6 @@
     <color name="line">#EBEBEB</color>
 
     <color name="theme">#D62424</color>
+    <color name="gray_fbfbfb">#FBFBFB</color>
 
 </resources>

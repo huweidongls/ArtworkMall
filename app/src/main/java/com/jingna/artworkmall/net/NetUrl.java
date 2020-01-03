@@ -6,8 +6,8 @@ package com.jingna.artworkmall.net;
 
 public class NetUrl {
 
-//    public static final String BASE_URL = "http://192.168.1.102:80/";//http://192.168.2.211:8080/
-    public static final String BASE_URL = "http://192.168.43.113:80/";//http://192.168.2.211:8080/
+    public static final String BASE_URL = "http://192.168.1.102:80/";//http://192.168.2.211:8080/
+//    public static final String BASE_URL = "http://192.168.43.113:80/";//http://192.168.2.211:8080/
     public static final String MemUsersendMessage = "/MemUser/sendMessage";//发送验证码
     public static final String MemUserloginAPP = "/MemUser/loginAPP";//短信登录
     public static final String MemUserloginAppPassword = "/MemUser/loginAppPassword";//账号密码登录
@@ -39,4 +39,8 @@ public class NetUrl {
     public static final String AppOrdergetByGoods = "/AppOrder/getByGoods";//积分商城详情
     public static final String MemUserfindByTeam = "/MemUser/findByTeam";//查询我的团队
     public static final String MemUsergetByInformation = "/MemUser/getByInformation";//我的获取信息
+    public static final String AppGoodsShopgetByTjk = "/AppGoodsShop/getByTjk";//体检卡商品详情
+    public static final String AppGoodsShopgetByJfsc = "/AppGoodsShop/getByJfsc";//积分商城商品详情
+    public static final String AppShopCategoryqueryList = "/AppShopCategory/queryList";//父分类列表接口
+    public static final String AppShopCategoryqueryChildList = "/AppShopCategory/queryChildList";//子分类列表接口
 }

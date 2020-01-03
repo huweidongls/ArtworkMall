@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.jingna.artworkmall.R;
 import com.jingna.artworkmall.adapter.CalendarAdapter;
@@ -25,6 +26,7 @@ public class DialogCalendar extends Dialog {
     private Context context;
     private RecyclerView recyclerView;
     private ImageView iv;
+    private TextView tvTime;
     private CalendarAdapter adapter;
     private String yearMonth;
     private List<AppMemberSignqueryListBean.DataBean> data;
@@ -49,6 +51,9 @@ public class DialogCalendar extends Dialog {
 
         recyclerView = view.findViewById(R.id.rv);
         iv = view.findViewById(R.id.iv);
+        tvTime = view.findViewById(R.id.tv_time);
+
+        tvTime.setText(yearMonth);
         adapter = new CalendarAdapter(yearMonth, data);
         GridLayoutManager manager = new GridLayoutManager(context, 7);
         recyclerView.setLayoutManager(manager);

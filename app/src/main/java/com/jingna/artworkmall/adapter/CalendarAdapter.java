@@ -48,13 +48,21 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        for (AppMemberSignqueryListBean.DataBean bean : data){
-            if(bean.getSignDay().equals(formatTimeUnit(position+1))){
+        for (int i = 0; i<data.size(); i++){
+            if(data.get(i).getSignDay().equals(formatTimeUnit(position+1))){
                 holder.iv.setVisibility(View.VISIBLE);
+                break;
             }else {
                 holder.iv.setVisibility(View.GONE);
             }
         }
+//        for (AppMemberSignqueryListBean.DataBean bean : data){
+//            if(bean.getSignDay().equals(formatTimeUnit(position+1))){
+//                holder.iv.setVisibility(View.VISIBLE);
+//            }else {
+//                holder.iv.setVisibility(View.GONE);
+//            }
+//        }
 
         holder.tv.setText(formatTimeUnit(position+1));
     }

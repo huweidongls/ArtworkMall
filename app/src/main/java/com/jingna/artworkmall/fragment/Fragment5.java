@@ -67,6 +67,8 @@ public class Fragment5 extends BaseFragment {
     TextView tvCouponsNum;
     @BindView(R.id.progress)
     ProgressBar progressBar;
+    @BindView(R.id.tv_huoyuedu)
+    TextView tvHuoyuedu;
 
     private static final int SDK_PAY_FLAG = 1;
     private int isSignIn = 0;
@@ -111,6 +113,7 @@ public class Fragment5 extends BaseFragment {
                     int dangqian = bean.getData().getMemberUserLiveness();
                     progressBar.setMax(shangxian);
                     progressBar.setProgress(dangqian);
+                    tvHuoyuedu.setText(dangqian+"");
                 }
             });
         }
@@ -184,6 +187,22 @@ public class Fragment5 extends BaseFragment {
                     qiandao();
                 }else if(isSignIn == 1){
                     ToastUtil.showShort(getContext(), "已签到");
+                    final String yearMonth = c.get(Calendar.YEAR)+"-"+formatTimeUnit((c.get(Calendar.MONTH)+1));
+                    Map<String, String> map1 = new LinkedHashMap<>();
+                    map1.put("id", SpUtils.getUserId(getContext()));
+                    map1.put("yearMonth", yearMonth);
+                    map1.put("pageSize", "0");
+                    map1.put("pageNum", "0");
+                    ViseUtil.Get(getContext(), NetUrl.AppMemberSignqueryList, map1, new ViseUtil.ViseListener() {
+                        @Override
+                        public void onReturn(String s) {
+                            Logger.e("123123", s);
+                            Gson gson = new Gson();
+                            AppMemberSignqueryListBean bean = gson.fromJson(s, AppMemberSignqueryListBean.class);
+                            DialogCalendar dialogCalendar = new DialogCalendar(getContext(), yearMonth, bean.getData());
+                            dialogCalendar.show();
+                        }
+                    });
                 }
                 break;
             case R.id.rl_all_order:
@@ -219,22 +238,6 @@ public class Fragment5 extends BaseFragment {
      * 签到
      */
     private void qiandao() {
-        final String yearMonth = c.get(Calendar.YEAR)+"-"+formatTimeUnit((c.get(Calendar.MONTH)+1));
-        Map<String, String> map1 = new LinkedHashMap<>();
-        map1.put("id", SpUtils.getUserId(getContext()));
-        map1.put("yearMonth", yearMonth);
-        map1.put("pageSize", "0");
-        map1.put("pageNum", "0");
-        ViseUtil.Get(getContext(), NetUrl.AppMemberSignqueryList, map1, new ViseUtil.ViseListener() {
-            @Override
-            public void onReturn(String s) {
-                Logger.e("123123", s);
-                Gson gson = new Gson();
-                AppMemberSignqueryListBean bean = gson.fromJson(s, AppMemberSignqueryListBean.class);
-                DialogCalendar dialogCalendar = new DialogCalendar(getContext(), yearMonth, bean.getData());
-                dialogCalendar.show();
-            }
-        });
 
         Map<String, String> map = new LinkedHashMap<>();
         map.put("memberUserId", SpUtils.getUserId(getContext()));

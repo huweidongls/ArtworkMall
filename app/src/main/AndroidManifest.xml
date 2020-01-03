@@ -112,7 +112,9 @@
         <activity android:name=".page.AboutActivity" />
         <activity android:name=".page.BanquanActivity" />
         <activity android:name=".page.YinsiActivity" />
-        <activity android:name=".page.Register2Activity"></activity>
+        <activity android:name=".page.Register2Activity" />
+        <activity android:name=".page.FenleiActivity" />
+        <activity android:name=".page.JifenDetailsActivity"></activity>
     </application>
 
 </manifest>

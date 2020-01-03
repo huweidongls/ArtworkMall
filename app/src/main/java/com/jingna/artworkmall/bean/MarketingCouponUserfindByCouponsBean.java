@@ -50,8 +50,8 @@ public class MarketingCouponUserfindByCouponsBean implements Serializable {
         private int usageMode;
         private int type;
         private double parameter;
-        private int maxMoney;
-        private int sumDiscount;
+        private double maxMoney;
+        private double sumDiscount;
         private String createTime;
         private String pastTime;
 
@@ -95,19 +95,19 @@ public class MarketingCouponUserfindByCouponsBean implements Serializable {
             this.parameter = parameter;
         }
 
-        public int getMaxMoney() {
+        public double getMaxMoney() {
             return maxMoney;
         }
 
-        public void setMaxMoney(int maxMoney) {
+        public void setMaxMoney(double maxMoney) {
             this.maxMoney = maxMoney;
         }
 
-        public int getSumDiscount() {
+        public double getSumDiscount() {
             return sumDiscount;
         }
 
-        public void setSumDiscount(int sumDiscount) {
+        public void setSumDiscount(double sumDiscount) {
             this.sumDiscount = sumDiscount;
         }
 

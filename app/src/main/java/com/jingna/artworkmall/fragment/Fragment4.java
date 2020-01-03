@@ -1,5 +1,6 @@
 package com.jingna.artworkmall.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -18,6 +19,7 @@ import com.jingna.artworkmall.base.BaseFragment;
 import com.jingna.artworkmall.bean.AppGoodsShopqueryListBean;
 import com.jingna.artworkmall.bean.IndexPageApifindBannerCategoryBean;
 import com.jingna.artworkmall.net.NetUrl;
+import com.jingna.artworkmall.page.FenleiActivity;
 import com.jingna.artworkmall.util.ViseUtil;
 import com.scwang.smartrefresh.header.MaterialHeader;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -34,6 +36,7 @@ import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by Administrator on 2019/12/10.
@@ -142,6 +145,17 @@ public class Fragment4 extends BaseFragment {
             }
         });
 
+    }
+
+    @OnClick({R.id.rl_fenlei})
+    public void onClick(View view){
+        Intent intent = new Intent();
+        switch (view.getId()){
+            case R.id.rl_fenlei:
+                intent.setClass(getContext(), FenleiActivity.class);
+                startActivity(intent);
+                break;
+        }
     }
 
 }

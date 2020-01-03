@@ -104,10 +104,21 @@
 
                     </LinearLayout>
 
-                    <ImageView
-                        
-                        android:layout_width="29dp"
-                        android:layout_height="20dp" />
+                    <RelativeLayout
+                        android:background="@mipmap/huoyuedu"
+                        android:layout_width="35dp"
+                        android:layout_height="20dp" >
+
+                        <TextView
+                            android:id="@+id/tv_huoyuedu"
+                            android:layout_alignParentBottom="true"
+                            android:layout_centerHorizontal="true"
+                            android:textColor="@color/white_ffffff"
+                            android:textSize="11sp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                    </RelativeLayout>
 
                 </LinearLayout>
 

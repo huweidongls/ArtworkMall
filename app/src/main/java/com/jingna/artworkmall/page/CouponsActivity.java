@@ -15,6 +15,8 @@ import com.jingna.artworkmall.bean.MarketingCouponUserfindByCouponsBean;
 import com.jingna.artworkmall.net.NetUrl;
 import com.jingna.artworkmall.util.SpUtils;
 import com.jingna.artworkmall.util.StatusBarUtil;
+import com.jingna.artworkmall.util.StringUtils;
+import com.jingna.artworkmall.util.ToastUtil;
 import com.jingna.artworkmall.util.ViseUtil;
 
 import java.util.ArrayList;
@@ -36,11 +38,14 @@ public class CouponsActivity extends BaseActivity {
     private CouponsAdapter adapter;
     private List<MarketingCouponUserfindByCouponsBean.DataBean> mList;
 
+    private double price = 0.00;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_coupons);
 
+        price = getIntent().getDoubleExtra("price", 0.00);
         StatusBarUtil.setStatusBarColor(CouponsActivity.this, getResources().getColor(R.color.white_ffffff));
         //一般的手机的状态栏文字和图标都是白色的, 可如果你的应用也是纯白色的, 或导致状态栏文字看不清
         //所以如果你是这种情况,请使用以下代码, 设置状态使用深色文字图标风格, 否则你可以选择性注释掉这个if内容
@@ -68,10 +73,14 @@ public class CouponsActivity extends BaseActivity {
                 adapter = new CouponsAdapter(mList, new CouponsAdapter.ClickListener() {
                     @Override
                     public void onItemClick(int pos) {
-                        Intent intent = new Intent();
-                        intent.putExtra("bean", mList.get(pos));
-                        setResult(1006, intent);
-                        finish();
+                        if(mList.get(pos).getMaxMoney()<=price){
+                            Intent intent = new Intent();
+                            intent.putExtra("bean", mList.get(pos));
+                            setResult(1006, intent);
+                            finish();
+                        }else {
+                            ToastUtil.showShort(context, "满"+ StringUtils.roundByScale(mList.get(pos).getMaxMoney(), 2)+"元可用");
+                        }
                     }
                 });
                 LinearLayoutManager manager = new LinearLayoutManager(context);

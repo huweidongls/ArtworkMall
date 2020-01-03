@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.jingna.artworkmall.R;
 import com.jingna.artworkmall.bean.MarketingCouponUserfindByCouponsBean;
+import com.jingna.artworkmall.util.StringUtils;
 
 import java.util.List;
 
@@ -44,14 +45,17 @@ public class CouponsAdapter extends RecyclerView.Adapter<CouponsAdapter.ViewHold
             holder.llManjian.setVisibility(View.VISIBLE);
             holder.llZhekou.setVisibility(View.GONE);
             holder.tvManjian.setText(((int)data.get(position).getParameter())+"");
-            holder.tvBottom.setText("满"+data.get(position).getMaxMoney()+"元立减");
+            holder.tvBottom.setText("满"+StringUtils.roundByScale(data.get(position).getMaxMoney(), 2)+"元立减");
             holder.rl.setBackgroundResource(R.mipmap.cheng);
+            holder.tvMax.setVisibility(View.GONE);
         }else if(type == 1){
             holder.llManjian.setVisibility(View.GONE);
             holder.llZhekou.setVisibility(View.VISIBLE);
             holder.tvZhekou.setText((data.get(position).getParameter()*10)+"");
-            holder.tvBottom.setText("满"+data.get(position).getMaxMoney()+"元可用");
+            holder.tvBottom.setText("满"+StringUtils.roundByScale(data.get(position).getMaxMoney(), 2)+"元可用");
             holder.rl.setBackgroundResource(R.mipmap.lan);
+            holder.tvMax.setVisibility(View.VISIBLE);
+            holder.tvMax.setText("最高抵扣"+ StringUtils.roundByScale(data.get(position).getSumDiscount(), 2)+"平台币");
         }
         holder.tvTitle.setText(data.get(position).getName());
         holder.tvTime.setText(data.get(position).getCreateTime()+"-"+data.get(position).getPastTime());
@@ -78,6 +82,7 @@ public class CouponsAdapter extends RecyclerView.Adapter<CouponsAdapter.ViewHold
         private TextView tvTitle;
         private TextView tvTime;
         private RelativeLayout rl;
+        private TextView tvMax;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -89,6 +94,7 @@ public class CouponsAdapter extends RecyclerView.Adapter<CouponsAdapter.ViewHold
             tvTitle = itemView.findViewById(R.id.tv_title);
             tvTime = itemView.findViewById(R.id.tv_time);
             rl = itemView.findViewById(R.id.rl);
+            tvMax = itemView.findViewById(R.id.tv_max);
         }
     }
 

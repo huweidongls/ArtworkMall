@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -13,8 +14,10 @@ import com.jingna.artworkmall.R;
 import com.jingna.artworkmall.adapter.AddressAdapter;
 import com.jingna.artworkmall.base.BaseActivity;
 import com.jingna.artworkmall.bean.AddressListBean;
+import com.jingna.artworkmall.bean.AppGoodsShopgetByTjkBean;
 import com.jingna.artworkmall.bean.MarketingCouponUserfindByCouponsBean;
 import com.jingna.artworkmall.net.NetUrl;
+import com.jingna.artworkmall.util.GlideUtils;
 import com.jingna.artworkmall.util.SpUtils;
 import com.jingna.artworkmall.util.StatusBarUtil;
 import com.jingna.artworkmall.util.StringUtils;
@@ -49,11 +52,26 @@ public class TijianSureActivity extends BaseActivity {
     TextView tvNum;
     @BindView(R.id.tv_coupons)
     TextView tvCoupons;
+    @BindView(R.id.iv)
+    ImageView iv;
+    @BindView(R.id.tv_goods_name)
+    TextView tvGoodsName;
+    @BindView(R.id.tv_all_price)
+    TextView tvAllPrice;
+    @BindView(R.id.tv_price)
+    TextView tvPrice;
+    @BindView(R.id.tv_coupons_price)
+    TextView tvCouponsPrice;
 
     private String id = "";
     private String addressId = "";
     private String couponsId = "";
     private int goodsNum = 1;
+
+    private AppGoodsShopgetByTjkBean bean;
+    private double price = 0.00;
+    private double allPrice = 0.00;
+    private double couponsPrice = 0.00;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +79,7 @@ public class TijianSureActivity extends BaseActivity {
         setContentView(R.layout.activity_tijian_sure);
 
         id = getIntent().getStringExtra("id");
+        bean = (AppGoodsShopgetByTjkBean) getIntent().getSerializableExtra("bean");
         StatusBarUtil.setStatusBarColor(TijianSureActivity.this, getResources().getColor(R.color.line));
         //一般的手机的状态栏文字和图标都是白色的, 可如果你的应用也是纯白色的, 或导致状态栏文字看不清
         //所以如果你是这种情况,请使用以下代码, 设置状态使用深色文字图标风格, 否则你可以选择性注释掉这个if内容
@@ -76,6 +95,12 @@ public class TijianSureActivity extends BaseActivity {
 
     private void initData() {
 
+        price = bean.getData().getPrice();
+        allPrice = bean.getData().getPrice();
+        GlideUtils.into(context, NetUrl.BASE_URL+bean.getData().getAppPic(), iv);
+        tvGoodsName.setText(bean.getData().getGoodsName());
+        tvAllPrice.setText("¥"+StringUtils.roundByScale(allPrice, 2));
+        tvPrice.setText("¥"+StringUtils.roundByScale(allPrice, 2));
         Map<String,String> map = new LinkedHashMap<>();
         map.put("memberId", SpUtils.getUserId(context));
         ViseUtil.Get(context, NetUrl.MemAdressqueryList, map, new ViseUtil.ViseListener() {
@@ -111,6 +136,7 @@ public class TijianSureActivity extends BaseActivity {
                 break;
             case R.id.rl_coupons:
                 intent.setClass(context, CouponsActivity.class);
+                intent.putExtra("price", allPrice);
                 startActivityForResult(intent, 1005);
                 break;
             case R.id.rl_address:
@@ -127,11 +153,25 @@ public class TijianSureActivity extends BaseActivity {
                 if(goodsNum>1){
                     goodsNum = goodsNum - 1;
                     tvNum.setText(goodsNum+"");
+                    allPrice = price * goodsNum;
+                    tvAllPrice.setText("¥"+StringUtils.roundByScale(allPrice, 2));
+                    tvPrice.setText("¥"+StringUtils.roundByScale(allPrice, 2));
+                    tvCoupons.setText("未选择");
+                    couponsPrice = 0.00;
+                    tvCouponsPrice.setText("－¥"+StringUtils.roundByScale(couponsPrice, 2));
+                    couponsId = "";
                 }
                 break;
             case R.id.tv_jia:
                 goodsNum = goodsNum + 1;
                 tvNum.setText(goodsNum+"");
+                allPrice = price * goodsNum;
+                tvAllPrice.setText("¥"+StringUtils.roundByScale(allPrice, 2));
+                tvPrice.setText("¥"+StringUtils.roundByScale(allPrice, 2));
+                tvCoupons.setText("未选择");
+                couponsPrice = 0.00;
+                tvCouponsPrice.setText("－¥"+StringUtils.roundByScale(couponsPrice, 2));
+                couponsId = "";
                 break;
             case R.id.tv_zhifu:
                 tijiao();
@@ -184,6 +224,23 @@ public class TijianSureActivity extends BaseActivity {
             MarketingCouponUserfindByCouponsBean.DataBean dataBean = (MarketingCouponUserfindByCouponsBean.DataBean) data.getSerializableExtra("bean");
             couponsId = dataBean.getId()+"";
             tvCoupons.setText("已选择");
+            int type = dataBean.getType();
+            if(type == 0){
+                couponsPrice = dataBean.getParameter();
+                tvCouponsPrice.setText("－¥"+StringUtils.roundByScale(couponsPrice, 2));
+                tvPrice.setText("¥"+StringUtils.roundByScale((allPrice-couponsPrice), 2));
+            }else if(type == 1){
+                double zhekou = dataBean.getParameter();
+                double youhui = allPrice - (allPrice * zhekou);
+                double shangxian = dataBean.getSumDiscount();
+                if(youhui>shangxian){
+                    couponsPrice = shangxian;
+                }else {
+                    couponsPrice = youhui;
+                }
+                tvCouponsPrice.setText("－¥"+StringUtils.roundByScale(couponsPrice, 2));
+                tvPrice.setText("¥"+StringUtils.roundByScale((allPrice-couponsPrice), 2));
+            }
         }
     }
 }
