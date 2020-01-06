@@ -114,7 +114,8 @@
         <activity android:name=".page.YinsiActivity" />
         <activity android:name=".page.Register2Activity" />
         <activity android:name=".page.FenleiActivity" />
-        <activity android:name=".page.JifenDetailsActivity"></activity>
+        <activity android:name=".page.JifenDetailsActivity" />
+        <activity android:name=".page.ChongzhiActivity"></activity>
     </application>
 
 </manifest>

@@ -14,6 +14,7 @@ import com.jingna.artworkmall.adapter.PtJifenDetailsAdapter;
 import com.jingna.artworkmall.base.BaseActivity;
 import com.jingna.artworkmall.bean.AppPlatformBalancequeryListBean;
 import com.jingna.artworkmall.net.NetUrl;
+import com.jingna.artworkmall.util.Logger;
 import com.jingna.artworkmall.util.SpUtils;
 import com.jingna.artworkmall.util.StatusBarUtil;
 import com.jingna.artworkmall.util.ViseUtil;
@@ -95,7 +96,7 @@ public class PtJifenDetailsActivity extends BaseActivity {
                 Map<String, String> map = new LinkedHashMap<>();
                 map.put("id", SpUtils.getUserId(context));
                 map.put("pageSize", "10");
-                map.put("pageNum", "1");
+                map.put("pageNum", page+"");
                 ViseUtil.Get(context, NetUrl.AppPlatformBalancequeryList, map, refreshLayout, 1, new ViseUtil.ViseListener() {
                     @Override
                     public void onReturn(String s) {

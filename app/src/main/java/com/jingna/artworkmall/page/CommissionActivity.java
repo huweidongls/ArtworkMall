@@ -1,38 +1,38 @@
 package com.jingna.artworkmall.page;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
-import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.PopupWindow;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.jingna.artworkmall.R;
 import com.jingna.artworkmall.base.BaseActivity;
+import com.jingna.artworkmall.bean.AppRechargeExtractwithdrawalBean;
 import com.jingna.artworkmall.bean.BankCardListBean;
+import com.jingna.artworkmall.net.NetUrl;
 import com.jingna.artworkmall.util.SpUtils;
 import com.jingna.artworkmall.util.StatusBarUtil;
+import com.jingna.artworkmall.util.StringUtils;
 import com.jingna.artworkmall.util.ToastUtil;
+import com.jingna.artworkmall.util.ViseUtil;
+import com.jingna.artworkmall.util.WeiboDialogUtils;
 import com.vise.xsnow.http.ViseHttp;
 import com.vise.xsnow.http.callback.ACallback;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -62,6 +62,8 @@ public class CommissionActivity extends BaseActivity {
     private String bankId = "";
     private double allMoney;
 
+    private Dialog dialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,27 +85,20 @@ public class CommissionActivity extends BaseActivity {
 
     private void initData() {
 
-        ViseHttp.GET("")
-                .addParam("memberId", SpUtils.getUserId(context))
-                .request(new ACallback<String>() {
-                    @Override
-                    public void onSuccess(String data) {
-                        try {
-                            JSONObject jsonObject = new JSONObject(data);
-                            if (jsonObject.optString("status").equals("200")) {
-                                allMoney = jsonObject.optDouble("data");
-                                tvMoney.setText("余额¥" + allMoney + "，");
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-
-                    @Override
-                    public void onFail(int errCode, String errMsg) {
-
-                    }
-                });
+        Map<String, String> map = new LinkedHashMap<>();
+        map.put("id", SpUtils.getUserId(context));
+        ViseUtil.Get(context, NetUrl.AppRechargeExtractwithdrawal, map, new ViseUtil.ViseListener() {
+            @Override
+            public void onReturn(String s) {
+                Gson gson = new Gson();
+                AppRechargeExtractwithdrawalBean bean = gson.fromJson(s, AppRechargeExtractwithdrawalBean.class);
+                allMoney = bean.getData().getBalance();
+                tvMoney.setText("余额¥" + StringUtils.roundByScale(allMoney, 2) + "，");
+                bankId = bean.getData().getCardid()+"";
+                tvBankName.setText(bean.getData().getCardname());
+                tvSelect.setVisibility(View.GONE);
+            }
+        });
 
         money.addTextChangedListener(new TextWatcher() {
             @Override
@@ -119,7 +114,7 @@ public class CommissionActivity extends BaseActivity {
             @Override
             public void afterTextChanged(Editable s) {
                 String message = s.toString();
-                if (TextUtils.isEmpty(message)) {
+                if (StringUtils.isEmpty(message)) {
                     btn_mone.setBackgroundColor(Color.parseColor("#CF9297"));
                     ToastUtil.showShort(CommissionActivity.this, "请填写提现金额");
                 } else {
@@ -139,34 +134,28 @@ public class CommissionActivity extends BaseActivity {
                 break;
             case R.id.btn_mone:
                 String msg = money.getText().toString();
-                if (TextUtils.isEmpty(msg)) {
+                int m = Integer.valueOf(msg);
+                if (StringUtils.isEmpty(msg)) {
                     ToastUtil.showShort(CommissionActivity.this, "请填写提现金额");
-                } else if(TextUtils.isEmpty(bankId)){
+                } else if(StringUtils.isEmpty(bankId)){
                     ToastUtil.showShort(CommissionActivity.this, "请选择提现银行卡");
+                }else if(!(m % 100 == 0)){
+                    ToastUtil.showShort(CommissionActivity.this, "只能提现100的倍数金额");
                 }else {
-                    ViseHttp.POST("")
-                            .addParam("memberId", SpUtils.getUserId(context))
-                            .addParam("auditMoney", msg)
-                            .addParam("bankCardId", bankId)
-                            .request(new ACallback<String>() {
-                                @Override
-                                public void onSuccess(String data) {
-                                    try {
-                                        JSONObject jsonObject = new JSONObject(data);
-                                        if(jsonObject.optString("status").equals("200")){
-                                            ToastUtil.showShort(context, "提现成功");
-                                            finish();
-                                        }
-                                    } catch (JSONException e) {
-                                        e.printStackTrace();
-                                    }
-                                }
 
-                                @Override
-                                public void onFail(int errCode, String errMsg) {
+                    dialog = WeiboDialogUtils.createLoadingDialog(context, "请等待...");
+                    Map<String, String> map = new LinkedHashMap<>();
+                    map.put("memberId", SpUtils.getUserId(context));
+                    map.put("cardId", bankId);
+                    map.put("money", msg);
+                    ViseUtil.Get(context, NetUrl.AppRechargeExtractwithdrawalApply, map, dialog, new ViseUtil.ViseListener() {
+                        @Override
+                        public void onReturn(String s) {
+                            ToastUtil.showShort(context, "提现成功");
+                            finish();
+                        }
+                    });
 
-                                }
-                            });
                 }
                 break;
             case R.id.all:
@@ -187,7 +176,7 @@ public class CommissionActivity extends BaseActivity {
         if (requestCode == 1003 && data != null) {
             BankCardListBean.DataBean bean = (BankCardListBean.DataBean) data.getSerializableExtra("bean");
             bankId = bean.getId() + "";
-            tvBankName.setText(bean.getCardName() + "(" + bean.getCardNumber().substring(bean.getCardNumber().length() - 4, bean.getCardNumber().length()) + ")");
+            tvBankName.setText(bean.getCardName());
             tvSelect.setVisibility(View.GONE);
         }
     }

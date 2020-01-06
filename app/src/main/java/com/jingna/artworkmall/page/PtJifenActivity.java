@@ -68,7 +68,7 @@ public class PtJifenActivity extends BaseActivity {
 
     }
 
-    @OnClick({R.id.rl_back, R.id.rl_details})
+    @OnClick({R.id.rl_back, R.id.rl_details, R.id.btn_tixian, R.id.btn_chongzhi})
     public void onClick(View view){
         Intent intent = new Intent();
         switch (view.getId()){
@@ -77,6 +77,14 @@ public class PtJifenActivity extends BaseActivity {
                 break;
             case R.id.rl_details:
                 intent.setClass(context, PtJifenDetailsActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.btn_tixian:
+                intent.setClass(context, CommissionActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.btn_chongzhi:
+                intent.setClass(context, ChongzhiActivity.class);
                 startActivity(intent);
                 break;
         }

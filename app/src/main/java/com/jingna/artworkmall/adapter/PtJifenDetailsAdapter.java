@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.jingna.artworkmall.R;
 import com.jingna.artworkmall.bean.AppPlatformBalancequeryListBean;
+import com.jingna.artworkmall.util.StringUtils;
 
 import java.util.List;
 
@@ -36,9 +37,9 @@ public class PtJifenDetailsAdapter extends RecyclerView.Adapter<PtJifenDetailsAd
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         holder.tvTitle.setText(data.get(position).getOperatingDescribe());
-        holder.tvRecord.setText(data.get(position).getOperatingRecord()+"");
+        holder.tvRecord.setText(StringUtils.roundByScale(data.get(position).getOperatingRecord(), 2)+"");
         holder.tvTime.setText(data.get(position).getCreateTime());
-        holder.tvYue.setText("余额"+data.get(position).getBalance());
+        holder.tvYue.setText("余额"+ StringUtils.roundByScale(data.get(position).getBalance(), 2));
     }
 
     @Override

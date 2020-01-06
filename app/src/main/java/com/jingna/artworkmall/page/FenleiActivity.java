@@ -1,6 +1,7 @@
 package com.jingna.artworkmall.page;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -15,6 +16,7 @@ import com.jingna.artworkmall.bean.AppShopCategoryqueryChildListBean;
 import com.jingna.artworkmall.bean.AppShopCategoryqueryListBean;
 import com.jingna.artworkmall.net.NetUrl;
 import com.jingna.artworkmall.util.StatusBarUtil;
+import com.jingna.artworkmall.util.StringUtils;
 import com.jingna.artworkmall.util.ToastUtil;
 import com.jingna.artworkmall.util.ViseUtil;
 
@@ -134,7 +136,14 @@ public class FenleiActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.rl_sure:
-                ToastUtil.showShort(context, id);
+                if(StringUtils.isEmpty(id)){
+                    ToastUtil.showShort(context, "请选择分类");
+                }else {
+                    Intent intent = new Intent();
+                    intent.putExtra("categoryId", id);
+                    setResult(102, intent);
+                    finish();
+                }
                 break;
         }
     }
