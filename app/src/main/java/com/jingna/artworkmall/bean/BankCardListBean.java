@@ -45,6 +45,15 @@ public class BankCardListBean implements Serializable {
         private String cardNumber;
         private String cardName;
         private String cardPhone;
+        private String cardChannel;
+
+        public String getCardChannel() {
+            return cardChannel;
+        }
+
+        public void setCardChannel(String cardChannel) {
+            this.cardChannel = cardChannel;
+        }
 
         public int getId() {
             return id;

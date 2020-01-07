@@ -103,6 +103,7 @@ public class InsertBankCardActivity extends BaseActivity {
                                 map.put("cardNumber", bankCard);
                                 map.put("cardPhone", phoneNum);
                                 map.put("cardName", bankName);
+                                map.put("cardChannel", "银行卡");
                                 ViseUtil.Post(context, NetUrl.AppBankCardtoUpdate, map, new ViseUtil.ViseListener() {
                                     @Override
                                     public void onReturn(String s) {

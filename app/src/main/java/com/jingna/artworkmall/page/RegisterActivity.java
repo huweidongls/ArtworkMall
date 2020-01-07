@@ -131,6 +131,7 @@ public class RegisterActivity extends BaseActivity {
             case R.id.tv_phone:
                 intent.setClass(context, PhoneLoginActivity.class);
                 startActivity(intent);
+                finish();
                 break;
             case R.id.iv_code:
                 intent.setClass(context, CaptureActivity.class);

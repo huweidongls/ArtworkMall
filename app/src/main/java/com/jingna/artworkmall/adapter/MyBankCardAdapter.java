@@ -6,9 +6,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.jingna.artworkmall.R;
 import com.jingna.artworkmall.bean.BankCardListBean;
 import com.jingna.artworkmall.page.InsertBankCardActivity;
@@ -46,6 +48,13 @@ public class MyBankCardAdapter extends RecyclerView.Adapter<MyBankCardAdapter.Vi
             holder.rlBank.setVisibility(View.GONE);
             holder.tvAdd.setVisibility(View.VISIBLE);
         }else {
+            if(data.get(position).getCardChannel().equals("支付宝")){
+                holder.rlBank.setBackgroundResource(R.drawable.bg_00a0e9_6dp);
+                Glide.with(context).load(R.mipmap.zhifubao).into(holder.ivType);
+            }else if(data.get(position).getCardChannel().equals("银行卡")){
+                holder.rlBank.setBackgroundResource(R.drawable.bg_ca566b_6dp);
+                Glide.with(context).load(R.mipmap.yinhangka).into(holder.ivType);
+            }
             holder.rlBank.setVisibility(View.VISIBLE);
             holder.tvAdd.setVisibility(View.GONE);
             holder.tvBankName.setText(data.get(position).getCardName());
@@ -66,9 +75,7 @@ public class MyBankCardAdapter extends RecyclerView.Adapter<MyBankCardAdapter.Vi
         holder.tvAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setClass(context, InsertBankCardActivity.class);
-                context.startActivity(intent);
+                listener.onAdd();
             }
         });
     }
@@ -94,6 +101,7 @@ public class MyBankCardAdapter extends RecyclerView.Adapter<MyBankCardAdapter.Vi
         private TextView tvBankName;
         private TextView tvPhoneNum;
         private TextView tvBankCard;
+        private ImageView ivType;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -102,11 +110,13 @@ public class MyBankCardAdapter extends RecyclerView.Adapter<MyBankCardAdapter.Vi
             tvBankName = itemView.findViewById(R.id.tv_bank_name);
             tvPhoneNum = itemView.findViewById(R.id.tv_phonenum);
             tvBankCard = itemView.findViewById(R.id.tv_bank_card);
+            ivType = itemView.findViewById(R.id.iv_type);
         }
     }
 
     public interface ClickListener{
         void onItemClick(int pos, String bankName, String card);
+        void onAdd();
     }
 
 }

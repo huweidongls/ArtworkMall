@@ -10,7 +10,7 @@ public class MemUserfindByTeamBean {
 
     /**
      * status : 200
-     * data : [{"id":3,"memBirthday":"2019-12-26","memName":"18686817319","headPhoto":"upload/headPhoto/ceshitupian.jpg","username":"18686817319","password":"e10adc3949ba59abbe56e057f20f883e","memBalance":0,"memIntegral":1,"memStatus":0,"phoneNum":"18686817319","isFrozen":0,"gender":"1","updateTime":"2019-12-26 15:55:43","invitationCode":"j36948d64N","memberUserInfos":[]},{"id":20,"memName":"13349417696","headPhoto":"upload/headPhoto/ceshitupian.jpg","username":"13349417696","password":"fe1a10e4576c9db0b40e26b9ffa38ea5","memBalance":0,"memIntegral":0,"memStatus":0,"phoneNum":"13349417696","isFrozen":0,"gender":"0","invitationCode":"lPd0lW39l2","memberUserInfos":[]}]
+     * data : [{"id":3,"memName":"18686817319","headPhoto":"upload/headPhoto/ceshitupian.jpg","memberUserInfos":[],"platformBalances":[],"verificationSheetRecords":[],"sumPrice":3236,"sumYjdl":0,"sumCount":3},{"id":20,"memName":"子不语","headPhoto":"/upload/279e06cf3daa421c909cb7cd6afe8d57.jpeg","memberUserInfos":[],"platformBalances":[],"verificationSheetRecords":[],"sumPrice":4113,"sumYjdl":0,"sumCount":5},{"id":102,"memName":"饭多多","headPhoto":"upload/headPhoto/ceshitupian.jpg","memberUserInfos":[],"platformBalances":[],"verificationSheetRecords":[],"sumPrice":6000,"sumYjdl":6.6,"sumCount":3},{"id":103,"memName":"金多多","headPhoto":"upload/headPhoto/ceshitupian.jpg","memberUserInfos":[],"platformBalances":[],"verificationSheetRecords":[],"sumPrice":1950,"sumYjdl":2.34,"sumCount":1}]
      */
 
     private String status;
@@ -35,37 +35,25 @@ public class MemUserfindByTeamBean {
     public static class DataBean {
         /**
          * id : 3
-         * memBirthday : 2019-12-26
          * memName : 18686817319
          * headPhoto : upload/headPhoto/ceshitupian.jpg
-         * username : 18686817319
-         * password : e10adc3949ba59abbe56e057f20f883e
-         * memBalance : 0
-         * memIntegral : 1
-         * memStatus : 0
-         * phoneNum : 18686817319
-         * isFrozen : 0
-         * gender : 1
-         * updateTime : 2019-12-26 15:55:43
-         * invitationCode : j36948d64N
          * memberUserInfos : []
+         * platformBalances : []
+         * verificationSheetRecords : []
+         * sumPrice : 3236
+         * sumYjdl : 0
+         * sumCount : 3
          */
 
         private int id;
-        private String memBirthday;
         private String memName;
         private String headPhoto;
-        private String username;
-        private String password;
-        private double memBalance;
-        private double memIntegral;
-        private int memStatus;
-        private String phoneNum;
-        private int isFrozen;
-        private String gender;
-        private String updateTime;
-        private String invitationCode;
+        private double sumPrice;
+        private double sumYjdl;
+        private int sumCount;
         private List<?> memberUserInfos;
+        private List<?> platformBalances;
+        private List<?> verificationSheetRecords;
 
         public int getId() {
             return id;
@@ -73,14 +61,6 @@ public class MemUserfindByTeamBean {
 
         public void setId(int id) {
             this.id = id;
-        }
-
-        public String getMemBirthday() {
-            return memBirthday;
-        }
-
-        public void setMemBirthday(String memBirthday) {
-            this.memBirthday = memBirthday;
         }
 
         public String getMemName() {
@@ -99,84 +79,28 @@ public class MemUserfindByTeamBean {
             this.headPhoto = headPhoto;
         }
 
-        public String getUsername() {
-            return username;
+        public double getSumPrice() {
+            return sumPrice;
         }
 
-        public void setUsername(String username) {
-            this.username = username;
+        public void setSumPrice(double sumPrice) {
+            this.sumPrice = sumPrice;
         }
 
-        public String getPassword() {
-            return password;
+        public double getSumYjdl() {
+            return sumYjdl;
         }
 
-        public void setPassword(String password) {
-            this.password = password;
+        public void setSumYjdl(double sumYjdl) {
+            this.sumYjdl = sumYjdl;
         }
 
-        public double getMemBalance() {
-            return memBalance;
+        public int getSumCount() {
+            return sumCount;
         }
 
-        public void setMemBalance(double memBalance) {
-            this.memBalance = memBalance;
-        }
-
-        public double getMemIntegral() {
-            return memIntegral;
-        }
-
-        public void setMemIntegral(double memIntegral) {
-            this.memIntegral = memIntegral;
-        }
-
-        public int getMemStatus() {
-            return memStatus;
-        }
-
-        public void setMemStatus(int memStatus) {
-            this.memStatus = memStatus;
-        }
-
-        public String getPhoneNum() {
-            return phoneNum;
-        }
-
-        public void setPhoneNum(String phoneNum) {
-            this.phoneNum = phoneNum;
-        }
-
-        public int getIsFrozen() {
-            return isFrozen;
-        }
-
-        public void setIsFrozen(int isFrozen) {
-            this.isFrozen = isFrozen;
-        }
-
-        public String getGender() {
-            return gender;
-        }
-
-        public void setGender(String gender) {
-            this.gender = gender;
-        }
-
-        public String getUpdateTime() {
-            return updateTime;
-        }
-
-        public void setUpdateTime(String updateTime) {
-            this.updateTime = updateTime;
-        }
-
-        public String getInvitationCode() {
-            return invitationCode;
-        }
-
-        public void setInvitationCode(String invitationCode) {
-            this.invitationCode = invitationCode;
+        public void setSumCount(int sumCount) {
+            this.sumCount = sumCount;
         }
 
         public List<?> getMemberUserInfos() {
@@ -185,6 +109,22 @@ public class MemUserfindByTeamBean {
 
         public void setMemberUserInfos(List<?> memberUserInfos) {
             this.memberUserInfos = memberUserInfos;
+        }
+
+        public List<?> getPlatformBalances() {
+            return platformBalances;
+        }
+
+        public void setPlatformBalances(List<?> platformBalances) {
+            this.platformBalances = platformBalances;
+        }
+
+        public List<?> getVerificationSheetRecords() {
+            return verificationSheetRecords;
+        }
+
+        public void setVerificationSheetRecords(List<?> verificationSheetRecords) {
+            this.verificationSheetRecords = verificationSheetRecords;
         }
     }
 }

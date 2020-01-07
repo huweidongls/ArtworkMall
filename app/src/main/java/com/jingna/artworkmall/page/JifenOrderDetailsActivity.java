@@ -2,12 +2,15 @@ package com.jingna.artworkmall.page;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.jingna.artworkmall.R;
+import com.jingna.artworkmall.adapter.LabelAdapter;
 import com.jingna.artworkmall.base.BaseActivity;
 import com.jingna.artworkmall.bean.AppOrdergetByGoodsBean;
 import com.jingna.artworkmall.net.NetUrl;
@@ -45,6 +48,10 @@ public class JifenOrderDetailsActivity extends BaseActivity {
     TextView tvPrice;
     @BindView(R.id.tv_all_price)
     TextView tvAllPrice;
+    @BindView(R.id.tv_num)
+    TextView tvNum;
+    @BindView(R.id.rv)
+    RecyclerView rv;
 
     private String id = "";
 
@@ -85,6 +92,13 @@ public class JifenOrderDetailsActivity extends BaseActivity {
                 tvCreateTime.setText("下单时间："+bean.getData().getCreateTime());
                 tvPrice.setText("￥"+ StringUtils.roundByScale(bean.getData().getOrderRealPrice(), 2));
                 tvAllPrice.setText("￥"+ StringUtils.roundByScale(bean.getData().getOrderRealPrice(), 2));
+                tvNum.setText("数量："+bean.getData().getNum());
+                String[] ss = bean.getData().getLabel().split(",");
+                LabelAdapter labelAdapter = new LabelAdapter(ss);
+                LinearLayoutManager manager = new LinearLayoutManager(context);
+                manager.setOrientation(LinearLayoutManager.HORIZONTAL);
+                rv.setLayoutManager(manager);
+                rv.setAdapter(labelAdapter);
             }
         });
 

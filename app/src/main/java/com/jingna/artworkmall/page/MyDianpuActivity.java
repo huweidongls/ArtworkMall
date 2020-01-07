@@ -57,7 +57,7 @@ public class MyDianpuActivity extends BaseActivity {
 
         Map<String, String> map = new LinkedHashMap<>();
         map.put("id", SpUtils.getUserId(context));
-        ViseUtil.Get(context, NetUrl.MemUserfindByTeam, map, new ViseUtil.ViseListener() {
+        ViseUtil.Get(context, NetUrl.MemUsergetByMyShop, map, new ViseUtil.ViseListener() {
             @Override
             public void onReturn(String s) {
                 Gson gson = new Gson();

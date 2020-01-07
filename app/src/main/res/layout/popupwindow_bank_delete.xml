@@ -31,6 +31,20 @@
                 android:layout_height="1dp"/>
 
             <TextView
+                android:id="@+id/tv_default"
+                android:gravity="center"
+                android:textColor="#007AFF"
+                android:textSize="18sp"
+                android:text="设为默认"
+                android:layout_width="match_parent"
+                android:layout_height="57dp" />
+
+            <View
+                android:background="@color/line"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"/>
+
+            <TextView
                 android:id="@+id/tv_del"
                 android:gravity="center"
                 android:textColor="#FF0004"

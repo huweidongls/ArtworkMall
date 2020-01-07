@@ -1,8 +1,11 @@
 package com.jingna.artworkmall.page;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -10,9 +13,13 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.alipay.sdk.app.PayTask;
+import com.google.gson.Gson;
 import com.jingna.artworkmall.R;
 import com.jingna.artworkmall.base.BaseActivity;
+import com.jingna.artworkmall.bean.AliBean;
 import com.jingna.artworkmall.net.NetUrl;
 import com.jingna.artworkmall.util.SpUtils;
 import com.jingna.artworkmall.util.StatusBarUtil;
@@ -72,6 +79,7 @@ public class ChongzhiActivity extends BaseActivity {
     @BindView(R.id.et_jine)
     EditText etJine;
 
+    private static final int SDK_PAY_FLAG = 1;
     private String money = "";
 
     @Override
@@ -149,6 +157,7 @@ public class ChongzhiActivity extends BaseActivity {
 
         Map<String, String> map = new LinkedHashMap<>();
         map.put("id", SpUtils.getUserId(context));
+        map.put("str", "充值平台币");
         String jine = etJine.getText().toString();
         if(!StringUtils.isEmpty(money)){
             map.put("ptb", money);
@@ -158,12 +167,50 @@ public class ChongzhiActivity extends BaseActivity {
         ViseUtil.Get(context, NetUrl.AppRechargeExtractrechargePtb, map, new ViseUtil.ViseListener() {
             @Override
             public void onReturn(String s) {
-                ToastUtil.showShort(context, "充值成功！");
-                finish();
+                Gson gson = new Gson();
+                AliBean aliBean = gson.fromJson(s, AliBean.class);
+                aliPay(aliBean.getData().getData());
             }
         });
 
     }
+
+    public void aliPay(String info) {
+        final String orderInfo = info;   // 订单信息
+
+        Runnable payRunnable = new Runnable() {
+
+            @Override
+            public void run() {
+                PayTask alipay = new PayTask(ChongzhiActivity.this);
+                Map<String, String> result = alipay.payV2(orderInfo,true);
+
+                Message msg = new Message();
+                msg.what = SDK_PAY_FLAG;
+                msg.obj = result;
+                mHandler.sendMessage(msg);
+            }
+        };
+        // 必须异步调用
+        Thread payThread = new Thread(payRunnable);
+        payThread.start();
+    }
+
+    @SuppressLint("HandlerLeak")
+    private Handler mHandler = new Handler() {
+        @SuppressWarnings("unused")
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case SDK_PAY_FLAG:
+                    Map<String, String> result = (Map<String, String>) msg.obj;
+                    if(result.get("resultStatus").equals("9000")){
+                        Toast.makeText(context, "支付成功", Toast.LENGTH_SHORT).show();
+                    }
+                    break;
+            }
+        }
+
+    };
 
     private void select(View view){
         llJine.setVisibility(View.GONE);

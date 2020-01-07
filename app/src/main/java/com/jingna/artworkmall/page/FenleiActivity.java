@@ -75,6 +75,7 @@ public class FenleiActivity extends BaseActivity {
                     @Override
                     public void onItemClick(int pos) {
                         onLoad(leftList.get(pos).getId());
+                        id = "";
                     }
                 });
                 LinearLayoutManager manager = new LinearLayoutManager(context);

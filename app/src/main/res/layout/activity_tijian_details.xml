@@ -26,21 +26,37 @@
 
     </RelativeLayout>
 
-    <ScrollView
+    <!--<ScrollView-->
+        <!--android:layout_weight="1"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="0dp">-->
+
+        <!--<LinearLayout-->
+            <!--android:orientation="vertical"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content">-->
+
+
+
+        <!--</LinearLayout>-->
+
+    <!--</ScrollView>-->
+
+    <ProgressBar
+        android:id="@+id/pro"
+        android:progress="0"
+        android:max="100"
+        style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="6dp" />
+
+    <WebView
+        android:id="@+id/webview"
         android:layout_weight="1"
         android:layout_width="match_parent"
         android:layout_height="0dp">
 
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-
-
-        </LinearLayout>
-
-    </ScrollView>
+    </WebView>
 
     <LinearLayout
         android:elevation="2dp"

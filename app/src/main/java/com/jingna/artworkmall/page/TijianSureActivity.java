@@ -18,6 +18,7 @@ import com.jingna.artworkmall.bean.AppGoodsShopgetByTjkBean;
 import com.jingna.artworkmall.bean.MarketingCouponUserfindByCouponsBean;
 import com.jingna.artworkmall.net.NetUrl;
 import com.jingna.artworkmall.util.GlideUtils;
+import com.jingna.artworkmall.util.Logger;
 import com.jingna.artworkmall.util.SpUtils;
 import com.jingna.artworkmall.util.StatusBarUtil;
 import com.jingna.artworkmall.util.StringUtils;
@@ -62,6 +63,8 @@ public class TijianSureActivity extends BaseActivity {
     TextView tvPrice;
     @BindView(R.id.tv_coupons_price)
     TextView tvCouponsPrice;
+    @BindView(R.id.rl_num)
+    RelativeLayout rlNum;
 
     private String id = "";
     private String addressId = "";
@@ -73,11 +76,14 @@ public class TijianSureActivity extends BaseActivity {
     private double allPrice = 0.00;
     private double couponsPrice = 0.00;
 
+    private String type = "";//0为体检卡1为优选
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tijian_sure);
 
+        type = getIntent().getStringExtra("type");
         id = getIntent().getStringExtra("id");
         bean = (AppGoodsShopgetByTjkBean) getIntent().getSerializableExtra("bean");
         StatusBarUtil.setStatusBarColor(TijianSureActivity.this, getResources().getColor(R.color.line));
@@ -95,6 +101,12 @@ public class TijianSureActivity extends BaseActivity {
 
     private void initData() {
 
+        Logger.e("123123", type);
+        if(type.equals("0")){
+            rlNum.setVisibility(View.GONE);
+        }else if(type.equals("1")){
+            rlNum.setVisibility(View.VISIBLE);
+        }
         price = bean.getData().getPrice();
         allPrice = bean.getData().getPrice();
         GlideUtils.into(context, NetUrl.BASE_URL+bean.getData().getAppPic(), iv);
@@ -195,7 +207,7 @@ public class TijianSureActivity extends BaseActivity {
             ViseUtil.Get(context, NetUrl.AppOrderordersSubmitted, map, new ViseUtil.ViseListener() {
                 @Override
                 public void onReturn(String s) {
-                    ToastUtil.showShort(context, "提交成功");
+                    ToastUtil.showShort(context, "平台币支付成功");
                     finish();
                 }
             });
@@ -222,7 +234,7 @@ public class TijianSureActivity extends BaseActivity {
         }
         if(requestCode == 1005&&resultCode == 1006&&data != null){
             MarketingCouponUserfindByCouponsBean.DataBean dataBean = (MarketingCouponUserfindByCouponsBean.DataBean) data.getSerializableExtra("bean");
-            couponsId = dataBean.getId()+"";
+            couponsId = dataBean.getUcId();
             tvCoupons.setText("已选择");
             int type = dataBean.getType();
             if(type == 0){

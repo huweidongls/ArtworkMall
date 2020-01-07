@@ -54,6 +54,15 @@ public class MarketingCouponUserfindByCouponsBean implements Serializable {
         private double sumDiscount;
         private String createTime;
         private String pastTime;
+        private String ucId;
+
+        public String getUcId() {
+            return ucId;
+        }
+
+        public void setUcId(String ucId) {
+            this.ucId = ucId;
+        }
 
         public int getId() {
             return id;

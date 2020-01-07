@@ -169,6 +169,31 @@
 
         </RelativeLayout>
 
+        <RelativeLayout
+            android:background="?android:selectableItemBackground"
+            android:id="@+id/rl_yqm"
+            android:layout_width="match_parent"
+            android:layout_height="45dp">
+
+            <TextView
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:textColor="#232325"
+                android:textSize="15sp"
+                android:text="查看我的邀请码"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <ImageView
+                android:layout_width="3dp"
+                android:layout_height="8dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="15dp"
+                android:src="@mipmap/right_b" />
+
+        </RelativeLayout>
+
     </LinearLayout>
 
     <Button

@@ -61,6 +61,8 @@ public class PersonInformationActivity extends BaseActivity {
     private int mMonth;
     private int mDay;
 
+    private String invitationCode = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -105,13 +107,15 @@ public class PersonInformationActivity extends BaseActivity {
                     tvSex.setText("女");
                 }
                 tvBirthday.setText(bean.getData().getMemberUserInfo().getMemBirthday());
+                invitationCode = bean.getData().getMemberUserInfo().getInvitationCode();
             }
         });
 
     }
 
-    @OnClick({R.id.rl_back, R.id.rl_avatar, R.id.rl_birthday, R.id.rl_sex, R.id.rl_nickname, R.id.btn_out})
+    @OnClick({R.id.rl_back, R.id.rl_avatar, R.id.rl_birthday, R.id.rl_sex, R.id.rl_nickname, R.id.btn_out, R.id.rl_yqm})
     public void onClick(View view){
+        Intent intent = new Intent();
         switch (view.getId()){
             case R.id.rl_back:
                 finish();
@@ -154,6 +158,11 @@ public class PersonInformationActivity extends BaseActivity {
             case R.id.btn_out:
                 SpUtils.clear(context);
                 finish();
+                break;
+            case R.id.rl_yqm:
+                intent.setClass(context, YqmActivity.class);
+                intent.putExtra("code", invitationCode);
+                startActivity(intent);
                 break;
         }
     }

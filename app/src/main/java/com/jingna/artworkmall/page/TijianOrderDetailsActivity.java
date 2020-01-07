@@ -53,6 +53,8 @@ public class TijianOrderDetailsActivity extends BaseActivity {
     View viewCode;
     @BindView(R.id.ll_code)
     LinearLayout llCode;
+    @BindView(R.id.tv_title_bottom)
+    TextView tvTitleBottom;
 
     private String id = "";
 
@@ -90,6 +92,7 @@ public class TijianOrderDetailsActivity extends BaseActivity {
                     llCode.setVisibility(View.VISIBLE);
                     tvTopTitle.setText("待使用");
                     tvTitle.setText(bean.getData().getGoodsName());
+                    tvTitleBottom.setText(bean.getData().getGoodsName());
                     String code = bean.getData().getElectronicCode();
                     tvElectronicCode.setText(code);
                     Glide.with(context).load(CodeUtils.createImage(code, 400, 400, null)).into(ivCode);

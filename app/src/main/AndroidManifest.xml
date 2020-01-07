@@ -32,7 +32,6 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
@@ -115,7 +114,9 @@
         <activity android:name=".page.Register2Activity" />
         <activity android:name=".page.FenleiActivity" />
         <activity android:name=".page.JifenDetailsActivity" />
-        <activity android:name=".page.ChongzhiActivity"></activity>
+        <activity android:name=".page.ChongzhiActivity" />
+        <activity android:name=".page.YqmActivity" />
+        <activity android:name=".page.InsertZfbActivity"></activity>
     </application>
 
 </manifest>

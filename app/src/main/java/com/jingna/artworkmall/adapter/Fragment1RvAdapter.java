@@ -2,6 +2,7 @@ package com.jingna.artworkmall.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,8 +43,18 @@ public class Fragment1RvAdapter extends RecyclerView.Adapter<Fragment1RvAdapter.
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
         GlideUtils.into(context, NetUrl.BASE_URL+data.get(position).getAppPic(), holder.iv);
-        holder.tvPrice.setText("¥"+ StringUtils.roundByScale(data.get(position).getPrice(), 2));
+        holder.tvPrice.setText(StringUtils.roundByScale(data.get(position).getPrice(), 2));
         holder.tvName.setText(data.get(position).getGoodsName());
+        holder.tvSub.setText(data.get(position).getDescription());
+        holder.tvShichang.setText(StringUtils.roundByScale(data.get(position).getOriginalPrice(), 2));
+        if(data.get(position).getLabel() != null){
+            String[] s = data.get(position).getLabel().split(",");
+            LabelAdapter labelAdapter = new LabelAdapter(s);
+            LinearLayoutManager manager = new LinearLayoutManager(context);
+            manager.setOrientation(LinearLayoutManager.HORIZONTAL);
+            holder.rv.setLayoutManager(manager);
+            holder.rv.setAdapter(labelAdapter);
+        }
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -65,12 +76,18 @@ public class Fragment1RvAdapter extends RecyclerView.Adapter<Fragment1RvAdapter.
         private ImageView iv;
         private TextView tvPrice;
         private TextView tvName;
+        private RecyclerView rv;
+        private TextView tvSub;
+        private TextView tvShichang;
 
         public ViewHolder(View itemView) {
             super(itemView);
             iv = itemView.findViewById(R.id.iv);
             tvPrice = itemView.findViewById(R.id.tv_price);
             tvName = itemView.findViewById(R.id.tv_name);
+            rv = itemView.findViewById(R.id.rv);
+            tvSub = itemView.findViewById(R.id.tv_sub);
+            tvShichang = itemView.findViewById(R.id.tv_shichang);
         }
     }
 

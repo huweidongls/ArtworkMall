@@ -24,11 +24,6 @@ import com.jingna.artworkmall.util.SpUtils;
 import com.jingna.artworkmall.util.StatusBarUtil;
 import com.jingna.artworkmall.util.ToastUtil;
 import com.jingna.artworkmall.util.ViseUtil;
-import com.vise.xsnow.http.ViseHttp;
-import com.vise.xsnow.http.callback.ACallback;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -101,11 +96,78 @@ public class MyBankCardActivity extends BaseActivity {
                             finish();
                         }
                     }
+
+                    @Override
+                    public void onAdd() {
+                        showInsertPop();
+                    }
                 });
                 LinearLayoutManager manager = new LinearLayoutManager(context);
                 manager.setOrientation(LinearLayoutManager.VERTICAL);
                 recyclerView.setLayoutManager(manager);
                 recyclerView.setAdapter(adapter);
+            }
+        });
+
+    }
+
+    private void showInsertPop(){
+
+        View view = LayoutInflater.from(context).inflate(R.layout.popupwindow_bank_insert, null);
+
+        TextView tvZfb = view.findViewById(R.id.tv_zfb);
+        TextView tvYhk = view.findViewById(R.id.tv_yhk);
+        TextView tvCancel = view.findViewById(R.id.tv_cancel);
+
+        tvCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popupWindow.dismiss();
+            }
+        });
+
+        tvZfb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(context, InsertZfbActivity.class);
+                context.startActivity(intent);
+                popupWindow.dismiss();
+            }
+        });
+
+        tvYhk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(context, InsertBankCardActivity.class);
+                context.startActivity(intent);
+                popupWindow.dismiss();
+            }
+        });
+
+        popupWindow = new PopupWindow(view, WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT, true);
+        popupWindow.setTouchable(true);
+        popupWindow.setFocusable(true);
+        // 设置点击窗口外边窗口消失
+        popupWindow.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        popupWindow.setOutsideTouchable(true);
+        popupWindow.showAtLocation(getWindow().getDecorView(), Gravity.BOTTOM, 0, 0);
+//        popupWindow.showAsDropDown(rlPro);
+        // 设置popWindow的显示和消失动画
+        popupWindow.setAnimationStyle(R.style.mypopwindow_anim_style_bottom);
+        WindowManager.LayoutParams params = getWindow().getAttributes();
+        params.alpha = 0.5f;
+        getWindow().setAttributes(params);
+        popupWindow.update();
+
+        popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+
+            // 在dismiss中恢复透明度
+            public void onDismiss() {
+                WindowManager.LayoutParams params = getWindow().getAttributes();
+                params.alpha = 1f;
+                getWindow().setAttributes(params);
             }
         });
 
@@ -118,6 +180,7 @@ public class MyBankCardActivity extends BaseActivity {
         TextView tvTitle = view.findViewById(R.id.tv_title);
         TextView tvDel = view.findViewById(R.id.tv_del);
         TextView tvCancel = view.findViewById(R.id.tv_cancel);
+        TextView tvDefault = view.findViewById(R.id.tv_default);
 
         tvTitle.setText("您可对"+bankName+"尾号"+card+"的储蓄卡进行操作");
 
@@ -125,6 +188,22 @@ public class MyBankCardActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 popupWindow.dismiss();
+            }
+        });
+
+        tvDefault.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Map<String, String> map = new LinkedHashMap<>();
+                map.put("id", mList.get(pos).getId()+"");
+                map.put("userId", SpUtils.getUserId(context));
+                ViseUtil.Post(context, NetUrl.AppBankCardupdateDefault, map, new ViseUtil.ViseListener() {
+                    @Override
+                    public void onReturn(String s) {
+                        popupWindow.dismiss();
+                        ToastUtil.showShort(context, "设置成功");
+                    }
+                });
             }
         });
 

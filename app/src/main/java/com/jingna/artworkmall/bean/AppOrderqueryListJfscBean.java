@@ -10,9 +10,9 @@ public class AppOrderqueryListJfscBean {
 
     /**
      * status : 200
-     * data : [{"id":"1577763381240","orderStatus":"1","orderRealPrice":113,"list":[],"num":1,"appPic":"upload/goods/2019-12-30/f67db3c583824459b9ec812b99741ef6.jpg","goodsName":"测试商品"},{"id":"1577763445125","orderStatus":"1","orderRealPrice":98.4,"list":[],"num":1,"appPic":"upload/goods/2019-12-30/f67db3c583824459b9ec812b99741ef6.jpg","goodsName":"测试商品"},{"id":"1577763504440","orderStatus":"1","orderRealPrice":98.4,"list":[],"num":1,"appPic":"upload/goods/2019-12-30/f67db3c583824459b9ec812b99741ef6.jpg","goodsName":"测试商品"},{"id":"1577763577253","orderStatus":"1","orderRealPrice":113,"list":[],"num":1,"appPic":"upload/goods/2019-12-30/f67db3c583824459b9ec812b99741ef6.jpg","goodsName":"测试商品"},{"id":"1577763659050","orderStatus":"1","orderRealPrice":98.4,"list":[],"num":1,"appPic":"upload/goods/2019-12-30/f67db3c583824459b9ec812b99741ef6.jpg","goodsName":"测试商品"},{"id":"1577763734020","orderStatus":"1","orderRealPrice":1230,"list":[],"num":10,"appPic":"upload/goods/2019-12-30/f67db3c583824459b9ec812b99741ef6.jpg","goodsName":"测试商品"},{"id":"1577764728868","orderStatus":"1","orderRealPrice":246,"list":[],"num":2,"appPic":"upload/goods/2019-12-30/f67db3c583824459b9ec812b99741ef6.jpg","goodsName":"测试商品"}]
+     * data : [{"id":"1578393752905","orderStatus":"1","orderRealPrice":246,"list":[],"num":2,"appPic":"upload/headPhoto/ceshitupian.jpg","label":"特惠,精选","goodsName":"测试商品1"}]
      * totalPage : 1
-     * totalCount : 7
+     * totalCount : 1
      */
 
     private String status;
@@ -54,13 +54,14 @@ public class AppOrderqueryListJfscBean {
 
     public static class DataBean {
         /**
-         * id : 1577763381240
+         * id : 1578393752905
          * orderStatus : 1
-         * orderRealPrice : 113
+         * orderRealPrice : 246
          * list : []
-         * num : 1
-         * appPic : upload/goods/2019-12-30/f67db3c583824459b9ec812b99741ef6.jpg
-         * goodsName : 测试商品
+         * num : 2
+         * appPic : upload/headPhoto/ceshitupian.jpg
+         * label : 特惠,精选
+         * goodsName : 测试商品1
          */
 
         private String id;
@@ -68,6 +69,7 @@ public class AppOrderqueryListJfscBean {
         private double orderRealPrice;
         private int num;
         private String appPic;
+        private String label;
         private String goodsName;
         private List<?> list;
 
@@ -109,6 +111,14 @@ public class AppOrderqueryListJfscBean {
 
         public void setAppPic(String appPic) {
             this.appPic = appPic;
+        }
+
+        public String getLabel() {
+            return label;
+        }
+
+        public void setLabel(String label) {
+            this.label = label;
         }
 
         public String getGoodsName() {

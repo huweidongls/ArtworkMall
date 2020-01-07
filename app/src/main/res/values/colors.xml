@@ -35,5 +35,10 @@
 
     <color name="theme">#D62424</color>
     <color name="gray_fbfbfb">#FBFBFB</color>
+    <color name="yqm">#5D0BC5</color>
+    <color name="label1">#FFECE5</color>
+    <color name="label2">#E9F2FF</color>
+    <color name="label3">#FDF1DF</color>
+    <color name="label4">#F5F6F8</color>
 
 </resources>

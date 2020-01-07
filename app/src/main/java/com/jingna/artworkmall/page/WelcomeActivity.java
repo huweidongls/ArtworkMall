@@ -25,7 +25,7 @@ public class WelcomeActivity extends BaseActivity {
 
         Intent intent = new Intent();
         if(SpUtils.getUserId(context).equals("0")){
-            intent.setClass(context, LoginActivity.class);
+            intent.setClass(context, PhoneLoginActivity.class);
             startActivity(intent);
             finish();
         }else {

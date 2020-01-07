@@ -6,7 +6,9 @@ package com.jingna.artworkmall.net;
 
 public class NetUrl {
 
-    public static final String BASE_URL = "http://192.168.1.106:80/";//http://192.168.2.211:8080/
+//    public static final String BASE_URL = "http://192.168.1.102:80/";//http://192.168.2.211:8080/
+    public static final String BASE_URL = "http://122.112.187.234:80/";//http://192.168.2.211:8080/
+    public static final String H5BASE_URL = "http://39.98.188.171:8081/";//http://192.168.2.211:8080/
 //    public static final String BASE_URL = "http://192.168.43.113:80/";//http://192.168.2.211:8080/
     public static final String MemUsersendMessage = "/MemUser/sendMessage";//发送验证码
     public static final String MemUserloginAPP = "/MemUser/loginAPP";//短信登录
@@ -46,4 +48,6 @@ public class NetUrl {
     public static final String AppRechargeExtractwithdrawal = "/AppRechargeExtract/withdrawal";//去提现接口
     public static final String AppRechargeExtractwithdrawalApply = "/AppRechargeExtract/withdrawalApply";//提现申请
     public static final String AppRechargeExtractrechargePtb = "/AppRechargeExtract/rechargePtb";//充值平台币
+    public static final String AppBankCardupdateDefault = "/AppBankCard/updateDefault";//设置默认银行卡接口
+    public static final String MemUsergetByMyShop = "/MemUser/getByMyShop";//我的店铺
 }

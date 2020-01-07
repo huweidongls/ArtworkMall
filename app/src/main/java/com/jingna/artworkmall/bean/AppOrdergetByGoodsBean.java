@@ -10,7 +10,7 @@ public class AppOrdergetByGoodsBean {
 
     /**
      * status : 200
-     * data : {"id":"1577763445125","addresPhone":"13236636363","addresUname":"佛祖","addresName":"北京市-北京市-东城区汉广街41号408进门找胡小牛","orderStatus":"1","paymentMode":"平台币支付","createTime":"2019-12-31 11:37:17","orderRealPrice":98.4,"list":[],"num":1,"appPic":"upload/goods/2019-12-30/f67db3c583824459b9ec812b99741ef6.jpg","goodsName":"测试商品"}
+     * data : {"id":"1578389805684","addresPhone":"18643356464","addresUname":"宁","addresName":"内蒙古-乌海市-海勃湾区笨驴子","orderStatus":"4","paymentMode":"平台币支付","createTime":"2020-01-07 17:36:38","orderRealPrice":246,"list":[],"num":2,"appPic":"upload/goods/2019-12-30/f67db3c583824459b9ec812b99741ef6.jpg,upload/goods/2020-01-07/215add579f63468e9ed602dd6a6e7a59.jpg,upload/goods/2020-01-07/1d525b01596a4e0f86ec5e5a017424d6.jpg","label":"特惠,精选","goodsName":"测试商品"}
      */
 
     private String status;
@@ -34,17 +34,18 @@ public class AppOrdergetByGoodsBean {
 
     public static class DataBean {
         /**
-         * id : 1577763445125
-         * addresPhone : 13236636363
-         * addresUname : 佛祖
-         * addresName : 北京市-北京市-东城区汉广街41号408进门找胡小牛
-         * orderStatus : 1
+         * id : 1578389805684
+         * addresPhone : 18643356464
+         * addresUname : 宁
+         * addresName : 内蒙古-乌海市-海勃湾区笨驴子
+         * orderStatus : 4
          * paymentMode : 平台币支付
-         * createTime : 2019-12-31 11:37:17
-         * orderRealPrice : 98.4
+         * createTime : 2020-01-07 17:36:38
+         * orderRealPrice : 246
          * list : []
-         * num : 1
-         * appPic : upload/goods/2019-12-30/f67db3c583824459b9ec812b99741ef6.jpg
+         * num : 2
+         * appPic : upload/goods/2019-12-30/f67db3c583824459b9ec812b99741ef6.jpg,upload/goods/2020-01-07/215add579f63468e9ed602dd6a6e7a59.jpg,upload/goods/2020-01-07/1d525b01596a4e0f86ec5e5a017424d6.jpg
+         * label : 特惠,精选
          * goodsName : 测试商品
          */
 
@@ -58,6 +59,7 @@ public class AppOrdergetByGoodsBean {
         private double orderRealPrice;
         private int num;
         private String appPic;
+        private String label;
         private String goodsName;
         private List<?> list;
 
@@ -139,6 +141,14 @@ public class AppOrdergetByGoodsBean {
 
         public void setAppPic(String appPic) {
             this.appPic = appPic;
+        }
+
+        public String getLabel() {
+            return label;
+        }
+
+        public void setLabel(String label) {
+            this.label = label;
         }
 
         public String getGoodsName() {

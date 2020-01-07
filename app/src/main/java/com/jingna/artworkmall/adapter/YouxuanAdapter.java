@@ -13,7 +13,7 @@ import android.widget.TextView;
 import com.jingna.artworkmall.R;
 import com.jingna.artworkmall.bean.AppGoodsShopqueryListBean;
 import com.jingna.artworkmall.net.NetUrl;
-import com.jingna.artworkmall.page.TijianDetailsActivity;
+import com.jingna.artworkmall.page.JifenDetailsActivity;
 import com.jingna.artworkmall.util.GlideUtils;
 import com.jingna.artworkmall.util.StringUtils;
 
@@ -44,7 +44,9 @@ public class YouxuanAdapter extends RecyclerView.Adapter<YouxuanAdapter.ViewHold
     public void onBindViewHolder(ViewHolder holder, final int position) {
         GlideUtils.into(context, NetUrl.BASE_URL+data.get(position).getAppPic(), holder.iv);
         holder.tvName.setText(data.get(position).getGoodsName());
-        holder.tvPrice.setText("¥"+StringUtils.roundByScale(data.get(position).getPrice(), 2));
+        holder.tvSub.setText(data.get(position).getDescription());
+        holder.tvPrice.setText(StringUtils.roundByScale(data.get(position).getPrice(), 2));
+        holder.tvShichang.setText(StringUtils.roundByScale(data.get(position).getOriginalPrice(), 2));
         String label = data.get(position).getLabel();
         if(!StringUtils.isEmpty(label)){
             String[] s = label.split(",");
@@ -58,7 +60,7 @@ public class YouxuanAdapter extends RecyclerView.Adapter<YouxuanAdapter.ViewHold
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
-                intent.setClass(context, TijianDetailsActivity.class);
+                intent.setClass(context, JifenDetailsActivity.class);
                 intent.putExtra("id", data.get(position).getId()+"");
                 context.startActivity(intent);
             }
@@ -76,6 +78,8 @@ public class YouxuanAdapter extends RecyclerView.Adapter<YouxuanAdapter.ViewHold
         private TextView tvName;
         private TextView tvPrice;
         private RecyclerView rv;
+        private TextView tvSub;
+        private TextView tvShichang;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -83,6 +87,8 @@ public class YouxuanAdapter extends RecyclerView.Adapter<YouxuanAdapter.ViewHold
             tvName = itemView.findViewById(R.id.tv_name);
             tvPrice = itemView.findViewById(R.id.tv_price);
             rv = itemView.findViewById(R.id.rv);
+            tvSub = itemView.findViewById(R.id.tv_sub);
+            tvShichang = itemView.findViewById(R.id.tv_shichang);
         }
     }
 

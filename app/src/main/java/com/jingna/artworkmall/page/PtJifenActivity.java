@@ -45,8 +45,13 @@ public class PtJifenActivity extends BaseActivity {
             StatusBarUtil.setStatusBarColor(PtJifenActivity.this,0x55000000);
         }
         ButterKnife.bind(PtJifenActivity.this);
-        initData();
 
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        initData();
     }
 
     private void initData() {

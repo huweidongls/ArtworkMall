@@ -2,6 +2,7 @@ package com.jingna.artworkmall.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -45,6 +46,13 @@ public class JifenOrderAdapter extends RecyclerView.Adapter<JifenOrderAdapter.Vi
         holder.tvTitle.setText(data.get(position).getGoodsName());
         holder.tvPrice.setText("合计"+ StringUtils.roundByScale(data.get(position).getOrderRealPrice(), 2));
         String status = data.get(position).getOrderStatus();
+        holder.tvNum.setText("数量："+data.get(position).getNum());
+        String[] s = data.get(position).getLabel().split(",");
+        LabelAdapter labelAdapter = new LabelAdapter(s);
+        LinearLayoutManager manager = new LinearLayoutManager(context);
+        manager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        holder.rv.setLayoutManager(manager);
+        holder.rv.setAdapter(labelAdapter);
         if(status.equals("1")){
             holder.tvStatus.setText("待发货");
         }else if(status.equals("2")){
@@ -74,6 +82,8 @@ public class JifenOrderAdapter extends RecyclerView.Adapter<JifenOrderAdapter.Vi
         private TextView tvTitle;
         private TextView tvPrice;
         private TextView tvStatus;
+        private RecyclerView rv;
+        private TextView tvNum;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -81,6 +91,8 @@ public class JifenOrderAdapter extends RecyclerView.Adapter<JifenOrderAdapter.Vi
             tvTitle = itemView.findViewById(R.id.tv_title);
             tvPrice = itemView.findViewById(R.id.tv_price);
             tvStatus = itemView.findViewById(R.id.tv_status);
+            rv = itemView.findViewById(R.id.rv);
+            tvNum = itemView.findViewById(R.id.tv_num);
         }
     }
 

@@ -1,6 +1,7 @@
 package com.jingna.artworkmall.fragment;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -20,6 +21,11 @@ import com.jingna.artworkmall.card.CardFxPagerAdapter;
 import com.jingna.artworkmall.net.NetUrl;
 import com.jingna.artworkmall.util.DensityTool;
 import com.jingna.artworkmall.util.ViseUtil;
+import com.scwang.smartrefresh.header.MaterialHeader;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.youth.banner.Banner;
 
 import java.util.ArrayList;
@@ -42,6 +48,8 @@ public class Fragment1 extends BaseFragment {
     ViewPager viewPager;
     @BindView(R.id.banner)
     Banner banner;
+    @BindView(R.id.refresh)
+    SmartRefreshLayout smartRefreshLayout;
 
     private CardFxPagerAdapter mCardAdapter;
     private CardFragmentPagerAdapter mFragmentCardAdapter;
@@ -57,9 +65,25 @@ public class Fragment1 extends BaseFragment {
         View view = inflater.inflate(R.layout.fragment1, null);
 
         ButterKnife.bind(this, view);
+        initRefresh();
         initData();
 
         return view;
+    }
+
+    private void initRefresh() {
+
+        smartRefreshLayout.setRefreshHeader(new MaterialHeader(getContext()));
+        smartRefreshLayout.setRefreshFooter(new ClassicsFooter(getContext()));
+        smartRefreshLayout.setEnableLoadMore(false);
+        smartRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(@NonNull RefreshLayout refreshLayout) {
+                initData();
+                refreshLayout.finishRefresh(1000);
+            }
+        });
+
     }
 
     public void setCardView(List<String> data) {

@@ -10,9 +10,9 @@ public class AppGoodsShopqueryListBean {
 
     /**
      * status : 200
-     * data : [{"id":89,"goodsName":"测试商品1","label":"特惠,精选","appPic":"upload/headPhoto/ceshitupian.jpg","price":123}]
-     * totalPage : 1
-     * totalCount : 1
+     * data : [{"id":89,"goodsName":"测试商品1","label":"特惠,精选","appPic":"upload/headPhoto/ceshitupian.jpg","price":123,"description":"测试商品1","originalPrice":123,"isGood":2},{"id":88,"goodsName":"测试商品","label":"特惠,精选","appPic":"upload/headPhoto/ceshitupian.jpg","price":123,"description":"测试商品","originalPrice":123,"isGood":2}]
+     * totalPage : 0
+     * totalCount : 2
      */
 
     private String status;
@@ -59,6 +59,9 @@ public class AppGoodsShopqueryListBean {
          * label : 特惠,精选
          * appPic : upload/headPhoto/ceshitupian.jpg
          * price : 123
+         * description : 测试商品1
+         * originalPrice : 123
+         * isGood : 2
          */
 
         private int id;
@@ -66,6 +69,9 @@ public class AppGoodsShopqueryListBean {
         private String label;
         private String appPic;
         private double price;
+        private String description;
+        private double originalPrice;
+        private int isGood;
 
         public int getId() {
             return id;
@@ -105,6 +111,30 @@ public class AppGoodsShopqueryListBean {
 
         public void setPrice(double price) {
             this.price = price;
+        }
+
+        public String getDescription() {
+            return description;
+        }
+
+        public void setDescription(String description) {
+            this.description = description;
+        }
+
+        public double getOriginalPrice() {
+            return originalPrice;
+        }
+
+        public void setOriginalPrice(double originalPrice) {
+            this.originalPrice = originalPrice;
+        }
+
+        public int getIsGood() {
+            return isGood;
+        }
+
+        public void setIsGood(int isGood) {
+            this.isGood = isGood;
         }
     }
 }
