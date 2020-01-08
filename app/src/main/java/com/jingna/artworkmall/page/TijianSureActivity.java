@@ -1,5 +1,6 @@
 package com.jingna.artworkmall.page;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -208,6 +209,10 @@ public class TijianSureActivity extends BaseActivity {
                 @Override
                 public void onReturn(String s) {
                     ToastUtil.showShort(context, "平台币支付成功");
+                    Intent intent = new Intent();
+                    intent.setClass(context, TijiaoSuccessActivity.class);
+                    intent.putExtra("type", type);
+                    startActivity(intent);
                     finish();
                 }
             });

@@ -17,6 +17,7 @@ import com.google.gson.Gson;
 import com.jingna.artworkmall.R;
 import com.jingna.artworkmall.base.BaseActivity;
 import com.jingna.artworkmall.bean.MemUsergetOneBean;
+import com.jingna.artworkmall.dialog.DialogCustom;
 import com.jingna.artworkmall.dialog.InformationNicknameDialog;
 import com.jingna.artworkmall.dialog.InformationSexDialog;
 import com.jingna.artworkmall.net.NetUrl;
@@ -156,8 +157,17 @@ public class PersonInformationActivity extends BaseActivity {
                 nicknameDialog.show();
                 break;
             case R.id.btn_out:
-                SpUtils.clear(context);
-                finish();
+                DialogCustom dialogCustom = new DialogCustom(context, "是否退出登录", new DialogCustom.OnYesListener() {
+                    @Override
+                    public void onYes() {
+                        SpUtils.clear(context);
+                        Intent intent = new Intent(PersonInformationActivity.this, PhoneLoginActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+                        finish();
+                    }
+                });
+                dialogCustom.show();
                 break;
             case R.id.rl_yqm:
                 intent.setClass(context, YqmActivity.class);

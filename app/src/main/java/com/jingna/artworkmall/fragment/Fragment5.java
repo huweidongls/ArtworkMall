@@ -102,6 +102,7 @@ public class Fragment5 extends BaseFragment {
             ViseUtil.Get(getContext(), NetUrl.MemUsergetByInformation, map, new ViseUtil.ViseListener() {
                 @Override
                 public void onReturn(String s) {
+                    Logger.e("123123", s);
                     Gson gson = new Gson();
                     MemUsergetByInformationBean bean = gson.fromJson(s, MemUsergetByInformationBean.class);
                     tvNickname.setText(bean.getData().getMemName());

@@ -4,7 +4,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 
-import com.jingna.artworkmall.page.LoginActivity;
+import com.jingna.artworkmall.page.PhoneLoginActivity;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.vise.xsnow.http.ViseHttp;
 import com.vise.xsnow.http.callback.ACallback;
@@ -34,7 +34,7 @@ public class ViseUtil {
                             }else if(jsonObject.optString("status").equals("11")){
                                 SpUtils.clear(context);
                                 Intent intent = new Intent();
-                                intent.setClass(context, LoginActivity.class);
+                                intent.setClass(context, PhoneLoginActivity.class);
                                 context.startActivity(intent);
                             }else {
                                 ToastUtil.showShort(context, jsonObject.optString("errorMsg"));
@@ -66,7 +66,7 @@ public class ViseUtil {
                             }else if(jsonObject.optString("status").equals("11")){
                                 SpUtils.clear(context);
                                 Intent intent = new Intent();
-                                intent.setClass(context, LoginActivity.class);
+                                intent.setClass(context, PhoneLoginActivity.class);
                                 context.startActivity(intent);
                             }else {
                                 ToastUtil.showShort(context, jsonObject.optString("errorMsg"));
@@ -108,7 +108,7 @@ public class ViseUtil {
                             }else if(jsonObject.optString("status").equals("11")){
                                 SpUtils.clear(context);
                                 Intent intent = new Intent();
-                                intent.setClass(context, LoginActivity.class);
+                                intent.setClass(context, PhoneLoginActivity.class);
                                 context.startActivity(intent);
                             }else {
                                 ToastUtil.showShort(context, jsonObject.optString("errorMsg"));
@@ -141,7 +141,7 @@ public class ViseUtil {
                                 listener.onReturn(data);
                             }else if(jsonObject.optString("status").equals("11")){
                                 Intent intent = new Intent();
-                                intent.setClass(context, LoginActivity.class);
+                                intent.setClass(context, PhoneLoginActivity.class);
                                 context.startActivity(intent);
                             }else {
                                 ToastUtil.showShort(context, jsonObject.optString("errorMsg"));
@@ -172,7 +172,7 @@ public class ViseUtil {
                                 listener.onReturn(data);
                             }else if(jsonObject.optString("status").equals("11")){
                                 Intent intent = new Intent();
-                                intent.setClass(context, LoginActivity.class);
+                                intent.setClass(context, PhoneLoginActivity.class);
                                 context.startActivity(intent);
                             }else {
                                 ToastUtil.showShort(context, jsonObject.optString("errorMsg"));
@@ -213,7 +213,7 @@ public class ViseUtil {
                                 listener.onReturn(data);
                             }else if(jsonObject.optString("status").equals("11")){
                                 Intent intent = new Intent();
-                                intent.setClass(context, LoginActivity.class);
+                                intent.setClass(context, PhoneLoginActivity.class);
                                 context.startActivity(intent);
                             }else {
                                 ToastUtil.showShort(context, jsonObject.optString("errorMsg"));

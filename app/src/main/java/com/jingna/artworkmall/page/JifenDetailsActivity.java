@@ -25,6 +25,7 @@ import com.jingna.artworkmall.util.StatusBarUtil;
 import com.jingna.artworkmall.util.StringUtils;
 import com.jingna.artworkmall.util.ViseUtil;
 
+import java.io.Serializable;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -168,6 +169,7 @@ public class JifenDetailsActivity extends BaseActivity {
                 intent.putExtra("id", id);
                 intent.putExtra("bean", bean);
                 startActivity(intent);
+                finish();
                 break;
         }
     }

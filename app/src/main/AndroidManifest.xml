@@ -116,7 +116,8 @@
         <activity android:name=".page.JifenDetailsActivity" />
         <activity android:name=".page.ChongzhiActivity" />
         <activity android:name=".page.YqmActivity" />
-        <activity android:name=".page.InsertZfbActivity"></activity>
+        <activity android:name=".page.InsertZfbActivity" />
+        <activity android:name=".page.TijiaoSuccessActivity"></activity>
     </application>
 
 </manifest>
