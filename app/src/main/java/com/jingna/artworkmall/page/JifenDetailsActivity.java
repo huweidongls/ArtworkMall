@@ -150,7 +150,7 @@ public class JifenDetailsActivity extends BaseActivity {
             public void onReturn(String s) {
                 Gson gson = new Gson();
                 bean = gson.fromJson(s, AppGoodsShopgetByTjkBean.class);
-                tvPrice.setText(StringUtils.roundByScale(bean.getData().getPrice(), 2));
+                tvPrice.setText("¥"+StringUtils.roundByScale(bean.getData().getPrice(), 2));
             }
         });
 
