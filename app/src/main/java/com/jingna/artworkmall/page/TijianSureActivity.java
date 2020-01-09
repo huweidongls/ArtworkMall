@@ -1,6 +1,7 @@
 package com.jingna.artworkmall.page;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -25,6 +26,7 @@ import com.jingna.artworkmall.util.StatusBarUtil;
 import com.jingna.artworkmall.util.StringUtils;
 import com.jingna.artworkmall.util.ToastUtil;
 import com.jingna.artworkmall.util.ViseUtil;
+import com.jingna.artworkmall.util.WeiboDialogUtils;
 
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -78,6 +80,8 @@ public class TijianSureActivity extends BaseActivity {
     private double couponsPrice = 0.00;
 
     private String type = "";//0为体检卡1为优选
+
+    private Dialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -197,6 +201,7 @@ public class TijianSureActivity extends BaseActivity {
         if(StringUtils.isEmpty(addressId)){
             ToastUtil.showShort(context, "请选择收货地址");
         }else {
+            dialog = WeiboDialogUtils.createLoadingDialog(context, "请等待...");
             Map<String, String> map = new LinkedHashMap<>();
             map.put("member", SpUtils.getUserId(context));
             map.put("addressId", addressId);
@@ -205,7 +210,7 @@ public class TijianSureActivity extends BaseActivity {
             if(!StringUtils.isEmpty(couponsId)){
                 map.put("couponId", couponsId);
             }
-            ViseUtil.Get(context, NetUrl.AppOrderordersSubmitted, map, new ViseUtil.ViseListener() {
+            ViseUtil.Get(context, NetUrl.AppOrderordersSubmitted, map, dialog, new ViseUtil.ViseListener() {
                 @Override
                 public void onReturn(String s) {
                     ToastUtil.showShort(context, "平台币支付成功");
