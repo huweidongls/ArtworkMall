@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -79,9 +78,11 @@ public class LoginActivity extends BaseActivity {
                 break;
             case R.id.tv_get_code:
                 String phone = et_phone.getText().toString();
-                if(phone.isEmpty()){
+                if(StringUtils.isEmpty(phone)){
                     ToastUtil.showShort(context, "请输入电话号码!");
-                }else{
+                }else if(!StringUtils.isPhoneNumberValid(phone)){
+                    ToastUtil.showShort(context, "请输入正确格式的电话号码!");
+                }else {
                     MyApplication.loginTimeCount.start();
                     PhoneCode(phone);
                 }
@@ -106,7 +107,7 @@ public class LoginActivity extends BaseActivity {
      * 发送短信验证码
      */
     public void PhoneCode(String phone){
-        if(phone.isEmpty()){
+        if(StringUtils.isEmpty(phone)){
             ToastUtil.showShort(context,"电话号为空!");
         } else {
             Map<String, String> map = new LinkedHashMap<>();

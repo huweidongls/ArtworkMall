@@ -164,7 +164,7 @@ public class CommissionActivity extends BaseActivity {
                 }
                 break;
             case R.id.all:
-                money.setText(allMoney+"");
+                money.setText((int)allMoney+"");
                 money.setSelection(money.getText().toString().length());
                 break;
             case R.id.ll_bank:
