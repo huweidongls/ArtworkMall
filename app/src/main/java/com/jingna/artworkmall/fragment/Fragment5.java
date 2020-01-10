@@ -1,10 +1,7 @@
 package com.jingna.artworkmall.fragment;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,9 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.alipay.sdk.app.PayTask;
 import com.google.gson.Gson;
 import com.jingna.artworkmall.R;
 import com.jingna.artworkmall.base.BaseFragment;
@@ -26,7 +21,6 @@ import com.jingna.artworkmall.page.AddressActivity;
 import com.jingna.artworkmall.page.BanquanActivity;
 import com.jingna.artworkmall.page.CouponsActivity;
 import com.jingna.artworkmall.page.JifenOrderActivity;
-import com.jingna.artworkmall.page.LoginActivity;
 import com.jingna.artworkmall.page.MyBankCardActivity;
 import com.jingna.artworkmall.page.MyDianpuActivity;
 import com.jingna.artworkmall.page.PersonInformationActivity;
@@ -70,7 +64,6 @@ public class Fragment5 extends BaseFragment {
     @BindView(R.id.tv_huoyuedu)
     TextView tvHuoyuedu;
 
-    private static final int SDK_PAY_FLAG = 1;
     private int isSignIn = 0;
 
     private Calendar c;
@@ -97,12 +90,12 @@ public class Fragment5 extends BaseFragment {
         if(SpUtils.getUserId(getContext()).equals("0")){
 
         }else {
+            Logger.e("123123", SpUtils.getUserId(getContext()));
             Map<String, String> map = new LinkedHashMap<>();
             map.put("id", SpUtils.getUserId(getContext()));
             ViseUtil.Get(getContext(), NetUrl.MemUsergetByInformation, map, new ViseUtil.ViseListener() {
                 @Override
                 public void onReturn(String s) {
-                    Logger.e("123123", s);
                     Gson gson = new Gson();
                     MemUsergetByInformationBean bean = gson.fromJson(s, MemUsergetByInformationBean.class);
                     tvNickname.setText(bean.getData().getMemName());
@@ -128,31 +121,17 @@ public class Fragment5 extends BaseFragment {
         Intent intent = new Intent();
         switch (view.getId()){
             case R.id.rl_address:
-                if(SpUtils.getUserId(getContext()).equals("0")){
-                    intent.setClass(getContext(), LoginActivity.class);
-                    startActivity(intent);
-                }else {
-                    intent.setClass(getContext(), AddressActivity.class);
-                    startActivity(intent);
-                }
+                intent.setClass(getContext(), AddressActivity.class);
+                startActivity(intent);
                 break;
             case R.id.ll_pt_jifen:
-                if(SpUtils.getUserId(getContext()).equals("0")){
-                    intent.setClass(getContext(), LoginActivity.class);
-                    startActivity(intent);
-                }else {
-                    intent.setClass(getContext(), PtJifenActivity.class);
-                    startActivity(intent);
-                }
+                Logger.e("123123", SpUtils.getUserId(getContext()));
+                intent.setClass(getContext(), PtJifenActivity.class);
+                startActivity(intent);
                 break;
             case R.id.rl_jifen_order:
-                if(SpUtils.getUserId(getContext()).equals("0")){
-                    intent.setClass(getContext(), LoginActivity.class);
-                    startActivity(intent);
-                }else {
-                    intent.setClass(getContext(), JifenOrderActivity.class);
-                    startActivity(intent);
-                }
+                intent.setClass(getContext(), JifenOrderActivity.class);
+                startActivity(intent);
                 break;
             case R.id.ll_head:
                 intent.setClass(getContext(), PersonInformationActivity.class);
@@ -197,7 +176,6 @@ public class Fragment5 extends BaseFragment {
                     ViseUtil.Get(getContext(), NetUrl.AppMemberSignqueryList, map1, new ViseUtil.ViseListener() {
                         @Override
                         public void onReturn(String s) {
-                            Logger.e("123123", s);
                             Gson gson = new Gson();
                             AppMemberSignqueryListBean bean = gson.fromJson(s, AppMemberSignqueryListBean.class);
                             DialogCalendar dialogCalendar = new DialogCalendar(getContext(), yearMonth, bean.getData());
@@ -267,42 +245,5 @@ public class Fragment5 extends BaseFragment {
     private String formatTimeUnit(int unit) {
         return unit < 10 ? "0" + String.valueOf(unit) : String.valueOf(unit);
     }
-
-    public void aliPay(String info) {
-        final String orderInfo = info;   // 订单信息
-
-        Runnable payRunnable = new Runnable() {
-
-            @Override
-            public void run() {
-                PayTask alipay = new PayTask(getActivity());
-                Map<String, String> result = alipay.payV2(orderInfo,true);
-
-                Message msg = new Message();
-                msg.what = SDK_PAY_FLAG;
-                msg.obj = result;
-                mHandler.sendMessage(msg);
-            }
-        };
-        // 必须异步调用
-        Thread payThread = new Thread(payRunnable);
-        payThread.start();
-    }
-
-    @SuppressLint("HandlerLeak")
-    private Handler mHandler = new Handler() {
-        @SuppressWarnings("unused")
-        public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case SDK_PAY_FLAG:
-                    Map<String, String> result = (Map<String, String>) msg.obj;
-                    if(result.get("resultStatus").equals("9000")){
-                        Toast.makeText(getContext(), "支付成功", Toast.LENGTH_SHORT).show();
-                    }
-                    break;
-            }
-        }
-
-    };
 
 }

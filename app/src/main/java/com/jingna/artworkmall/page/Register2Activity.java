@@ -12,6 +12,7 @@ import com.jingna.artworkmall.R;
 import com.jingna.artworkmall.base.BaseActivity;
 import com.jingna.artworkmall.bean.LoginBean;
 import com.jingna.artworkmall.net.NetUrl;
+import com.jingna.artworkmall.util.Logger;
 import com.jingna.artworkmall.util.SpUtils;
 import com.jingna.artworkmall.util.StatusBarUtil;
 import com.jingna.artworkmall.util.StringUtils;
@@ -99,6 +100,7 @@ public class Register2Activity extends BaseActivity {
             ViseUtil.Get(context, NetUrl.MemUseraddMember, map, dialog, new ViseUtil.ViseListener() {
                 @Override
                 public void onReturn(String s) {
+                    Logger.e("123123", s);
                     Gson gson = new Gson();
                     LoginBean bean = gson.fromJson(s,LoginBean.class);
                     SpUtils.setToken(context, bean.getData().getToken());

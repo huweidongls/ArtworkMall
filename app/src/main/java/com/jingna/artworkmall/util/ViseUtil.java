@@ -35,6 +35,7 @@ public class ViseUtil {
                                 SpUtils.clear(context);
                                 Intent intent = new Intent();
                                 intent.setClass(context, PhoneLoginActivity.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                 context.startActivity(intent);
                             }else {
                                 ToastUtil.showShort(context, jsonObject.optString("errorMsg"));
@@ -67,6 +68,7 @@ public class ViseUtil {
                                 SpUtils.clear(context);
                                 Intent intent = new Intent();
                                 intent.setClass(context, PhoneLoginActivity.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                 context.startActivity(intent);
                             }else {
                                 ToastUtil.showShort(context, jsonObject.optString("errorMsg"));
@@ -109,6 +111,7 @@ public class ViseUtil {
                                 SpUtils.clear(context);
                                 Intent intent = new Intent();
                                 intent.setClass(context, PhoneLoginActivity.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                 context.startActivity(intent);
                             }else {
                                 ToastUtil.showShort(context, jsonObject.optString("errorMsg"));
@@ -142,6 +145,7 @@ public class ViseUtil {
                             }else if(jsonObject.optString("status").equals("11")){
                                 Intent intent = new Intent();
                                 intent.setClass(context, PhoneLoginActivity.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                 context.startActivity(intent);
                             }else {
                                 ToastUtil.showShort(context, jsonObject.optString("errorMsg"));
@@ -173,6 +177,7 @@ public class ViseUtil {
                             }else if(jsonObject.optString("status").equals("11")){
                                 Intent intent = new Intent();
                                 intent.setClass(context, PhoneLoginActivity.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                 context.startActivity(intent);
                             }else {
                                 ToastUtil.showShort(context, jsonObject.optString("errorMsg"));
@@ -214,6 +219,7 @@ public class ViseUtil {
                             }else if(jsonObject.optString("status").equals("11")){
                                 Intent intent = new Intent();
                                 intent.setClass(context, PhoneLoginActivity.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                 context.startActivity(intent);
                             }else {
                                 ToastUtil.showShort(context, jsonObject.optString("errorMsg"));

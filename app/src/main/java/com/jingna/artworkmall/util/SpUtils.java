@@ -21,46 +21,6 @@ public class SpUtils {
     public static String SHEQU_ID = "shequ_id";
     public static String SHEQU_NAME = "shequ_name";
 
-    public static void setShequName(Context context, String shequName){
-        spCache = new SpCache(context, "user_info");
-        spCache.put(SHEQU_NAME, shequName);
-    }
-
-    public static String getShequName(Context context){
-        spCache = new SpCache(context, "user_info");
-        return spCache.get(SHEQU_NAME, "");
-    }
-
-    public static void setShequId(Context context, String shequId){
-        spCache = new SpCache(context, "user_info");
-        spCache.put(SHEQU_ID, shequId);
-    }
-
-    public static String getShequId(Context context){
-        spCache = new SpCache(context, "user_info");
-        return spCache.get(SHEQU_ID, "");
-    }
-
-    public static void setXiaoquName(Context context, String xiaoquName){
-        spCache = new SpCache(context, "user_info");
-        spCache.put(XIAOQU_NAME, xiaoquName);
-    }
-
-    public static String getXiaoquName(Context context){
-        spCache = new SpCache(context, "user_info");
-        return spCache.get(XIAOQU_NAME, "");
-    }
-
-    public static void setXiaoquId(Context context, String xiaoquId){
-        spCache = new SpCache(context, "user_info");
-        spCache.put(XIAOQU_ID, xiaoquId);
-    }
-
-    public static String getXiaoquId(Context context){
-        spCache = new SpCache(context, "user_info");
-        return spCache.get(XIAOQU_ID, "");
-    }
-
     public static void setReal(Context context, String real){
         spCache = new SpCache(context, "user_info");
         spCache.put(REAL, real);
