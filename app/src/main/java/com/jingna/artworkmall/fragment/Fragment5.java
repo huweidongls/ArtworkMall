@@ -228,6 +228,7 @@ public class Fragment5 extends BaseFragment {
 
                     if(jsonObject.optInt("data") == 1){
                         ToastUtil.showShort(getContext(), "签到成功");
+                        isSignIn = 1;
                     }else {
                         ToastUtil.showShort(getContext(), "已签到");
                     }
