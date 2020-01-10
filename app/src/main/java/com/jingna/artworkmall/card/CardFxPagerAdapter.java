@@ -81,7 +81,7 @@ public class CardFxPagerAdapter extends PagerAdapter implements CardAdapter {
     private void bind(String item, View view) {
         ImageView img = view.findViewById(R.id.fragment_sy_fx_card_img);
 
-        GlideUtils.into(view.getContext(), item, img);
+        GlideUtils.into(view.getContext(), NetUrl.BASE_URL+item, img);
     }
 
 }

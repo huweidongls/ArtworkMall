@@ -31,6 +31,7 @@
                 android:layout_height="match_parent">
 
                 <LinearLayout
+                    android:clipToPadding="false"
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
@@ -227,14 +228,14 @@
                     </LinearLayout>
 
                     <android.support.v4.view.ViewPager
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
                         android:layout_marginTop="15dp"
                         android:id="@+id/vp"
                         android:layout_width="match_parent"
                         android:layout_height="122dp"
                         android:clipToPadding="false"
-                        android:overScrollMode="never"
-                        android:paddingLeft="10dp"
-                        android:paddingRight="10dp" />
+                        android:overScrollMode="never" />
 
                     <RelativeLayout
                         android:layout_marginBottom="20dp"

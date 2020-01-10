@@ -17,6 +17,7 @@ import com.jingna.artworkmall.bean.AppMemberSignqueryListBean;
 import com.jingna.artworkmall.bean.MemUsergetByInformationBean;
 import com.jingna.artworkmall.dialog.DialogCalendar;
 import com.jingna.artworkmall.net.NetUrl;
+import com.jingna.artworkmall.page.AboutActivity;
 import com.jingna.artworkmall.page.AddressActivity;
 import com.jingna.artworkmall.page.BanquanActivity;
 import com.jingna.artworkmall.page.CouponsActivity;
@@ -200,7 +201,8 @@ public class Fragment5 extends BaseFragment {
                 startActivity(intent);
                 break;
             case R.id.rl_about:
-
+                intent.setClass(getContext(), AboutActivity.class);
+                startActivity(intent);
                 break;
             case R.id.rl_banquan:
                 intent.setClass(getContext(), BanquanActivity.class);

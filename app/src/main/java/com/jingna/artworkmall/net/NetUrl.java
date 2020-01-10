@@ -49,4 +49,5 @@ public class NetUrl {
     public static final String AppRechargeExtractrechargePtb = "/AppRechargeExtract/rechargePtb";//充值平台币
     public static final String AppBankCardupdateDefault = "/AppBankCard/updateDefault";//设置默认银行卡接口
     public static final String MemUsergetByMyShop = "/MemUser/getByMyShop";//我的店铺
+    public static final String IndexPageApiqueryGoodsContent = "/IndexPageApi/queryGoodsContent";//首页内容图片
 }

@@ -16,11 +16,12 @@ import com.jingna.artworkmall.adapter.Fragment1RvAdapter;
 import com.jingna.artworkmall.base.BaseFragment;
 import com.jingna.artworkmall.bean.IndexPageApifindBannerCategoryBean;
 import com.jingna.artworkmall.bean.IndexPageApiqueryCardBean;
-import com.jingna.artworkmall.card.CardFragmentPagerAdapter;
+import com.jingna.artworkmall.bean.IndexPageApiqueryGoodsContentBean;
 import com.jingna.artworkmall.card.CardFxPagerAdapter;
+import com.jingna.artworkmall.card.ShadowTransformer;
 import com.jingna.artworkmall.net.NetUrl;
-import com.jingna.artworkmall.util.DensityTool;
 import com.jingna.artworkmall.util.ViseUtil;
+import com.jingna.artworkmall.widget.ViewPagerAdapter;
 import com.scwang.smartrefresh.header.MaterialHeader;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -52,9 +53,10 @@ public class Fragment1 extends BaseFragment {
     SmartRefreshLayout smartRefreshLayout;
 
     private CardFxPagerAdapter mCardAdapter;
-    private CardFragmentPagerAdapter mFragmentCardAdapter;
-
-    private List<String> data;
+    private ShadowTransformer shadowTransformer;
+//    private CardFragmentPagerAdapter mFragmentCardAdapter;
+    private ViewPagerAdapter mViewPagerAdapter;
+    private List<IndexPageApiqueryGoodsContentBean.DataBean> data;
 
     private Fragment1RvAdapter adapter;
     private List<IndexPageApiqueryCardBean.DataBean> mList;
@@ -86,17 +88,23 @@ public class Fragment1 extends BaseFragment {
 
     }
 
-    public void setCardView(List<String> data) {
+    public void setCardView(List<IndexPageApiqueryGoodsContentBean.DataBean> data) {
 
         mCardAdapter = new CardFxPagerAdapter();
         for (int i = 0; i < data.size(); i++) {
-            mCardAdapter.addCardItem(data.get(i));
+            mCardAdapter.addCardItem(data.get(i).getContentImg());
         }
-        mFragmentCardAdapter = new CardFragmentPagerAdapter(getActivity().getSupportFragmentManager(),
-                DensityTool.dp2px(getContext(), 1));
-
+//        mFragmentCardAdapter = new CardFragmentPagerAdapter(getActivity().getSupportFragmentManager(),
+//                DensityTool.dp2px(getContext(), 1));
         viewPager.setAdapter(mCardAdapter);
-        viewPager.setOffscreenPageLimit(3);
+//        shadowTransformer = new ShadowTransformer(viewPager, mCardAdapter);
+//        shadowTransformer.enableScaling(false);
+
+//        mViewPagerAdapter = new ViewPagerAdapter(getContext(), data);
+//        viewPager.setOffscreenPageLimit(3);
+//        viewPager.setPageMargin(1);
+//        viewPager.setAdapter(mViewPagerAdapter);
+//        viewPager.setPageTransformer(false, new GalleryTransformer());
 
     }
 
@@ -117,13 +125,15 @@ public class Fragment1 extends BaseFragment {
             }
         });
 
-        data = new ArrayList<>();
-        data.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1576124684803&di=b2955f5c7f53d25a2a66942ae32d992d&imgtype=0&src=http%3A%2F%2Fww2.sinaimg.cn%2Flarge%2F00667u01jw1erufiv0fd1j30k00b9q48.jpg");
-        data.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1576124684802&di=d75ad5b4e7d8b79100f9a520ecf5362a&imgtype=0&src=http%3A%2F%2Fzjnews.zjol.com.cn%2Fgdxw%2Fycxw_zxtf%2F201611%2FW020161116816118043260.jpg");
-        data.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1576124704707&di=509a494541450addeee6532972bad420&imgtype=jpg&src=http%3A%2F%2Fimg4.imgtn.bdimg.com%2Fit%2Fu%3D2637673594%2C2560483073%26fm%3D214%26gp%3D0.jpg");
-        data.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1576124712771&di=972c90108393a191c7ba19a3719c0a34&imgtype=jpg&src=http%3A%2F%2Fimg4.imgtn.bdimg.com%2Fit%2Fu%3D3011731684%2C1303327354%26fm%3D214%26gp%3D0.jpg");
-        data.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1576124684800&di=c16a4a9ff8ced70464fe924aca6ef57c&imgtype=0&src=http%3A%2F%2Fstatic.chayuqing.com%2F65cbb7e0729bb0ea9be3f26a0b6ec5c6.jpg");
-        setCardView(data);
+        ViseUtil.Get(getContext(), NetUrl.IndexPageApiqueryGoodsContent, null, new ViseUtil.ViseListener() {
+            @Override
+            public void onReturn(String s) {
+                Gson gson = new Gson();
+                IndexPageApiqueryGoodsContentBean bean = gson.fromJson(s, IndexPageApiqueryGoodsContentBean.class);
+                data = bean.getData();
+                setCardView(data);
+            }
+        });
 
         Map<String, String> map1 = new LinkedHashMap<>();
         map1.put("pageNum", "0");
