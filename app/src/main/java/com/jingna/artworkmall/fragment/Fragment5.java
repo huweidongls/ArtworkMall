@@ -201,8 +201,8 @@ public class Fragment5 extends BaseFragment {
                 startActivity(intent);
                 break;
             case R.id.rl_about:
-                intent.setClass(getContext(), AboutActivity.class);
-                startActivity(intent);
+//                intent.setClass(getContext(), AboutActivity.class);
+//                startActivity(intent);
                 break;
             case R.id.rl_banquan:
                 intent.setClass(getContext(), BanquanActivity.class);

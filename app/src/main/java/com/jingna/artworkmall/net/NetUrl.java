@@ -7,7 +7,8 @@ package com.jingna.artworkmall.net;
 public class NetUrl {
 
 //    public static final String BASE_URL = "http://192.168.1.102:80/";//http://192.168.2.211:8080/
-    public static final String BASE_URL = "http://122.112.187.234:80/";//http://192.168.2.211:8080/
+    public static final String BASE_URL = "http://slsapi.5ijiaoyu.cn/";//http://192.168.2.211:8080/
+//    public static final String BASE_URL = "http://122.112.187.234:80/";//http://192.168.2.211:8080/
     public static final String H5BASE_URL = "http://39.98.188.171:8081/";//http://192.168.2.211:8080/
     public static final String MemUsersendMessage = "/MemUser/sendMessage";//发送验证码
     public static final String MemUserloginAPP = "/MemUser/loginAPP";//短信登录

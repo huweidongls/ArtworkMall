@@ -16,10 +16,17 @@ public class SpUtils {
     public static String TOKEN = "token";
     public static String SEARCH_HISTORY = "search_history";
     public static String REAL = "real";
-    public static String XIAOQU_ID = "xiaoqu_id";
-    public static String XIAOQU_NAME = "xiaoqu_name";
-    public static String SHEQU_ID = "shequ_id";
-    public static String SHEQU_NAME = "shequ_name";
+    public static String LOGIN_URL = "login_url";
+
+    public static void setLoginUrl(Context context, String loginUrl){
+        spCache = new SpCache(context, "user_info");
+        spCache.put(LOGIN_URL, loginUrl);
+    }
+
+    public static String getLoginUrl(Context context){
+        spCache = new SpCache(context, "user_info");
+        return spCache.get(LOGIN_URL, "");
+    }
 
     public static void setReal(Context context, String real){
         spCache = new SpCache(context, "user_info");

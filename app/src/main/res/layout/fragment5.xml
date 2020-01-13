@@ -374,7 +374,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="11dp"
-                        android:text="积分商城订单"
+                        android:text="优选订单"
                         android:textColor="#2E2E2E"
                         android:textSize="15sp" />
 

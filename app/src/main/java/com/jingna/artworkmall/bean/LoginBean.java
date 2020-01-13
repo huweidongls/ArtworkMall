@@ -37,6 +37,7 @@ public class LoginBean {
 
         private int userId;
         private String token;
+        private String loginUrl;
 
         public int getUserId() {
             return userId;
@@ -52,6 +53,14 @@ public class LoginBean {
 
         public void setToken(String token) {
             this.token = token;
+        }
+
+        public String getLoginUrl() {
+            return loginUrl;
+        }
+
+        public void setLoginUrl(String loginUrl) {
+            this.loginUrl = loginUrl;
         }
     }
 }

@@ -44,9 +44,9 @@ public class ViewPagerAdapter extends PagerAdapter {
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
         ImageView imageView = new ImageView(mContext);
-        imageView.setLayoutParams(new ViewGroup.LayoutParams(DensityTool.dp2px(mContext,200),DensityTool.dp2px(mContext,400)));
+        imageView.setLayoutParams(new ViewGroup.LayoutParams(DensityTool.dp2px(mContext,200),DensityTool.dp2px(mContext,122)));
         GlideUtils.into(mContext, NetUrl.BASE_URL+data.get(position).getContentImg(), imageView);
-        imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+        imageView.setScaleType(ImageView.ScaleType.FIT_XY);
         container.addView(imageView);
         return imageView;
     }

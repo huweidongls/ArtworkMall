@@ -63,6 +63,7 @@ public class PersonInformationActivity extends BaseActivity {
     private int mDay;
 
     private String invitationCode = "";
+    private String loginUrl = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,6 +110,7 @@ public class PersonInformationActivity extends BaseActivity {
                 }
                 tvBirthday.setText(bean.getData().getMemberUserInfo().getMemBirthday());
                 invitationCode = bean.getData().getMemberUserInfo().getInvitationCode();
+                loginUrl = bean.getData().getMemberUserInfo().getLoginUrl();
             }
         });
 
@@ -172,6 +174,7 @@ public class PersonInformationActivity extends BaseActivity {
             case R.id.rl_yqm:
                 intent.setClass(context, YqmActivity.class);
                 intent.putExtra("code", invitationCode);
+                intent.putExtra("url", loginUrl);
                 startActivity(intent);
                 break;
         }

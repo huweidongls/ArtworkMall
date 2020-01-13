@@ -41,12 +41,14 @@ public class YqmActivity extends BaseActivity {
     RelativeLayout rl;
 
     private String invitationCode = "";
+    private String loginUrl = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_yqm);
 
+        loginUrl = getIntent().getStringExtra("url");
         invitationCode = getIntent().getStringExtra("code");
         StatusBarUtil.setStatusBarColor(YqmActivity.this, getResources().getColor(R.color.yqm));
         //一般的手机的状态栏文字和图标都是白色的, 可如果你的应用也是纯白色的, 或导致状态栏文字看不清
@@ -64,7 +66,7 @@ public class YqmActivity extends BaseActivity {
     private void initData() {
 
         tvCode.setText(invitationCode);
-        Glide.with(context).load(CodeUtils.createImage(invitationCode, 400, 400, null)).into(iv);
+        Glide.with(context).load(CodeUtils.createImage(loginUrl+invitationCode, 400, 400, null)).into(iv);
 
     }
 

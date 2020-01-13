@@ -115,6 +115,15 @@ public class MemUsergetOneBean {
             private List<?> memberUserInfos;
             private List<?> platformBalances;
             private List<?> verificationSheetRecords;
+            private String loginUrl;
+
+            public String getLoginUrl() {
+                return loginUrl;
+            }
+
+            public void setLoginUrl(String loginUrl) {
+                this.loginUrl = loginUrl;
+            }
 
             public int getId() {
                 return id;
