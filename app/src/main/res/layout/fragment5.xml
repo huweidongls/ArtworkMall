@@ -105,6 +105,7 @@
                     </LinearLayout>
 
                     <RelativeLayout
+                        android:id="@+id/rl_huoyuedu"
                         android:background="@mipmap/huoyuedu"
                         android:layout_width="35dp"
                         android:layout_height="20dp" >

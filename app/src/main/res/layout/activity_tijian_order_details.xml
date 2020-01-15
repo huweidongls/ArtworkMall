@@ -220,10 +220,10 @@
                         android:layout_height="wrap_content" />
 
                     <TextView
+                        android:id="@+id/tv_all_price"
                         android:layout_alignParentRight="true"
                         android:textColor="#646464"
                         android:textSize="14sp"
-                        android:text="￥1500.00"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
 
@@ -245,10 +245,10 @@
                         android:layout_height="wrap_content" />
 
                     <TextView
+                        android:id="@+id/tv_coupons_price"
                         android:layout_alignParentRight="true"
                         android:textColor="#646464"
                         android:textSize="14sp"
-                        android:text="－￥20.00"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
 

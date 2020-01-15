@@ -6,10 +6,11 @@ package com.jingna.artworkmall.net;
 
 public class NetUrl {
 
-//    public static final String BASE_URL = "http://192.168.1.102:80/";//http://192.168.2.211:8080/
-    public static final String BASE_URL = "http://slsapi.5ijiaoyu.cn/";//http://192.168.2.211:8080/
+    public static final String BASE_URL = "http://192.168.1.102:80/";//http://192.168.2.211:8080/
+//    public static final String BASE_URL = "http://slsapi.5ijiaoyu.cn/";//http://192.168.2.211:8080/
 //    public static final String BASE_URL = "http://122.112.187.234:80/";//http://192.168.2.211:8080/
-    public static final String H5BASE_URL = "http://39.98.188.171:8081/";//http://192.168.2.211:8080/
+//    public static final String H5BASE_URL = "http://39.98.188.171:8081/";//http://192.168.2.211:8080/
+    public static final String H5BASE_URL = "http://slsh5.5ijiaoyu.cn";//http://192.168.2.211:8080/
     public static final String MemUsersendMessage = "/MemUser/sendMessage";//发送验证码
     public static final String MemUserloginAPP = "/MemUser/loginAPP";//短信登录
     public static final String MemUserloginAppPassword = "/MemUser/loginAppPassword";//账号密码登录
@@ -51,4 +52,5 @@ public class NetUrl {
     public static final String AppBankCardupdateDefault = "/AppBankCard/updateDefault";//设置默认银行卡接口
     public static final String MemUsergetByMyShop = "/MemUser/getByMyShop";//我的店铺
     public static final String IndexPageApiqueryGoodsContent = "/IndexPageApi/queryGoodsContent";//首页内容图片
+    public static final String AppMemberUserLivenessqueryList = "/AppMemberUserLiveness/queryList";//活跃度记录列表
 }

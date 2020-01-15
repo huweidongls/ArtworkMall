@@ -20,6 +20,7 @@ import com.jingna.artworkmall.bean.IndexPageApiqueryGoodsContentBean;
 import com.jingna.artworkmall.card.CardFxPagerAdapter;
 import com.jingna.artworkmall.card.ShadowTransformer;
 import com.jingna.artworkmall.net.NetUrl;
+import com.jingna.artworkmall.util.Logger;
 import com.jingna.artworkmall.util.ViseUtil;
 import com.jingna.artworkmall.widget.ViewPagerAdapter;
 import com.scwang.smartrefresh.header.MaterialHeader;

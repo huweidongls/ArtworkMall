@@ -56,7 +56,7 @@ public class AppOrdergetByCardBean {
         private String paymentMode;
         private String createTime;
         private double orderRealPrice;
-        private int couponPrice;
+        private double couponPrice;
         private String electronicCode;
         private String goodsName;
         private List<?> list;
@@ -125,11 +125,11 @@ public class AppOrdergetByCardBean {
             this.orderRealPrice = orderRealPrice;
         }
 
-        public int getCouponPrice() {
+        public double getCouponPrice() {
             return couponPrice;
         }
 
-        public void setCouponPrice(int couponPrice) {
+        public void setCouponPrice(double couponPrice) {
             this.couponPrice = couponPrice;
         }
 

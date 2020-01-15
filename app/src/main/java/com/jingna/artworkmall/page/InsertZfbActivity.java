@@ -38,6 +38,8 @@ public class InsertZfbActivity extends BaseActivity {
     EditText etBankCard;
     @BindView(R.id.et_phonenum)
     EditText etPhonenum;
+    @BindView(R.id.et_real_name)
+    EditText etRealName;
 
     private String userId = "";
 
@@ -82,7 +84,8 @@ public class InsertZfbActivity extends BaseActivity {
                 if(isAgree){
                     final String bankCard = etBankCard.getText().toString();
                     final String phoneNum = etPhonenum.getText().toString();
-                    if(StringUtils.isEmpty(bankCard)||StringUtils.isEmpty(phoneNum)){
+                    final String realName = etRealName.getText().toString();
+                    if(StringUtils.isEmpty(bankCard)||StringUtils.isEmpty(phoneNum)||StringUtils.isEmpty(realName)){
                         ToastUtil.showShort(context, "请完善信息后提交");
                     }else if(!StringUtils.isPhoneNumberValid(phoneNum)){
                         ToastUtil.showShort(context, "请输入正确格式的手机号码");
@@ -94,6 +97,7 @@ public class InsertZfbActivity extends BaseActivity {
                                 map.put("cardMemberId", SpUtils.getUserId(context));
                                 map.put("cardNumber", bankCard);
                                 map.put("cardPhone", phoneNum);
+                                map.put("realName", realName);
                                 map.put("cardName", "支付宝");
                                 map.put("cardChannel", "支付宝");
                                 ViseUtil.Post(context, NetUrl.AppBankCardtoUpdate, map, new ViseUtil.ViseListener() {

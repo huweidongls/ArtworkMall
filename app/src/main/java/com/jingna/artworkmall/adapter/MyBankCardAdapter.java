@@ -51,9 +51,11 @@ public class MyBankCardAdapter extends RecyclerView.Adapter<MyBankCardAdapter.Vi
             if(data.get(position).getCardChannel().equals("支付宝")){
                 holder.rlBank.setBackgroundResource(R.drawable.bg_00a0e9_6dp);
                 Glide.with(context).load(R.mipmap.zhifubao).into(holder.ivType);
+                holder.tvType.setText("支付宝");
             }else if(data.get(position).getCardChannel().equals("银行卡")){
                 holder.rlBank.setBackgroundResource(R.drawable.bg_ca566b_6dp);
                 Glide.with(context).load(R.mipmap.yinhangka).into(holder.ivType);
+                holder.tvType.setText("储蓄卡");
             }
             holder.rlBank.setVisibility(View.VISIBLE);
             holder.tvAdd.setVisibility(View.GONE);
@@ -62,7 +64,7 @@ public class MyBankCardAdapter extends RecyclerView.Adapter<MyBankCardAdapter.Vi
             phone = phone.substring(phone.length()-4, phone.length());
             holder.tvPhoneNum.setText("手机尾号"+phone);
             card = data.get(position).getCardNumber();
-            card = card.substring(card.length()-4, card.length());
+//            card = card.substring(card.length()-4, card.length());
             holder.tvBankCard.setText(card);
         }
         final String finalCard = card;
@@ -102,6 +104,7 @@ public class MyBankCardAdapter extends RecyclerView.Adapter<MyBankCardAdapter.Vi
         private TextView tvPhoneNum;
         private TextView tvBankCard;
         private ImageView ivType;
+        private TextView tvType;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -111,6 +114,7 @@ public class MyBankCardAdapter extends RecyclerView.Adapter<MyBankCardAdapter.Vi
             tvPhoneNum = itemView.findViewById(R.id.tv_phonenum);
             tvBankCard = itemView.findViewById(R.id.tv_bank_card);
             ivType = itemView.findViewById(R.id.iv_type);
+            tvType = itemView.findViewById(R.id.tv_type);
         }
     }
 

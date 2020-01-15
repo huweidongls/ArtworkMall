@@ -12,6 +12,7 @@ import com.jingna.artworkmall.net.NetUrl;
 import com.jingna.artworkmall.util.SpUtils;
 import com.jingna.artworkmall.util.StatusBarUtil;
 import com.jingna.artworkmall.util.StringUtils;
+import com.jingna.artworkmall.util.ToastUtil;
 import com.jingna.artworkmall.util.ViseUtil;
 
 import org.json.JSONException;
@@ -89,8 +90,9 @@ public class PtJifenActivity extends BaseActivity {
                 startActivity(intent);
                 break;
             case R.id.btn_chongzhi:
-                intent.setClass(context, ChongzhiActivity.class);
-                startActivity(intent);
+                ToastUtil.showShort(context, "暂未开放");
+//                intent.setClass(context, ChongzhiActivity.class);
+//                startActivity(intent);
                 break;
         }
     }

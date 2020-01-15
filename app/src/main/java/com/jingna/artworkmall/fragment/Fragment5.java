@@ -17,10 +17,10 @@ import com.jingna.artworkmall.bean.AppMemberSignqueryListBean;
 import com.jingna.artworkmall.bean.MemUsergetByInformationBean;
 import com.jingna.artworkmall.dialog.DialogCalendar;
 import com.jingna.artworkmall.net.NetUrl;
-import com.jingna.artworkmall.page.AboutActivity;
 import com.jingna.artworkmall.page.AddressActivity;
 import com.jingna.artworkmall.page.BanquanActivity;
 import com.jingna.artworkmall.page.CouponsActivity;
+import com.jingna.artworkmall.page.HuoyueduActivity;
 import com.jingna.artworkmall.page.JifenOrderActivity;
 import com.jingna.artworkmall.page.MyBankCardActivity;
 import com.jingna.artworkmall.page.MyDianpuActivity;
@@ -29,7 +29,6 @@ import com.jingna.artworkmall.page.PtJifenActivity;
 import com.jingna.artworkmall.page.TijianOrderActivity;
 import com.jingna.artworkmall.page.YinsiActivity;
 import com.jingna.artworkmall.util.GlideUtils;
-import com.jingna.artworkmall.util.Logger;
 import com.jingna.artworkmall.util.SpUtils;
 import com.jingna.artworkmall.util.StringUtils;
 import com.jingna.artworkmall.util.ToastUtil;
@@ -66,6 +65,7 @@ public class Fragment5 extends BaseFragment {
     TextView tvHuoyuedu;
 
     private int isSignIn = 0;
+    private int dangqian = 0;
 
     private Calendar c;
 
@@ -91,7 +91,6 @@ public class Fragment5 extends BaseFragment {
         if(SpUtils.getUserId(getContext()).equals("0")){
 
         }else {
-            Logger.e("123123", SpUtils.getUserId(getContext()));
             Map<String, String> map = new LinkedHashMap<>();
             map.put("id", SpUtils.getUserId(getContext()));
             ViseUtil.Get(getContext(), NetUrl.MemUsergetByInformation, map, new ViseUtil.ViseListener() {
@@ -105,7 +104,7 @@ public class Fragment5 extends BaseFragment {
                     tvPtb.setText(StringUtils.roundByScale(bean.getData().getMemIntegral(), 2));
                     tvCouponsNum.setText(bean.getData().getCouponNum()+"");
                     int shangxian = bean.getData().getActivityLevelNum();
-                    int dangqian = bean.getData().getMemberUserLiveness();
+                    dangqian = bean.getData().getMemberUserLiveness();
                     progressBar.setMax(shangxian);
                     progressBar.setProgress(dangqian);
                     tvHuoyuedu.setText(dangqian+"");
@@ -117,7 +116,7 @@ public class Fragment5 extends BaseFragment {
 
     @OnClick({R.id.rl_address, R.id.ll_pt_jifen, R.id.rl_jifen_order, R.id.ll_head, R.id.rl_bank, R.id.rl_dianpu,
     R.id.ll_coupons, R.id.ll_qiandao, R.id.rl_all_order, R.id.rl_daishiyong, R.id.rl_yishiyong, R.id.rl_about,
-    R.id.rl_banquan, R.id.rl_yinsi})
+    R.id.rl_banquan, R.id.rl_yinsi, R.id.rl_huoyuedu})
     public void onClick(View view){
         Intent intent = new Intent();
         switch (view.getId()){
@@ -126,7 +125,6 @@ public class Fragment5 extends BaseFragment {
                 startActivity(intent);
                 break;
             case R.id.ll_pt_jifen:
-                Logger.e("123123", SpUtils.getUserId(getContext()));
                 intent.setClass(getContext(), PtJifenActivity.class);
                 startActivity(intent);
                 break;
@@ -210,6 +208,11 @@ public class Fragment5 extends BaseFragment {
                 break;
             case R.id.rl_yinsi:
                 intent.setClass(getContext(), YinsiActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.rl_huoyuedu:
+                intent.setClass(getContext(), HuoyueduActivity.class);
+                intent.putExtra("dangqian", dangqian);
                 startActivity(intent);
                 break;
         }

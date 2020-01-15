@@ -45,6 +45,8 @@ public class InsertBankCardActivity extends BaseActivity {
     EditText etPhonenum;
     @BindView(R.id.et_bank_name)
     EditText etBankName;
+    @BindView(R.id.et_real_name)
+    EditText etRealName;
 
     private String userId = "";
 
@@ -90,7 +92,9 @@ public class InsertBankCardActivity extends BaseActivity {
                     final String bankCard = etBankCard.getText().toString();
                     final String phoneNum = etPhonenum.getText().toString();
                     final String bankName = etBankName.getText().toString();
-                    if(StringUtils.isEmpty(bankCard)||StringUtils.isEmpty(phoneNum)||StringUtils.isEmpty(bankName)){
+                    final String realName = etRealName.getText().toString();
+                    if(StringUtils.isEmpty(bankCard)||StringUtils.isEmpty(phoneNum)||StringUtils.isEmpty(bankName)
+                            ||StringUtils.isEmpty(realName)){
                         ToastUtil.showShort(context, "请完善信息后提交");
                     }else if(!StringUtils.isPhoneNumberValid(phoneNum)){
                         ToastUtil.showShort(context, "请输入正确格式的手机号码");
@@ -103,6 +107,7 @@ public class InsertBankCardActivity extends BaseActivity {
                                 map.put("cardNumber", bankCard);
                                 map.put("cardPhone", phoneNum);
                                 map.put("cardName", bankName);
+                                map.put("realName", realName);
                                 map.put("cardChannel", "银行卡");
                                 ViseUtil.Post(context, NetUrl.AppBankCardtoUpdate, map, new ViseUtil.ViseListener() {
                                     @Override
