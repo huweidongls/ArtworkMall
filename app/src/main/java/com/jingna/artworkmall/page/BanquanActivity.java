@@ -3,17 +3,28 @@ package com.jingna.artworkmall.page;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.jingna.artworkmall.R;
 import com.jingna.artworkmall.base.BaseActivity;
+import com.jingna.artworkmall.bean.IndexPageApiqueryListBbsmBean;
+import com.jingna.artworkmall.net.NetUrl;
+import com.jingna.artworkmall.util.HtmlFromUtils;
 import com.jingna.artworkmall.util.StatusBarUtil;
+import com.jingna.artworkmall.util.VersionUtils;
+import com.jingna.artworkmall.util.ViseUtil;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class BanquanActivity extends BaseActivity {
 
     private Context context = BanquanActivity.this;
+
+    @BindView(R.id.tv)
+    TextView tv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +40,23 @@ public class BanquanActivity extends BaseActivity {
             StatusBarUtil.setStatusBarColor(BanquanActivity.this,0x55000000);
         }
         ButterKnife.bind(BanquanActivity.this);
+        initData();
+
+    }
+
+    private void initData() {
+
+        ViseUtil.Get(context, NetUrl.IndexPageApiqueryListBbsm, null, new ViseUtil.ViseListener() {
+            @Override
+            public void onReturn(String s) {
+                Gson gson = new Gson();
+                IndexPageApiqueryListBbsmBean bean = gson.fromJson(s, IndexPageApiqueryListBbsmBean.class);
+                if(bean.getData().size()>0){
+                    String html = bean.getData().get(0).getUsinghelp();
+                    HtmlFromUtils.setTextFromHtml(BanquanActivity.this, tv, html);
+                }
+            }
+        });
 
     }
 

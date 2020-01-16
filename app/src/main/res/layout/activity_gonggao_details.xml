@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/white_ffffff"
-    tools:context="com.jingna.artworkmall.page.YinsiActivity">
+    tools:context="com.jingna.artworkmall.page.GonggaoDetailsActivity">
 
     <RelativeLayout
         style="@style/rl_top_bar_white">
@@ -22,15 +22,25 @@
         </RelativeLayout>
 
         <TextView
-            android:text="隐私政策"
+            android:text="详情"
             style="@style/tv_top_title_white" />
 
     </RelativeLayout>
 
-    <TextView
-        android:layout_margin="10dp"
-        android:id="@+id/tv"
+    <ProgressBar
+        android:id="@+id/pro"
+        android:progress="0"
+        android:max="100"
+        style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="6dp" />
+
+    <WebView
+        android:id="@+id/webview"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+
+    </WebView>
 
 </LinearLayout>

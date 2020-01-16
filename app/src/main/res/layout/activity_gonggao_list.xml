@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/white_ffffff"
-    tools:context="com.jingna.artworkmall.page.YinsiActivity">
+    tools:context="com.jingna.artworkmall.page.GonggaoListActivity">
 
     <RelativeLayout
         style="@style/rl_top_bar_white">
@@ -22,15 +22,21 @@
         </RelativeLayout>
 
         <TextView
-            android:text="隐私政策"
+            android:text="公告"
             style="@style/tv_top_title_white" />
 
     </RelativeLayout>
 
-    <TextView
-        android:layout_margin="10dp"
-        android:id="@+id/tv"
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/refresh"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 
 </LinearLayout>

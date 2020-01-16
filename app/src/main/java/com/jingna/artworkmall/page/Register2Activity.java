@@ -84,8 +84,10 @@ public class Register2Activity extends BaseActivity {
 
     private void register() {
 
-        String name = etName.getText().toString();
-        String idnum = etIdnum.getText().toString();
+//        String name = etName.getText().toString();
+//        String idnum = etIdnum.getText().toString();
+        String name = "123123";
+        String idnum = "123123";
         String pwd = etPwd.getText().toString();
         if(StringUtils.isEmpty(name)||StringUtils.isEmpty(idnum)||StringUtils.isEmpty(pwd)){
             ToastUtil.showShort(context, "请完善信息之后提交");

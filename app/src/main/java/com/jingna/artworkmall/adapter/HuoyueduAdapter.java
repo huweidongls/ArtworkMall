@@ -52,6 +52,9 @@ public class HuoyueduAdapter extends RecyclerView.Adapter<HuoyueduAdapter.ViewHo
         }else if(type == 4){
             holder.tvType.setText("会员签到");
             holder.tv.setText("+ "+data.get(position).getRiHuoSign());
+        }else if(type == 5){
+            holder.tvType.setText("本期可获取活跃度已达到上限");
+            holder.tv.setText("+ 0");
         }
     }
 

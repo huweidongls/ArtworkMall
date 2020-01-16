@@ -47,14 +47,13 @@ public class YouxuanAdapter extends RecyclerView.Adapter<YouxuanAdapter.ViewHold
         holder.tvSub.setText(data.get(position).getDescription());
         holder.tvPrice.setText(StringUtils.roundByScale(data.get(position).getPrice(), 2));
         holder.tvShichang.setText(StringUtils.roundByScale(data.get(position).getOriginalPrice(), 2));
-        String label = data.get(position).getLabel();
-        if(!StringUtils.isEmpty(label)){
-            String[] s = label.split(",");
-            YouxuanItemAdapter itemAdapter = new YouxuanItemAdapter(s);
+        if(data.get(position).getLabel() != null){
+            String[] s = data.get(position).getLabel().split(",");
+            LabelAdapter labelAdapter = new LabelAdapter(s);
             LinearLayoutManager manager = new LinearLayoutManager(context);
             manager.setOrientation(LinearLayoutManager.HORIZONTAL);
             holder.rv.setLayoutManager(manager);
-            holder.rv.setAdapter(itemAdapter);
+            holder.rv.setAdapter(labelAdapter);
         }
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

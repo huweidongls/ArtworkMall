@@ -6,8 +6,8 @@ package com.jingna.artworkmall.net;
 
 public class NetUrl {
 
-    public static final String BASE_URL = "http://192.168.1.102:80/";//http://192.168.2.211:8080/
-//    public static final String BASE_URL = "http://slsapi.5ijiaoyu.cn/";//http://192.168.2.211:8080/
+//    public static final String BASE_URL = "http://192.168.1.102:80/";//http://192.168.2.211:8080/
+    public static final String BASE_URL = "http://slsapi.5ijiaoyu.cn/";//http://192.168.2.211:8080/
 //    public static final String BASE_URL = "http://122.112.187.234:80/";//http://192.168.2.211:8080/
 //    public static final String H5BASE_URL = "http://39.98.188.171:8081/";//http://192.168.2.211:8080/
     public static final String H5BASE_URL = "http://slsh5.5ijiaoyu.cn";//http://192.168.2.211:8080/
@@ -53,4 +53,11 @@ public class NetUrl {
     public static final String MemUsergetByMyShop = "/MemUser/getByMyShop";//我的店铺
     public static final String IndexPageApiqueryGoodsContent = "/IndexPageApi/queryGoodsContent";//首页内容图片
     public static final String AppMemberUserLivenessqueryList = "/AppMemberUserLiveness/queryList";//活跃度记录列表
+    public static final String IndexPageApiqueryNotice = "/IndexPageApi/queryNotice";//首页公告
+    public static final String IndexPageApiqueryListGywm = "/IndexPageApi/queryListGywm";//查询所有关于我们
+    public static final String IndexPageApiqueryListYszc = "/IndexPageApi/queryListYszc";//查询所有权限隐私
+    public static final String AppGoodsContentaddActivityLevel = "/AppGoodsContent/addActivityLevel";//查看内容后增加活跃度
+    public static final String AppNoticequeryList = "/AppNotice/queryList";//APP查询所有公告
+    public static final String IndexPageApiqueryListBbsm = "/IndexPageApi/queryListBbsm";//查询所有版本说明
+    public static final String AppVersionNumversionNumNew = "/AppVersionNum/versionNumNew";//最新版本
 }

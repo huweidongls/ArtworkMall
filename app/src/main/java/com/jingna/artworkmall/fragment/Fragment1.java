@@ -1,5 +1,6 @@
 package com.jingna.artworkmall.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -17,11 +18,14 @@ import com.jingna.artworkmall.base.BaseFragment;
 import com.jingna.artworkmall.bean.IndexPageApifindBannerCategoryBean;
 import com.jingna.artworkmall.bean.IndexPageApiqueryCardBean;
 import com.jingna.artworkmall.bean.IndexPageApiqueryGoodsContentBean;
+import com.jingna.artworkmall.bean.IndexPageApiqueryNoticeBean;
 import com.jingna.artworkmall.card.CardFxPagerAdapter;
 import com.jingna.artworkmall.card.ShadowTransformer;
 import com.jingna.artworkmall.net.NetUrl;
+import com.jingna.artworkmall.page.GonggaoListActivity;
 import com.jingna.artworkmall.util.Logger;
 import com.jingna.artworkmall.util.ViseUtil;
+import com.jingna.artworkmall.widget.ScrollTextView;
 import com.jingna.artworkmall.widget.ViewPagerAdapter;
 import com.scwang.smartrefresh.header.MaterialHeader;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -37,6 +41,7 @@ import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by Administrator on 2019/12/10.
@@ -52,6 +57,8 @@ public class Fragment1 extends BaseFragment {
     Banner banner;
     @BindView(R.id.refresh)
     SmartRefreshLayout smartRefreshLayout;
+    @BindView(R.id.tv_scroll)
+    ScrollTextView tvScroll;
 
     private CardFxPagerAdapter mCardAdapter;
     private ShadowTransformer shadowTransformer;
@@ -70,8 +77,27 @@ public class Fragment1 extends BaseFragment {
         ButterKnife.bind(this, view);
         initRefresh();
         initData();
+        initGonggao();
 
         return view;
+    }
+
+    private void initGonggao() {
+
+        ViseUtil.Get(getContext(), NetUrl.IndexPageApiqueryNotice, null, new ViseUtil.ViseListener() {
+            @Override
+            public void onReturn(String s) {
+                Gson gson = new Gson();
+                IndexPageApiqueryNoticeBean bean = gson.fromJson(s, IndexPageApiqueryNoticeBean.class);
+                List<String> list = new ArrayList<>();
+                for (IndexPageApiqueryNoticeBean.DataBean dataBean : bean.getData()){
+                    list.add(dataBean.getTitle());
+                }
+                tvScroll.setList(list);
+                tvScroll.startScroll();
+            }
+        });
+
     }
 
     private void initRefresh() {
@@ -158,6 +184,17 @@ public class Fragment1 extends BaseFragment {
             }
         });
 
+    }
+
+    @OnClick({R.id.ll_gonggao})
+    public void onClick(View view){
+        Intent intent = new Intent();
+        switch (view.getId()){
+            case R.id.ll_gonggao:
+                intent.setClass(getContext(), GonggaoListActivity.class);
+                startActivity(intent);
+                break;
+        }
     }
 
 }

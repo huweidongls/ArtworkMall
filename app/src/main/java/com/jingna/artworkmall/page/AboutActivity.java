@@ -4,14 +4,17 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.view.View;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.jingna.artworkmall.R;
 import com.jingna.artworkmall.base.BaseActivity;
 import com.jingna.artworkmall.bean.IndexPageApiqueryGoodsContentBean;
+import com.jingna.artworkmall.bean.IndexPageApiqueryListGywmBean;
 import com.jingna.artworkmall.card.CardFxPagerAdapter;
 import com.jingna.artworkmall.card.ShadowTransformer;
 import com.jingna.artworkmall.net.NetUrl;
+import com.jingna.artworkmall.util.HtmlFromUtils;
 import com.jingna.artworkmall.util.StatusBarUtil;
 import com.jingna.artworkmall.util.ViseUtil;
 import com.jingna.artworkmall.widget.GalleryTransformer;
@@ -27,11 +30,13 @@ public class AboutActivity extends BaseActivity {
 
     private Context context = AboutActivity.this;
 
-    @BindView(R.id.vp)
-    ViewPager viewPager;
+//    @BindView(R.id.vp)
+//    ViewPager viewPager;
+    @BindView(R.id.tv)
+    TextView tv;
 
-    private ViewPagerAdapter mViewPagerAdapter;
-    private List<IndexPageApiqueryGoodsContentBean.DataBean> data;
+//    private ViewPagerAdapter mViewPagerAdapter;
+//    private List<IndexPageApiqueryGoodsContentBean.DataBean> data;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,37 +58,49 @@ public class AboutActivity extends BaseActivity {
 
     private void initData() {
 
-        ViseUtil.Get(context, NetUrl.IndexPageApiqueryGoodsContent, null, new ViseUtil.ViseListener() {
+        ViseUtil.Get(context, NetUrl.IndexPageApiqueryListGywm, null, new ViseUtil.ViseListener() {
             @Override
             public void onReturn(String s) {
                 Gson gson = new Gson();
-                IndexPageApiqueryGoodsContentBean bean = gson.fromJson(s, IndexPageApiqueryGoodsContentBean.class);
-                data = bean.getData();
-                setCardView(data);
+                IndexPageApiqueryListGywmBean bean = gson.fromJson(s, IndexPageApiqueryListGywmBean.class);
+                if(bean.getData().size()>0){
+                    String html = bean.getData().get(0).getAboutUs();
+                    HtmlFromUtils.setTextFromHtml(AboutActivity.this, tv, html);
+                }
             }
         });
 
-    }
-
-    public void setCardView(List<IndexPageApiqueryGoodsContentBean.DataBean> data) {
-
-//        mCardAdapter = new CardFxPagerAdapter();
-//        for (int i = 0; i < data.size(); i++) {
-//            mCardAdapter.addCardItem(data.get(i).getContentImg());
-//        }
-////        mFragmentCardAdapter = new CardFragmentPagerAdapter(getActivity().getSupportFragmentManager(),
-////                DensityTool.dp2px(getContext(), 1));
-//        viewPager.setAdapter(mCardAdapter);
-//        shadowTransformer = new ShadowTransformer(viewPager, mCardAdapter);
-//        shadowTransformer.enableScaling(false);
-
-        mViewPagerAdapter = new ViewPagerAdapter(context, data);
-        viewPager.setOffscreenPageLimit(3);
-        viewPager.setPageMargin(1);
-        viewPager.setAdapter(mViewPagerAdapter);
-        viewPager.setPageTransformer(false, new GalleryTransformer());
+//        ViseUtil.Get(context, NetUrl.IndexPageApiqueryGoodsContent, null, new ViseUtil.ViseListener() {
+//            @Override
+//            public void onReturn(String s) {
+//                Gson gson = new Gson();
+//                IndexPageApiqueryGoodsContentBean bean = gson.fromJson(s, IndexPageApiqueryGoodsContentBean.class);
+//                data = bean.getData();
+//                setCardView(data);
+//            }
+//        });
 
     }
+
+//    public void setCardView(List<IndexPageApiqueryGoodsContentBean.DataBean> data) {
+//
+////        mCardAdapter = new CardFxPagerAdapter();
+////        for (int i = 0; i < data.size(); i++) {
+////            mCardAdapter.addCardItem(data.get(i).getContentImg());
+////        }
+//////        mFragmentCardAdapter = new CardFragmentPagerAdapter(getActivity().getSupportFragmentManager(),
+//////                DensityTool.dp2px(getContext(), 1));
+////        viewPager.setAdapter(mCardAdapter);
+////        shadowTransformer = new ShadowTransformer(viewPager, mCardAdapter);
+////        shadowTransformer.enableScaling(false);
+//
+//        mViewPagerAdapter = new ViewPagerAdapter(context, data);
+//        viewPager.setOffscreenPageLimit(3);
+//        viewPager.setPageMargin(1);
+//        viewPager.setAdapter(mViewPagerAdapter);
+//        viewPager.setPageTransformer(false, new GalleryTransformer());
+//
+//    }
 
     @OnClick({R.id.rl_back})
     public void onClick(View view){
