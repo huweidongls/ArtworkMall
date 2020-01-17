@@ -8,7 +8,7 @@ public class VersionBean {
 
     /**
      * status : 200
-     * data : {"id":7,"versionNum":"v2","url":"guge","onOff":1,"versions":"v222222222"}
+     * data : {"id":1,"versionName":"第一版","downloadUrl":"www.huxiaoniiu.cn","onOff":1,"verDesc":"哼,老马","isDelete":1,"createTime":"2020-01-17 10:03:15","qrCode":"www.huxiaoniu.cn","updateTime":"2020-01-17 10:03:54","versionCode":1}
      */
 
     private String status;
@@ -32,18 +32,28 @@ public class VersionBean {
 
     public static class DataBean {
         /**
-         * id : 7
-         * versionNum : v2
-         * url : guge
+         * id : 1
+         * versionName : 第一版
+         * downloadUrl : www.huxiaoniiu.cn
          * onOff : 1
-         * versions : v222222222
+         * verDesc : 哼,老马
+         * isDelete : 1
+         * createTime : 2020-01-17 10:03:15
+         * qrCode : www.huxiaoniu.cn
+         * updateTime : 2020-01-17 10:03:54
+         * versionCode : 1
          */
 
         private int id;
-        private String versionNum;
-        private String url;
+        private String versionName;
+        private String downloadUrl;
         private int onOff;
-        private String versions;
+        private String verDesc;
+        private int isDelete;
+        private String createTime;
+        private String qrCode;
+        private String updateTime;
+        private int versionCode;
 
         public int getId() {
             return id;
@@ -53,20 +63,20 @@ public class VersionBean {
             this.id = id;
         }
 
-        public String getVersionNum() {
-            return versionNum;
+        public String getVersionName() {
+            return versionName;
         }
 
-        public void setVersionNum(String versionNum) {
-            this.versionNum = versionNum;
+        public void setVersionName(String versionName) {
+            this.versionName = versionName;
         }
 
-        public String getUrl() {
-            return url;
+        public String getDownloadUrl() {
+            return downloadUrl;
         }
 
-        public void setUrl(String url) {
-            this.url = url;
+        public void setDownloadUrl(String downloadUrl) {
+            this.downloadUrl = downloadUrl;
         }
 
         public int getOnOff() {
@@ -77,12 +87,52 @@ public class VersionBean {
             this.onOff = onOff;
         }
 
-        public String getVersions() {
-            return versions;
+        public String getVerDesc() {
+            return verDesc;
         }
 
-        public void setVersions(String versions) {
-            this.versions = versions;
+        public void setVerDesc(String verDesc) {
+            this.verDesc = verDesc;
+        }
+
+        public int getIsDelete() {
+            return isDelete;
+        }
+
+        public void setIsDelete(int isDelete) {
+            this.isDelete = isDelete;
+        }
+
+        public String getCreateTime() {
+            return createTime;
+        }
+
+        public void setCreateTime(String createTime) {
+            this.createTime = createTime;
+        }
+
+        public String getQrCode() {
+            return qrCode;
+        }
+
+        public void setQrCode(String qrCode) {
+            this.qrCode = qrCode;
+        }
+
+        public String getUpdateTime() {
+            return updateTime;
+        }
+
+        public void setUpdateTime(String updateTime) {
+            this.updateTime = updateTime;
+        }
+
+        public int getVersionCode() {
+            return versionCode;
+        }
+
+        public void setVersionCode(int versionCode) {
+            this.versionCode = versionCode;
         }
     }
 }

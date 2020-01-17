@@ -119,92 +119,92 @@ public class MainActivity extends BaseActivity {
         MyApplication.getInstance().addActivity(MainActivity.this);
         ButterKnife.bind(MainActivity.this);
         init();
-//        initVersion();
+        initVersion();
 
     }
 
-//    /**
-//     * 版本
-//     */
-//    private void initVersion() {
-//
-//        final int versionCode = VersionUtils.packageCode(context);
-//        ViseUtil.Get(context, NetUrl.AppVersionNumversionNumNew, null, new ViseUtil.ViseListener() {
-//            @Override
-//            public void onReturn(String s) {
-//                Log.e("123123", s);
-//                Gson gson = new Gson();
-//                final VersionBean bean = gson.fromJson(s, VersionBean.class);
-//                if(bean.getData().getVersioncode()>versionCode){
-//                    DialogVersion dialogVersion = new DialogVersion(context, bean.getData().getVersionname(), bean.getData().getVerDesc()
-//                            , new DialogVersion.ClickListener() {
-//                        @Override
-//                        public void onSure() {
-//                            final ProgressDialog progressDialog = new ProgressDialog(context);
-//                            progressDialog.setCancelable(false);
-//                            progressDialog.setCanceledOnTouchOutside(false);
-//                            progressDialog.show();
-//                            String downloadUrl = bean.getData().getDownloadAdd();
-//                            String path = Environment.getExternalStorageDirectory().getAbsolutePath();
-//                            ViseHttp.DOWNLOAD(downloadUrl)
-//                                    .setRootName(path)
-//                                    .setDirName("sls")
-//                                    .setFileName("sls.apk")
-//                                    .request(new ACallback<DownProgress>() {
-//                                        @Override
-//                                        public void onSuccess(DownProgress data) {
-//                                            progressDialog.setInfo(data.getFormatStatusString(), data.getPercent());
-//                                            if (data.isDownComplete()){
-//                                                progressDialog.dismiss();
-//                                                String appFile = Environment.getExternalStorageDirectory().getAbsolutePath()+"/fuse/"+"Fuse.apk";
-//                                                openAPK(appFile);
-//                                            }
-//                                        }
-//
-//                                        @Override
-//                                        public void onFail(int errCode, String errMsg) {
-//
-//                                        }
-//                                    });
-//                        }
-//
-//                        @Override
-//                        public void onCancel() {
-//                            if(bean.getData().getIsAutoupdate() == 1){
-//                                MyApplication.getInstance().exit();
-//                            }
-//                        }
-//                    });
-//                    dialogVersion.setCancelable(false);
-//                    dialogVersion.setCanceledOnTouchOutside(false);
-//                    dialogVersion.show();
-//                }
-//            }
-//        });
-//
-//    }
-//
-//    /**
-//     * 安装apk
-//     * @param fileSavePath
-//     */
-//    private void openAPK(String fileSavePath){
-//        File file=new File(Uri.parse(fileSavePath).getPath());
-//        String filePath = file.getAbsolutePath();
-//        Intent intent = new Intent(Intent.ACTION_VIEW);
-//        Uri data = null;
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {//判断版本大于等于7.0
-//            // 生成文件的uri，，
-//            // 注意 下面参数com.ausee.fileprovider 为apk的包名加上.fileprovider，
-//            data = FileProvider.getUriForFile(context, "com.guoyu.fuseapp.fileprovider", new File(filePath));
-//            intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);// 给目标应用一个临时授权
-//        } else {
-//            data = Uri.fromFile(file);
-//        }
-//
-//        intent.setDataAndType(data, "application/vnd.android.package-archive");
-//        startActivity(intent);
-//    }
+    /**
+     * 版本
+     */
+    private void initVersion() {
+
+        final int versionCode = VersionUtils.packageCode(context);
+        ViseUtil.Get(context, NetUrl.AppVersionNumversionNumNew, null, new ViseUtil.ViseListener() {
+            @Override
+            public void onReturn(String s) {
+                Log.e("123123", s);
+                Gson gson = new Gson();
+                final VersionBean bean = gson.fromJson(s, VersionBean.class);
+                if(bean.getData().getVersionCode()>versionCode){
+                    DialogVersion dialogVersion = new DialogVersion(context, bean.getData().getVersionName(), bean.getData().getVerDesc()
+                            , new DialogVersion.ClickListener() {
+                        @Override
+                        public void onSure() {
+                            final ProgressDialog progressDialog = new ProgressDialog(context);
+                            progressDialog.setCancelable(false);
+                            progressDialog.setCanceledOnTouchOutside(false);
+                            progressDialog.show();
+                            String downloadUrl = bean.getData().getDownloadUrl();
+                            String path = Environment.getExternalStorageDirectory().getAbsolutePath();
+                            ViseHttp.DOWNLOAD(downloadUrl)
+                                    .setRootName(path)
+                                    .setDirName("sls")
+                                    .setFileName("sls.apk")
+                                    .request(new ACallback<DownProgress>() {
+                                        @Override
+                                        public void onSuccess(DownProgress data) {
+                                            progressDialog.setInfo(data.getFormatStatusString(), data.getPercent());
+                                            if (data.isDownComplete()){
+                                                progressDialog.dismiss();
+                                                String appFile = Environment.getExternalStorageDirectory().getAbsolutePath()+"/sls/"+"sls.apk";
+                                                openAPK(appFile);
+                                            }
+                                        }
+
+                                        @Override
+                                        public void onFail(int errCode, String errMsg) {
+
+                                        }
+                                    });
+                        }
+
+                        @Override
+                        public void onCancel() {
+                            if(bean.getData().getOnOff() == 0){
+                                MyApplication.getInstance().exit();
+                            }
+                        }
+                    });
+                    dialogVersion.setCancelable(false);
+                    dialogVersion.setCanceledOnTouchOutside(false);
+                    dialogVersion.show();
+                }
+            }
+        });
+
+    }
+
+    /**
+     * 安装apk
+     * @param fileSavePath
+     */
+    private void openAPK(String fileSavePath){
+        File file=new File(Uri.parse(fileSavePath).getPath());
+        String filePath = file.getAbsolutePath();
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        Uri data = null;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {//判断版本大于等于7.0
+            // 生成文件的uri，，
+            // 注意 下面参数com.ausee.fileprovider 为apk的包名加上.fileprovider，
+            data = FileProvider.getUriForFile(context, "com.jingna.artworkmall.fileprovider", new File(filePath));
+            intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);// 给目标应用一个临时授权
+        } else {
+            data = Uri.fromFile(file);
+        }
+
+        intent.setDataAndType(data, "application/vnd.android.package-archive");
+        startActivity(intent);
+    }
 
     /**
      * 初始化各个组件

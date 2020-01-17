@@ -89,12 +89,14 @@ public class Fragment1 extends BaseFragment {
             public void onReturn(String s) {
                 Gson gson = new Gson();
                 IndexPageApiqueryNoticeBean bean = gson.fromJson(s, IndexPageApiqueryNoticeBean.class);
-                List<String> list = new ArrayList<>();
-                for (IndexPageApiqueryNoticeBean.DataBean dataBean : bean.getData()){
-                    list.add(dataBean.getTitle());
+                if(bean.getData().size()>0){
+                    List<String> list = new ArrayList<>();
+                    for (IndexPageApiqueryNoticeBean.DataBean dataBean : bean.getData()){
+                        list.add(dataBean.getTitle());
+                    }
+                    tvScroll.setList(list);
+                    tvScroll.startScroll();
                 }
-                tvScroll.setList(list);
-                tvScroll.startScroll();
             }
         });
 

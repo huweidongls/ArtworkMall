@@ -47,7 +47,7 @@ public class HuoyueduAdapter extends RecyclerView.Adapter<HuoyueduAdapter.ViewHo
             holder.tvType.setText("直推购买业绩商品");
             holder.tv.setText("+ "+data.get(position).getRiHuoTuiPerformance());
         }else if(type == 3){
-            holder.tvType.setText("商城消费业绩商品");
+            holder.tvType.setText("商城消费");
             holder.tv.setText("+ "+data.get(position).getRiHuoPerformance());
         }else if(type == 4){
             holder.tvType.setText("会员签到");

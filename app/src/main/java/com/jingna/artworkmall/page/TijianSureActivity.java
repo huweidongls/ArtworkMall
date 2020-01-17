@@ -18,6 +18,7 @@ import com.jingna.artworkmall.base.BaseActivity;
 import com.jingna.artworkmall.bean.AddressListBean;
 import com.jingna.artworkmall.bean.AppGoodsShopgetByTjkBean;
 import com.jingna.artworkmall.bean.MarketingCouponUserfindByCouponsBean;
+import com.jingna.artworkmall.dialog.DialogZhifu;
 import com.jingna.artworkmall.net.NetUrl;
 import com.jingna.artworkmall.util.GlideUtils;
 import com.jingna.artworkmall.util.Logger;
@@ -27,6 +28,9 @@ import com.jingna.artworkmall.util.StringUtils;
 import com.jingna.artworkmall.util.ToastUtil;
 import com.jingna.artworkmall.util.ViseUtil;
 import com.jingna.artworkmall.util.WeiboDialogUtils;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -83,6 +87,8 @@ public class TijianSureActivity extends BaseActivity {
 
     private Dialog dialog;
 
+    private double yue = 0.00;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -101,6 +107,25 @@ public class TijianSureActivity extends BaseActivity {
         }
         ButterKnife.bind(TijianSureActivity.this);
         initData();
+        initYue();
+
+    }
+
+    private void initYue() {
+
+        Map<String, String> map = new LinkedHashMap<>();
+        map.put("id", SpUtils.getUserId(context));
+        ViseUtil.Get(context, NetUrl.AppPlatformBalanceMybalance, map, new ViseUtil.ViseListener() {
+            @Override
+            public void onReturn(String s) {
+                try {
+                    JSONObject jsonObject = new JSONObject(s);
+                    yue = jsonObject.optDouble("data");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
 
     }
 
@@ -191,7 +216,18 @@ public class TijianSureActivity extends BaseActivity {
                 couponsId = "";
                 break;
             case R.id.tv_zhifu:
-                tijiao();
+                DialogZhifu dialogZhifu = new DialogZhifu(context, yue, new DialogZhifu.ClickListener() {
+                    @Override
+                    public void onYes() {
+                        tijiao();
+                    }
+
+                    @Override
+                    public void onNo() {
+
+                    }
+                });
+                dialogZhifu.show();
                 break;
         }
     }

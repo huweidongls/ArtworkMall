@@ -153,7 +153,7 @@ public class FxDetailsActivity extends BaseActivity {
         @JavascriptInterface
         public void share(String s) {
             Intent intent = new Intent();
-            ToastUtil.showShort(context, s);
+//            ToastUtil.showShort(context, s);
             if(!StringUtils.isEmpty(s)){
                 try {
                     JSONObject jsonObject = new JSONObject(s);
