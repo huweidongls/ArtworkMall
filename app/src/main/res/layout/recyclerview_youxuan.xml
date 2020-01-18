@@ -6,11 +6,13 @@
     android:orientation="vertical">
 
     <LinearLayout
+        android:layout_marginRight="5dp"
+        android:layout_marginLeft="5dp"
         android:layout_marginTop="13dp"
         android:layout_gravity="center_horizontal"
         android:orientation="vertical"
         android:background="@color/white_ffffff"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <com.jingna.artworkmall.widget.RoundImageView
@@ -19,7 +21,7 @@
             app:right_top_radius="8dp"
             android:scaleType="centerCrop"
             android:src="@mipmap/img0063x"
-            android:layout_width="166dp"
+            android:layout_width="match_parent"
             android:layout_height="155dp" />
 
         <TextView
