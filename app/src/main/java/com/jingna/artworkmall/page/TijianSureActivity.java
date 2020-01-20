@@ -1,11 +1,9 @@
 package com.jingna.artworkmall.page;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -13,7 +11,6 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.jingna.artworkmall.R;
-import com.jingna.artworkmall.adapter.AddressAdapter;
 import com.jingna.artworkmall.base.BaseActivity;
 import com.jingna.artworkmall.bean.AddressListBean;
 import com.jingna.artworkmall.bean.AppGoodsShopgetByTjkBean;
@@ -177,8 +174,9 @@ public class TijianSureActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.rl_coupons:
-                intent.setClass(context, CouponsActivity.class);
-                intent.putExtra("price", allPrice);
+                intent.setClass(context, TijiaoCouponsActivity.class);
+                intent.putExtra("id", id);
+                intent.putExtra("num", goodsNum+"");
                 startActivityForResult(intent, 1005);
                 break;
             case R.id.rl_address:

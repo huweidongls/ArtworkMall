@@ -60,5 +60,7 @@ public class NetUrl {
     public static final String AppNoticequeryList = "/AppNotice/queryList";//APP查询所有公告
     public static final String IndexPageApiqueryListBbsm = "/IndexPageApi/queryListBbsm";//查询所有版本说明
     public static final String AppVersionNumversionNumNew = "/AppVersionNum/versionNumNew";//最新版本
-    public static final String MemUserverifyPwd = "/MemUser/verifyPwd";//最新版本
+    public static final String MemUserverifyPwd = "/MemUser/verifyPwd";//提交订单验证密码
+    public static final String MemUserfindByUserCoupons = "/MemUser/findByUserCoupons";//查询该用户在该商品中可用的优惠券
+
 }

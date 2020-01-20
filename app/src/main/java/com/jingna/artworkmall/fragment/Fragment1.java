@@ -119,9 +119,9 @@ public class Fragment1 extends BaseFragment {
 
     public void setCardView(List<IndexPageApiqueryGoodsContentBean.DataBean> data) {
 
-        mCardAdapter = new CardFxPagerAdapter();
+        mCardAdapter = new CardFxPagerAdapter(getContext());
         for (int i = 0; i < data.size(); i++) {
-            mCardAdapter.addCardItem(data.get(i).getContentImg());
+            mCardAdapter.addCardItem(data.get(i));
         }
 //        mFragmentCardAdapter = new CardFragmentPagerAdapter(getActivity().getSupportFragmentManager(),
 //                DensityTool.dp2px(getContext(), 1));

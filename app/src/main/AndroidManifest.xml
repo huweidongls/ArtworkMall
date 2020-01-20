@@ -121,7 +121,8 @@
         <activity android:name=".page.HuoyueduActivity" />
         <activity android:name=".page.FxDetailsActivity" />
         <activity android:name=".page.GonggaoListActivity" />
-        <activity android:name=".page.GonggaoDetailsActivity"></activity>
+        <activity android:name=".page.GonggaoDetailsActivity" />
+        <activity android:name=".page.TijiaoCouponsActivity"></activity>
     </application>
 
 </manifest>
