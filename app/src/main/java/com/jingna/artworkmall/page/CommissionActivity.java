@@ -133,35 +133,7 @@ public class CommissionActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.btn_mone:
-                String msg = money.getText().toString();
-                int m = 0;
-                if(!StringUtils.isEmpty(msg)){
-                    m = Integer.valueOf(msg);
-                }
-                if (StringUtils.isEmpty(msg)) {
-                    ToastUtil.showShort(CommissionActivity.this, "请填写提现金额");
-                } else if(StringUtils.isEmpty(bankId)){
-                    ToastUtil.showShort(CommissionActivity.this, "请选择提现银行卡");
-                }else if(!(m % 100 == 0)){
-                    ToastUtil.showShort(CommissionActivity.this, "只能提现100的倍数金额");
-                }else if(m>allMoney){
-                    ToastUtil.showShort(CommissionActivity.this, "提现金额超过当前余额");
-                }else {
-
-                    dialog = WeiboDialogUtils.createLoadingDialog(context, "请等待...");
-                    Map<String, String> map = new LinkedHashMap<>();
-                    map.put("memberId", SpUtils.getUserId(context));
-                    map.put("cardId", bankId);
-                    map.put("money", msg);
-                    ViseUtil.Get(context, NetUrl.AppRechargeExtractwithdrawalApply, map, dialog, new ViseUtil.ViseListener() {
-                        @Override
-                        public void onReturn(String s) {
-                            ToastUtil.showShort(context, "提现成功");
-                            finish();
-                        }
-                    });
-
-                }
+                tixian();
                 break;
             case R.id.all:
                 money.setText((int)allMoney+"");
@@ -172,6 +144,38 @@ public class CommissionActivity extends BaseActivity {
                 intent.putExtra("type", "tixian");
                 startActivityForResult(intent, 1003);
                 break;
+        }
+    }
+
+    private synchronized void tixian(){
+        String msg = money.getText().toString();
+        int m = 0;
+        if(!StringUtils.isEmpty(msg)){
+            m = Integer.valueOf(msg);
+        }
+        if (StringUtils.isEmpty(msg)) {
+            ToastUtil.showShort(CommissionActivity.this, "请填写提现金额");
+        } else if(StringUtils.isEmpty(bankId)){
+            ToastUtil.showShort(CommissionActivity.this, "请选择提现银行卡");
+        }else if(!(m % 100 == 0)){
+            ToastUtil.showShort(CommissionActivity.this, "只能提现100的倍数金额");
+        }else if(m>allMoney){
+            ToastUtil.showShort(CommissionActivity.this, "提现金额超过当前余额");
+        }else {
+
+            dialog = WeiboDialogUtils.createLoadingDialog(context, "请等待...");
+            Map<String, String> map = new LinkedHashMap<>();
+            map.put("memberId", SpUtils.getUserId(context));
+            map.put("cardId", bankId);
+            map.put("money", msg);
+            ViseUtil.Get(context, NetUrl.AppRechargeExtractwithdrawalApply, map, dialog, new ViseUtil.ViseListener() {
+                @Override
+                public void onReturn(String s) {
+                    ToastUtil.showShort(context, "提现成功");
+                    finish();
+                }
+            });
+
         }
     }
 

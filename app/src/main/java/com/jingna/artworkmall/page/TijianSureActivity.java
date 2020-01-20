@@ -232,7 +232,7 @@ public class TijianSureActivity extends BaseActivity {
         }
     }
 
-    private void tijiao() {
+    private synchronized void tijiao() {
 
         if(StringUtils.isEmpty(addressId)){
             ToastUtil.showShort(context, "请选择收货地址");

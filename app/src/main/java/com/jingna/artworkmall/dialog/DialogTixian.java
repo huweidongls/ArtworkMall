@@ -11,7 +11,6 @@ import android.widget.TextView;
 
 import com.jingna.artworkmall.R;
 import com.jingna.artworkmall.net.NetUrl;
-import com.jingna.artworkmall.util.Logger;
 import com.jingna.artworkmall.util.StringUtils;
 import com.jingna.artworkmall.util.ToastUtil;
 import com.jingna.artworkmall.util.ViseUtil;
@@ -23,23 +22,21 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
- * Created by Administrator on 2020/1/17.
+ * Created by Administrator on 2020/1/19.
  */
 
-public class DialogZhifu extends Dialog {
+public class DialogTixian extends Dialog {
 
     private Context context;
-    private TextView tvYue;
+    private EditText etPwd;
     private TextView tvCancel;
     private TextView tvSure;
-    private EditText etPwd;
-    private double yue;
-    private ClickListener listener;
 
-    public DialogZhifu(@NonNull Context context, double yue, ClickListener listener) {
+    ClickListener listener;
+
+    public DialogTixian(@NonNull Context context, ClickListener listener) {
         super(context, R.style.RoundCornerDialog);
         this.context = context;
-        this.yue = yue;
         this.listener = listener;
     }
 
@@ -51,15 +48,20 @@ public class DialogZhifu extends Dialog {
 
     private void init() {
 
-        View view = LayoutInflater.from(context).inflate(R.layout.dialog_zhifu, null);
+        View view = LayoutInflater.from(context).inflate(R.layout.dialog_tixian, null);
         setContentView(view);
 
-        tvYue = view.findViewById(R.id.tv_yue);
+        etPwd = view.findViewById(R.id.et_pwd);
         tvCancel = view.findViewById(R.id.tv_cancel);
         tvSure = view.findViewById(R.id.tv_sure);
-        etPwd = view.findViewById(R.id.et_pwd);
 
-        tvYue.setText("平台币余额¥"+ StringUtils.roundByScale(yue, 2));
+        tvCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dismiss();
+            }
+        });
+
         tvSure.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -88,19 +90,11 @@ public class DialogZhifu extends Dialog {
                 }
             }
         });
-        tvCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dismiss();
-                listener.onNo();
-            }
-        });
 
     }
 
     public interface ClickListener{
         void onYes();
-        void onNo();
     }
 
 }
