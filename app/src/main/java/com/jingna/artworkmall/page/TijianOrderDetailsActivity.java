@@ -41,8 +41,8 @@ public class TijianOrderDetailsActivity extends BaseActivity {
     TextView tvName;
     @BindView(R.id.tv_phone)
     TextView tvPhone;
-    @BindView(R.id.tv_idnum)
-    TextView tvIdnum;
+//    @BindView(R.id.tv_idnum)
+//    TextView tvIdnum;
     @BindView(R.id.tv_order_id)
     TextView tvOrderId;
     @BindView(R.id.tv_create_time)
@@ -102,7 +102,7 @@ public class TijianOrderDetailsActivity extends BaseActivity {
                     Glide.with(context).load(CodeUtils.createImage(code, 400, 400, null)).into(ivCode);
                     tvName.setText("联系人："+bean.getData().getAddresUname());
                     tvPhone.setText("手机号："+bean.getData().getAddresPhone());
-                    tvIdnum.setText("身份证："+bean.getData().getIdNumber());
+//                    tvIdnum.setText("身份证："+bean.getData().getIdNumber());
                     tvOrderId.setText("订单编号："+bean.getData().getId());
                     tvCreateTime.setText("下单时间："+bean.getData().getCreateTime());
                     tvAllPrice.setText("￥"+ StringUtils.roundByScale((bean.getData().getOrderRealPrice()+bean.getData().getCouponPrice()), 2));
@@ -115,7 +115,7 @@ public class TijianOrderDetailsActivity extends BaseActivity {
                     tvTitle.setText(bean.getData().getGoodsName());
                     tvName.setText("联系人："+bean.getData().getAddresUname());
                     tvPhone.setText("手机号："+bean.getData().getAddresPhone());
-                    tvIdnum.setText("身份证："+bean.getData().getIdNumber());
+//                    tvIdnum.setText("身份证："+bean.getData().getIdNumber());
                     tvOrderId.setText("订单编号："+bean.getData().getId());
                     tvCreateTime.setText("下单时间："+bean.getData().getCreateTime());
                     tvAllPrice.setText("￥"+ StringUtils.roundByScale((bean.getData().getOrderRealPrice()+bean.getData().getCouponPrice()), 2));

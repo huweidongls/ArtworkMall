@@ -55,6 +55,7 @@
                 android:layout_height="wrap_content" />
 
             <TextView
+                android:visibility="gone"
                 android:id="@+id/tv_yi_idnum"
                 android:layout_marginRight="20dp"
                 android:layout_marginLeft="20dp"
@@ -180,6 +181,7 @@
                 android:layout_height="wrap_content" />
 
             <TextView
+                android:visibility="gone"
                 android:id="@+id/tv_idnum"
                 android:layout_marginRight="20dp"
                 android:layout_marginLeft="20dp"

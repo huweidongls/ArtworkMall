@@ -50,7 +50,7 @@ public class TijianOrderAdapter extends RecyclerView.Adapter<TijianOrderAdapter.
             holder.tvTitle.setText(data.get(position).getGoodsName());
             holder.tvName.setText("联系人："+data.get(position).getAddresUname());
             holder.tvPhone.setText("手机号："+data.get(position).getAddresPhone());
-            holder.tvIdnum.setText("身份证："+data.get(position).getIdNumber());
+//            holder.tvIdnum.setText("身份证："+data.get(position).getIdNumber());
             holder.tvPrice.setText("合计  "+ StringUtils.roundByScale(data.get(position).getOrderRealPrice(), 2));
             String code = data.get(position).getElectronicCode();
             holder.tvElectronicCode.setText(code);
@@ -96,7 +96,7 @@ public class TijianOrderAdapter extends RecyclerView.Adapter<TijianOrderAdapter.
         private TextView tvElectronicCode;
         private TextView tvName;
         private TextView tvPhone;
-        private TextView tvIdnum;
+//        private TextView tvIdnum;
         private TextView tvPrice;
 
         public ViewHolder(View itemView) {
@@ -113,7 +113,7 @@ public class TijianOrderAdapter extends RecyclerView.Adapter<TijianOrderAdapter.
             tvElectronicCode = itemView.findViewById(R.id.tv_electronic_code);
             tvName = itemView.findViewById(R.id.tv_name);
             tvPhone = itemView.findViewById(R.id.tv_phone);
-            tvIdnum = itemView.findViewById(R.id.tv_idnum);
+//            tvIdnum = itemView.findViewById(R.id.tv_idnum);
             tvPrice = itemView.findViewById(R.id.tv_price);
         }
     }

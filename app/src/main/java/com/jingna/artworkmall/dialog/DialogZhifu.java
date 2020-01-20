@@ -15,6 +15,7 @@ import com.jingna.artworkmall.util.Logger;
 import com.jingna.artworkmall.util.StringUtils;
 import com.jingna.artworkmall.util.ToastUtil;
 import com.jingna.artworkmall.util.ViseUtil;
+import com.jingna.artworkmall.util.WeiboDialogUtils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -35,6 +36,8 @@ public class DialogZhifu extends Dialog {
     private EditText etPwd;
     private double yue;
     private ClickListener listener;
+
+    private Dialog dialog;
 
     public DialogZhifu(@NonNull Context context, double yue, ClickListener listener) {
         super(context, R.style.RoundCornerDialog);
@@ -67,9 +70,10 @@ public class DialogZhifu extends Dialog {
                 if(StringUtils.isEmpty(pwd)){
                     ToastUtil.showShort(context, "密码不能为空");
                 }else {
+                    dialog = WeiboDialogUtils.createLoadingDialog(context, "请等待...");
                     Map<String, String> map = new LinkedHashMap<>();
                     map.put("pwd", pwd);
-                    ViseUtil.Get(context, NetUrl.MemUserverifyPwd, map, new ViseUtil.ViseListener() {
+                    ViseUtil.Get(context, NetUrl.MemUserverifyPwd, map, dialog, new ViseUtil.ViseListener() {
                         @Override
                         public void onReturn(String s) {
                             try {

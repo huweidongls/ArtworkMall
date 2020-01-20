@@ -138,6 +138,7 @@
                 android:layout_height="wrap_content" />
 
             <TextView
+                android:visibility="gone"
                 android:id="@+id/tv_idnum"
                 android:textColor="#646464"
                 android:textSize="14sp"
