@@ -128,10 +128,9 @@ public class TijianSureActivity extends BaseActivity {
 
     private void initData() {
 
-        Logger.e("123123", type);
-        if(type.equals("0")){
+        if(bean.getData().getIsGood() == 1){
             rlNum.setVisibility(View.GONE);
-        }else if(type.equals("1")){
+        }else if(bean.getData().getIsGood() == 2){
             rlNum.setVisibility(View.VISIBLE);
         }
         price = bean.getData().getPrice();
@@ -214,18 +213,22 @@ public class TijianSureActivity extends BaseActivity {
                 couponsId = "";
                 break;
             case R.id.tv_zhifu:
-                DialogZhifu dialogZhifu = new DialogZhifu(context, yue, new DialogZhifu.ClickListener() {
-                    @Override
-                    public void onYes() {
-                        tijiao();
-                    }
+                if((allPrice-couponsPrice)>yue){
+                    ToastUtil.showShort(context, "余额不足");
+                }else {
+                    DialogZhifu dialogZhifu = new DialogZhifu(context, yue, new DialogZhifu.ClickListener() {
+                        @Override
+                        public void onYes() {
+                            tijiao();
+                        }
 
-                    @Override
-                    public void onNo() {
+                        @Override
+                        public void onNo() {
 
-                    }
-                });
-                dialogZhifu.show();
+                        }
+                    });
+                    dialogZhifu.show();
+                }
                 break;
         }
     }
@@ -283,8 +286,13 @@ public class TijianSureActivity extends BaseActivity {
             int type = dataBean.getType();
             if(type == 0){
                 couponsPrice = dataBean.getParameter();
-                tvCouponsPrice.setText("－¥"+StringUtils.roundByScale(couponsPrice, 2));
-                tvPrice.setText("¥"+StringUtils.roundByScale((allPrice-couponsPrice), 2));
+                if(allPrice>couponsPrice){
+                    tvCouponsPrice.setText("－¥"+StringUtils.roundByScale(couponsPrice, 2));
+                    tvPrice.setText("¥"+StringUtils.roundByScale((allPrice-couponsPrice), 2));
+                }else {
+                    tvCouponsPrice.setText("－¥"+StringUtils.roundByScale(allPrice, 2));
+                    tvPrice.setText("¥"+StringUtils.roundByScale((0.00), 2));
+                }
             }else if(type == 1){
                 double zhekou = dataBean.getParameter();
                 double youhui = allPrice - (allPrice * zhekou);

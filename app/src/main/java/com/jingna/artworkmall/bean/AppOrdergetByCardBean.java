@@ -57,9 +57,18 @@ public class AppOrdergetByCardBean {
         private String createTime;
         private double orderRealPrice;
         private double couponPrice;
+        private double price;
         private String electronicCode;
         private String goodsName;
         private List<?> list;
+
+        public double getPrice() {
+            return price;
+        }
+
+        public void setPrice(double price) {
+            this.price = price;
+        }
 
         public String getId() {
             return id;

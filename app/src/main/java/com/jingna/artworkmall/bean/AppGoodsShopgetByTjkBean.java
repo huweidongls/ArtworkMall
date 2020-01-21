@@ -50,6 +50,15 @@ public class AppGoodsShopgetByTjkBean implements Serializable {
         private String detailMobileHtml;
         private String purchaseInstructions;
         private int type;
+        private int isGood;
+
+        public int getIsGood() {
+            return isGood;
+        }
+
+        public void setIsGood(int isGood) {
+            this.isGood = isGood;
+        }
 
         public String getGoodsName() {
             return goodsName;

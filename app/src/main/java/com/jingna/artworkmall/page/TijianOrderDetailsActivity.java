@@ -105,8 +105,8 @@ public class TijianOrderDetailsActivity extends BaseActivity {
 //                    tvIdnum.setText("身份证："+bean.getData().getIdNumber());
                     tvOrderId.setText("订单编号："+bean.getData().getId());
                     tvCreateTime.setText("下单时间："+bean.getData().getCreateTime());
-                    tvAllPrice.setText("￥"+ StringUtils.roundByScale((bean.getData().getOrderRealPrice()+bean.getData().getCouponPrice()), 2));
-                    tvCouponsPrice.setText("￥"+ StringUtils.roundByScale(bean.getData().getCouponPrice(), 2));
+                    tvAllPrice.setText("￥"+ StringUtils.roundByScale(bean.getData().getPrice(), 2));
+                    tvCouponsPrice.setText("￥ - "+ StringUtils.roundByScale(bean.getData().getCouponPrice(), 2));
                     tvPrice.setText("￥"+ StringUtils.roundByScale(bean.getData().getOrderRealPrice(), 2));
                 }else if(status.equals("4")){
                     viewCode.setVisibility(View.GONE);
@@ -118,7 +118,7 @@ public class TijianOrderDetailsActivity extends BaseActivity {
 //                    tvIdnum.setText("身份证："+bean.getData().getIdNumber());
                     tvOrderId.setText("订单编号："+bean.getData().getId());
                     tvCreateTime.setText("下单时间："+bean.getData().getCreateTime());
-                    tvAllPrice.setText("￥"+ StringUtils.roundByScale((bean.getData().getOrderRealPrice()+bean.getData().getCouponPrice()), 2));
+                    tvAllPrice.setText("￥"+ StringUtils.roundByScale(bean.getData().getPrice(), 2));
                     tvCouponsPrice.setText("￥"+ StringUtils.roundByScale(bean.getData().getCouponPrice(), 2));
                     tvPrice.setText("￥"+ StringUtils.roundByScale(bean.getData().getOrderRealPrice(), 2));
                 }

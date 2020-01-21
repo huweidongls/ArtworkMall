@@ -30,6 +30,7 @@ import com.jingna.artworkmall.fragment.Fragment3;
 import com.jingna.artworkmall.fragment.Fragment4;
 import com.jingna.artworkmall.fragment.Fragment5;
 import com.jingna.artworkmall.net.NetUrl;
+import com.jingna.artworkmall.util.Logger;
 import com.jingna.artworkmall.util.StatusBarUtil;
 import com.jingna.artworkmall.util.ToastUtil;
 import com.jingna.artworkmall.util.VersionUtils;

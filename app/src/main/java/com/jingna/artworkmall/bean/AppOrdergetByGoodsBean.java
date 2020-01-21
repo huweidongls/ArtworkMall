@@ -62,6 +62,24 @@ public class AppOrdergetByGoodsBean {
         private String label;
         private String goodsName;
         private List<?> list;
+        private double price;
+        private double couponPrice;
+
+        public double getPrice() {
+            return price;
+        }
+
+        public void setPrice(double price) {
+            this.price = price;
+        }
+
+        public double getCouponPrice() {
+            return couponPrice;
+        }
+
+        public void setCouponPrice(double couponPrice) {
+            this.couponPrice = couponPrice;
+        }
 
         public String getId() {
             return id;

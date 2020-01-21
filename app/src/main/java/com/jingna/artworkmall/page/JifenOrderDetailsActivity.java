@@ -52,6 +52,8 @@ public class JifenOrderDetailsActivity extends BaseActivity {
     TextView tvNum;
     @BindView(R.id.rv)
     RecyclerView rv;
+    @BindView(R.id.tv_coupons_price)
+    TextView tvCouponsPrice;
 
     private String id = "";
 
@@ -83,6 +85,7 @@ public class JifenOrderDetailsActivity extends BaseActivity {
             public void onReturn(String s) {
                 Gson gson = new Gson();
                 AppOrdergetByGoodsBean bean = gson.fromJson(s, AppOrdergetByGoodsBean.class);
+                int num = bean.getData().getNum();
                 tvAddressName.setText(bean.getData().getAddresUname());
                 tvAddressPhone.setText(bean.getData().getAddresPhone());
                 tvAddress.setText("地址："+bean.getData().getAddresName());
@@ -91,7 +94,8 @@ public class JifenOrderDetailsActivity extends BaseActivity {
                 tvOrderId.setText("订单编号："+bean.getData().getId());
                 tvCreateTime.setText("下单时间："+bean.getData().getCreateTime());
                 tvPrice.setText("￥"+ StringUtils.roundByScale(bean.getData().getOrderRealPrice(), 2));
-                tvAllPrice.setText("￥"+ StringUtils.roundByScale(bean.getData().getOrderRealPrice(), 2));
+                tvAllPrice.setText("￥"+ StringUtils.roundByScale((bean.getData().getPrice()*num), 2));
+                tvCouponsPrice.setText("￥ - "+ StringUtils.roundByScale(bean.getData().getCouponPrice(), 2));
                 tvNum.setText("数量："+bean.getData().getNum());
                 String[] ss = bean.getData().getLabel().split(",");
                 LabelAdapter labelAdapter = new LabelAdapter(ss);
